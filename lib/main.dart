@@ -34,9 +34,8 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
-                height: 520,
-                color: Colors.white,
+              SizedBox( // navbar and banner
+                height: 620,
                 child: Column(
                   children: [
                     // Top banner
@@ -50,114 +49,275 @@ class HomeScreen extends StatelessWidget {
                         style: TextStyle(color: Colors.white, fontSize: 16),
                       ),
                     ),
-                    Row( // navbar
+                    const Navbar(),
+                    Container(
+                      width: double.infinity,
+                      height: 500,
+                      decoration: const BoxDecoration(
+                        image: DecorationImage(fit:BoxFit.fill ,image: NetworkImage("https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534"))
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Essential range - over 20% off!',style: TextStyle(color: Colors.white, fontSize: 60),),
+                          const Text('over 20% off our essential range. come and grab yours while stock lasts',style: TextStyle(color: Colors.white,fontSize: 32),),
+                          ElevatedButton( // view all button
+                            onPressed: placeholderCallbackForButtons,
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.deepPurple,
+                            ),
+                            child: const Text(
+                              'browse collection',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ]
+                      )
+                    )
+                  ],
+               ),
+              ),
+              SizedBox( // ESSENTIAL RANGE display
+                height: 700,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('ESSENTIAL RANGE - OVER 20% OFF!',style: TextStyle(fontSize: 20),),
+                    Row( // images
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.network( // union logo at left
-                            'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                            height: 40,
-                            fit: BoxFit.cover,
-                          ),
-                        Container(width: 300,), // adds padding
-                        TextButton( // home button
-                            onPressed: placeholderCallbackForButtons,
-                            child: const Text(
-                              'Home'
-                            ),
-                          ),
-                        TextButton( // shop // needs to be drop down
-                            onPressed: placeholderCallbackForButtons,
-                            child: const Text(
-                              'Shop'
-                            ),
-                          ),
-                        TextButton( // print shack // needs to be drop down
-                            onPressed: placeholderCallbackForButtons,
-                            child: const Text(
-                              'The Print Shack'
-                            ),
-                          ),
-                        TextButton( // sale
-                            onPressed: placeholderCallbackForButtons,
-                            child: const Text(
-                              'SALE!'
-                            ),
-                          ),
-                        TextButton( // about
-                            onPressed: placeholderCallbackForButtons,
-                            child: const Text(
-                              'about'
-                            ),
-                          ),
-                        TextButton( // upsu
-                            onPressed: placeholderCallbackForButtons,
-                            child: const Text(
-                              'UPSU.net'
-                            ),
-                          ),
-                        Container(width: 350,), // adds padding
-                        IconButton( // search
-                          onPressed: placeholderCallbackForButtons, 
-                          icon: const Icon(Icons.search)
-                        ),
-                        IconButton( // account
-                          onPressed: placeholderCallbackForButtons, 
-                          icon: const Icon(Icons.man)
-                        ),
-                        IconButton( // cart
-                          onPressed: placeholderCallbackForButtons, 
-                          icon: const Icon(Icons.shopping_bag)
-                        ),
+                        const Display('Limited Edition Essential Zip Hoodies', '£14.99', 'https://shop.upsu.net/cdn/shop/files/Pink_Essential_Hoodie_2a3589c2-096f-479f-ac60-d41e8a853d04_720x.jpg?v=1749131089'),
+                        Container(width: 50,),
+                        const Display('Essential T-Shirt', '£6.99', 'https://shop.upsu.net/cdn/shop/files/Sage_T-shirt_720x.png?v=1759827236')
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              SizedBox( // SIGNATURE RANGE display
+                height: 700,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('SIGNATURE RANGE',style: TextStyle(fontSize: 20),),
+                    Row( // images
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Display('Signiture hoodie', '£32.99', 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498'),
+                        Container(width: 50,),
+                        const Display('Signiture T-Shirt', '£14.99', 'https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534')
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              SizedBox( // PORTSMOUTH CITY COLLECTION display
+                height: 1400,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('PORTSMOUTH CITY COLLECTION',style: TextStyle(fontSize: 20),),
+                    Row( // images
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Display('portsmouth city postcard', '£1.00', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_900x.jpg?v=1752232561'),
+                        Container(width: 50,),
+                        const Display('portsmouth city magnet', 'sold out', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_900x.jpg?v=1752230282')
                       ],
                     ),
-                    Image.network( // banner below navbar
-                      'https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534',
-                      height: 440,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      // child: Column( // i dont know how i would layer text over the image, ask teach
-                      //   children: [
-                      //     Text(
-                      //       '22'
-                      //     ),
-                      //     Text(
-                      //       '33'
-                      //     ),
-                      //     Text(
-                      //       '44'
-                      //     ),
-                      //   ]
-                      // )
-                  ),
+                    Row( // images
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Display('portsmouth city bookemark', '£3.00', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_900x.jpg?v=1752230004'),
+                        Container(width: 50,),
+                        const Display('portsmouth city Notebook', '£7.50', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_900x.jpg?v=1757419215')
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              ElevatedButton( // view all button
+                onPressed: placeholderCallbackForButtons,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                ),
+                child: const Text(
+                  'View All',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Column( // our range display
+                children: [
+                  const Text("Our Range"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Image.network('https://shop.upsu.net/cdn/shop/files/PurpleHoodieFinal_540x.jpg?v=1742201957',width: 300,height: 300,),
+                      Image.network('https://shop.upsu.net/cdn/shop/products/IMG_0651_540x.jpg?v=1557218799',width: 300,height: 300,),
+                      Image.network('https://shop.upsu.net/cdn/shop/products/GradGrey_540x.jpg?v=1657288025',width: 300,height: 300,),
+                      Image.network('https://shop.upsu.net/cdn/shop/products/IMG_0617_540x.jpg?v=1557218162',width: 300,height: 300,),
+                    ],
+                  )
                 ],
               ),
-            ),
-          ]
+              Row(// personal touch section
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 500,
+                    width: 650,
+                    padding: const EdgeInsets.fromLTRB(0, 200, 200, 0) ,
+                    child: Column( // for all the text
+                      children: [
+                        const Text('Add a Personal Touch',style: TextStyle(fontSize: 20),),
+                        const Text('First add your item of clothing to your cart then click below to add your text! One line of text contains 10 characters!',style: TextStyle(fontSize: 16),),
+                        ElevatedButton(
+                          onPressed: placeholderCallbackForButtons,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.deepPurple,
+                            //shape: ,
+                          ),
+                          child: const Text(
+                            'CLICK HERE TO ADD TEXT!',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Image.network('https://shop.upsu.net/cdn/shop/files/The_Union_Print_Shack_Logo_-_smaller_540x.png?v=1760532830',width: 400,height: 400,)
+                ],
+              ),
+              const Footer(),
+            ]
+          )
         )
+      );
+    }
+}
+
+class Navbar extends StatelessWidget{
+  const Navbar({super.key});
+
+  void placeholderCallbackForButtons() {
+    // This is the event handler for buttons that don't work yet
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return(
+      Row( // navbar
+        children: [
+          Image.network( // union logo at left
+            'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+            height: 40,
+            fit: BoxFit.cover,
+          ),
+          Container(width: 300,), // adds padding
+          TextButton( // home button
+            onPressed: placeholderCallbackForButtons,
+            child: const Text(
+              'Home'
+            ),
+          ),
+          TextButton( // shop // needs to be drop down
+            onPressed: placeholderCallbackForButtons,
+            child: const Text(
+              'Shop'
+            ),
+          ),
+          TextButton( // print shack // needs to be drop down
+            onPressed: placeholderCallbackForButtons,
+            child: const Text(
+              'The Print Shack'
+            ),
+          ),
+          TextButton( // sale
+            onPressed: placeholderCallbackForButtons,
+            child: const Text(
+              'SALE!'
+            ),
+          ),
+          TextButton( // about
+            onPressed: placeholderCallbackForButtons,
+            child: const Text(
+              'about'
+            ),
+          ),
+          TextButton( // upsu
+              onPressed: placeholderCallbackForButtons,
+            child: const Text(
+              'UPSU.net'
+            ),
+          ),
+          Container(width: 350,), // adds padding
+          IconButton( // search
+            onPressed: placeholderCallbackForButtons, 
+            icon: const Icon(Icons.search)
+          ),
+          IconButton( // account
+            onPressed: placeholderCallbackForButtons, 
+            icon: const Icon(Icons.man)
+          ),
+          IconButton( // cart
+            onPressed: placeholderCallbackForButtons, 
+            icon: const Icon(Icons.shopping_bag)
+          ),
+        ],
       )
     );
   }
 }
 
-class DisplaySection extends StatelessWidget{
-  final String header_text;
-  final String url;
+class Footer extends StatelessWidget{
+  const Footer({super.key});
 
-  const DisplaySection(this.header_text, this.url);
+  void placeholderCallbackForButtons() {
+    // This is the event handler for buttons that don't work yet
+  }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { // vsc complains about "Another exception was thrown: Cannot hit test a render box with no size."
     return(
       Container(
+        color: Colors.grey,
+        height: 500,
         width: double.infinity,
-        child: Column(
-          children : [
-            Text(header_text),
-            const Row(
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                //display(),
-              ]
+                Text('Opening Hours'),
+                Text('PLEASE NOTE THE UNION SHOP WILL BE CLOSED ALL DAY ON 07/11/2025'),
+                Text('(Term Time)'),
+                Text('Monday - Friday 9am - 4pm'),
+                Text('(Outside of Term Time / Consolidation Weeks)'),
+                Text('Monday - Friday 10am - 3pm'),
+                Text('Purchase online 24/7'),
+              ],
             ),
-          ]
+             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text('Help and Information'),
+                Text('Search'),
+                Text('Terms & Conditions of Sale Policy'),
+              ],
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                 Text('Latest offerss'),
+                SizedBox(
+                  width: 600,
+                  height: 200,
+                  child: TextField(decoration: InputDecoration(labelText: 'Email Address')), // turns out the row was evil, now gotta figure out how to add the button
+                )
+              ],
+            ),
+          ],
         )
       )
     );
@@ -166,7 +326,7 @@ class DisplaySection extends StatelessWidget{
 
 class Display extends StatelessWidget{
   final String name;
-  final double cost;
+  final String cost;
   final String url;
 
   const Display(this.name, this.cost, this.url,{super.key});
@@ -174,14 +334,12 @@ class Display extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return(
-      Container(
-        child: Column(
-          children: [
-            Image.network(url,width : 100, height : 100),
-            Text(name),
-            //Text('£'+cost),
-          ]
-        )
+      Column(
+        children: [
+          Image.network(url,width : 500, height : 500,),
+          Text(name,textAlign: TextAlign.left),
+          Text(cost),
+        ]
       )
     );
   }
