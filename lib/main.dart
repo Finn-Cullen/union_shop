@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/about_us.dart';
+import 'package:union_shop/account_login.dart';
+import 'package:union_shop/sale.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -17,6 +20,15 @@ class UnionShopApp extends StatelessWidget {
       ),
       home: const HomeScreen(),
       initialRoute: '/',
+      routes: {
+        '/about-us': (context) => const AboutUs(),
+        '/shop': (context) => const AboutUs(),
+        '/print-shack': (context) => const AboutUs(),
+        '/sale': (context) => const SalePage(),
+        '/search': (context) => const AboutUs(),
+        '/account': (context) => const Login(),
+        '/cart': (context) => const AboutUs(),
+      },
     );
   }
 }
@@ -39,16 +51,6 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     // Top banner
-                    Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      color: const Color(0xFF4d2963),
-                      child: const Text(
-                        'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      ),
-                    ),
                     const Navbar(),
                     Container(
                       width: double.infinity,
@@ -202,12 +204,47 @@ class Navbar extends StatelessWidget{
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
+  
+  void navtoaboutus(BuildContext context){
+    Navigator.pushNamed(context, '/about-us');
+  }
+  void navtoshop(BuildContext context){
+    Navigator.pushNamed(context, '/shop');
+  }
+  void navtoprintshack(BuildContext context){
+    Navigator.pushNamed(context, '/print-shack');
+  }
+  void navtosale(BuildContext context){
+    Navigator.pushNamed(context, '/sale');
+  }
+  void navtosearch(BuildContext context){
+    Navigator.pushNamed(context, '/search');
+  }
+  void navtoaccount(BuildContext context){
+    Navigator.pushNamed(context, '/account');
+  }
+  void navtocart(BuildContext context){
+    Navigator.pushNamed(context, '/cart');
+  }
+  void navtohome(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
 
   @override
   Widget build(BuildContext context) {
     return(
       Row( // navbar
         children: [
+          // Container( // top banner breaks code
+          //     width: double.infinity,
+          //     padding: const EdgeInsets.symmetric(vertical: 8),
+          //     color: const Color(0xFF4d2963),
+          //     child: const Text(
+          //     'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
+          //     textAlign: TextAlign.center,
+          //     style: TextStyle(color: Colors.white, fontSize: 16),
+          //   ),
+          // ),
           Image.network( // union logo at left
             'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
             height: 40,
@@ -215,52 +252,52 @@ class Navbar extends StatelessWidget{
           ),
           Container(width: 300,), // adds padding
           TextButton( // home button
-            onPressed: placeholderCallbackForButtons,
+            onPressed: () => navtohome(context),
             child: const Text(
               'Home'
             ),
           ),
           TextButton( // shop // needs to be drop down
-            onPressed: placeholderCallbackForButtons,
+            onPressed: () => navtoshop(context),
             child: const Text(
               'Shop'
             ),
           ),
           TextButton( // print shack // needs to be drop down
-            onPressed: placeholderCallbackForButtons,
+            onPressed: () => navtoprintshack(context),
             child: const Text(
               'The Print Shack'
             ),
           ),
           TextButton( // sale
-            onPressed: placeholderCallbackForButtons,
+            onPressed: () => navtosale(context),
             child: const Text(
               'SALE!'
             ),
           ),
           TextButton( // about
-            onPressed: placeholderCallbackForButtons,
+            onPressed: () => navtoaboutus(context),
             child: const Text(
               'about'
             ),
           ),
           TextButton( // upsu
-              onPressed: placeholderCallbackForButtons,
+              onPressed: placeholderCallbackForButtons, // leads no where
             child: const Text(
               'UPSU.net'
             ),
           ),
           Container(width: 350,), // adds padding
           IconButton( // search
-            onPressed: placeholderCallbackForButtons, 
+            onPressed: () => navtosearch(context), 
             icon: const Icon(Icons.search)
           ),
           IconButton( // account
-            onPressed: placeholderCallbackForButtons, 
+            onPressed: () => navtoaccount(context), 
             icon: const Icon(Icons.man)
           ),
           IconButton( // cart
-            onPressed: placeholderCallbackForButtons, 
+            onPressed: () => navtocart(context), 
             icon: const Icon(Icons.shopping_bag)
           ),
         ],
