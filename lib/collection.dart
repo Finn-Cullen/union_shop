@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/product_page.dart';
+import 'package:union_shop/main.dart';
+import 'package:union_shop/about_us.dart';
+import 'package:union_shop/account_login.dart';
+import 'package:union_shop/placeholder.dart';
+import 'package:union_shop/sale.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -16,292 +21,138 @@ class UnionShopApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
-      home: const HomeScreen(),
-      // By default, the app starts at the '/' route, which is the HomeScreen
+      home: const CollectionPage(),
       initialRoute: '/',
-      // When navigating to '/product', build and return the ProductPage
-      // In your browser, try this link: http://localhost:49856/#/product
-      routes: {'/product': (context) => const ProductPage()},
+      routes: {
+        '/product': (context) => const ProductPage(),
+        '/about-us': (context) => const AboutUs(),
+        '/shop': (context) => const AboutUs(),
+        '/print-shack': (context) => const AboutUs(),
+        '/sale': (context) => const SalePage(),
+        '/search': (context) => const AboutUs(),
+        '/account': (context) => const Login(),
+        '/cart': (context) => const AboutUs(),
+      },
     );
   }
 }
 
-class HomeScreen extends StatelessWidget {
-    const HomeScreen({super.key});
+class CollectionPage extends StatelessWidget {
+    const CollectionPage({super.key});
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  void navigateToProduct(BuildContext context) {
-    Navigator.pushNamed(context, '/product');
+  Widget orderrowanscolumns(List<Widget> list){
+    List<Widget> prod = [];
+    for (int i = 0; i < list.length;){ // this function turns a list of items into a set of rows in a column
+      List<Widget> disp = [];
+      disp.add(list[i]);
+      if(i+1 < list.length){
+        disp.add(list[i+1]);
+      }
+      if(i+2 < list.length){
+        disp.add(list[i+2]);
+      }
+      Widget widg = Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: disp,
+      );
+      i += 3;
+      prod.add(widg);
+    }
+
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: prod);
   }
 
-  void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
+  List<Widget> sortforcollections(List<Widget> dlist,List<List<String>> tlist){
+    List<Widget> retlist = [];
+    for(int disp = 0; disp < dlist.length; disp++){
+      bool check = false;
+      for(int coll = 0; coll < tlist[disp].length; coll++){
+        if(tlist[disp][coll] == collselected){check = true;}
+      }
+      if(check){retlist.add(dlist[disp]);}
+    }
+    return retlist;
+  }
+
+  Widget buildcoll(BuildContext context){
+    List<List<String>> collectionslist = [];
+    List<Widget> listofproducts = [];
+    listofproducts = Products.values.map((T) {
+      collectionslist.add(T.collections);
+      return ProductDisplay(
+        T.name,
+        T.cost,
+        T.url,
+      );
+    }).toList();
+    listofproducts = sortforcollections(listofproducts,collectionslist);
+    return orderrowanscolumns(listofproducts);
   }
 
   @override
   Widget build(BuildContext context) {
+    final productlist = buildcoll(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
             // Header
-            Container(
-              height: 100,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  // Top banner
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: const Color(0xFF4d2963),
-                    child: const Text(
-                      'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  // Main header
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Hero Section
+            const Navbar(),
+            
             SizedBox(
-              height: 400,
               width: double.infinity,
-              child: Stack(
-                children: [
-                  // Background image
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Content overlay
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    top: 80,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Placeholder Hero Title',
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            height: 1.2,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          "This is placeholder text for the hero section.",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: placeholderCallbackForButtons,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                          ),
-                          child: const Text(
-                            'BROWSE PRODUCTS',
-                            style: TextStyle(fontSize: 14, letterSpacing: 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+              height: 400,
+              child: Text(collselected),
             ),
-
-            // Products Section
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(40.0),
-                child: Column(
+            SizedBox( // filters and sorts
+                height: 100,
+                width: 800,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const Text(
-                      'PRODUCTS SECTION',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        letterSpacing: 1,
-                      ),
+                    const Text('FILTER BY'), // filters
+                    DropdownMenu<FilterMenu>(
+                      hintText: 'all products',
+                      dropdownMenuEntries: FilterMenu.values
+                        .map<DropdownMenuEntry<FilterMenu>>(
+                          (FilterMenu itm) {
+                            return DropdownMenuEntry<FilterMenu>(
+                              value: itm,
+                              label: itm.text,
+                            );
+                        }).toList(),
                     ),
-                    const SizedBox(height: 48),
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 48,
-                      children: const [
-                        ProductCard(
-                          title: 'Placeholder Product 1',
-                          price: '£10.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 2',
-                          price: '£15.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 3',
-                          price: '£20.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 4',
-                          price: '£25.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                      ],
+
+                    const Text('SORT BY'),
+                    DropdownMenu<SortMenu>( // sort
+                      hintText: 'Best Selling',
+                      dropdownMenuEntries: SortMenu.values
+                        .map<DropdownMenuEntry<SortMenu>>(
+                          (SortMenu itm) {
+                            return DropdownMenuEntry<SortMenu>(
+                              value: itm,
+                              label: itm.text,
+                            );
+                        }).toList(),
                     ),
+
+                    const Text('14 products'),
                   ],
                 ),
               ),
-            ),
 
-            // Footer
-            Container(
+            SizedBox(
               width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              height: 3000,
+              child: productlist,
             ),
+            // Footer
+            const Footer(),
           ],
         ),
       ),
@@ -309,59 +160,32 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class ProductCard extends StatelessWidget {
-  final String title;
-  final String price;
-  final String imageUrl;
+class ProductDisplay extends StatelessWidget{
+  final String name;
+  final String cost;
+  final String url;
 
-  const ProductCard({
-    super.key,
-    required this.title,
-    required this.price,
-    required this.imageUrl,
-  });
+  const ProductDisplay(this.name, this.cost, this.url,{super.key});
+
+  void navtoprod(BuildContext context){
+    prodname = name;
+    produrl = url;
+    Navigator.pushNamed(context, '/product');
+  }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/product');
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return(
+      Column(
         children: [
-          Expanded(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
-                  ),
-                );
-              },
-            ),
+          Image.network(url,width : 500, height : 500,),
+          TextButton(
+            onPressed : () => navtoprod(context),
+            child: Text(name,textAlign: TextAlign.left),
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
-            ],
-          ),
-        ],
-      ),
+          Text(cost),
+        ]
+      )
     );
   }
 }

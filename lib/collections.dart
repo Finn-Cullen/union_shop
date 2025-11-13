@@ -4,6 +4,9 @@ import 'package:union_shop/about_us.dart';
 import 'package:union_shop/account_login.dart';
 import 'package:union_shop/placeholder.dart';
 import 'package:union_shop/sale.dart';
+import 'package:union_shop/collection.dart';
+import 'package:union_shop/product_page.dart';
+
 
 void main() {
   runApp(const UnionShopApp());
@@ -23,6 +26,7 @@ class UnionShopApp extends StatelessWidget {
       home: const CollectionsPage(),
       initialRoute: '/',
       routes: {
+        '/product': (context) => const ProductPage(),
         '/about-us': (context) => const AboutUs(),
         '/shop': (context) => const AboutUs(),
         '/print-shack': (context) => const AboutUs(),
@@ -30,6 +34,7 @@ class UnionShopApp extends StatelessWidget {
         '/search': (context) => const AboutUs(),
         '/account': (context) => const Login(),
         '/cart': (context) => const AboutUs(),
+        '/collection': (context) => const CollectionPage(),
       },
     );
   }
@@ -75,7 +80,6 @@ class CollectionsPage extends StatelessWidget{
 
     final collections = buildcoll(context);
 
-
     return
       Scaffold(
         body: SingleChildScrollView(
@@ -105,8 +109,9 @@ class DisplayCollection extends StatelessWidget{
 
   const DisplayCollection(this.name, this.url,{super.key});
 
-  void nav(){
-
+  void nav(BuildContext context, String coll){
+    collselected = coll; // here we nav to collection page, data is saved to 'placeholder' and is used to filter items shown
+    Navigator.pushNamed(context, '/collection');
   }
 
   @override
@@ -118,7 +123,7 @@ class DisplayCollection extends StatelessWidget{
         decoration: BoxDecoration(
           image: DecorationImage(fit:BoxFit.fill ,image: NetworkImage(url))
         ),
-        child: Center(child: TextButton(onPressed: nav, child: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20)))),
+        child: Center(child: TextButton(onPressed: () => nav(context,name), child: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20)))),
         
       )
     );
