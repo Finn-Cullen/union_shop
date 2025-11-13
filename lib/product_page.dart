@@ -1,5 +1,30 @@
 import 'package:flutter/material.dart';
 
+String prodname = '';
+String produrl = '';
+
+
+void main() {
+  runApp(const ProductPage());
+}
+
+class UnionShopApp extends StatelessWidget {
+  const UnionShopApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'about us',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
+      ),
+      home: const ProductPage(),
+      initialRoute: '/',
+    );
+  }
+}
+
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
 
@@ -29,7 +54,7 @@ class ProductPage extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 8),
                     color: const Color(0xFF4d2963),
                     child: const Text(
-                      'PLACEHOLDER HEADER TEXT',
+                      'placeholder',
                       textAlign: TextAlign.center,
                       style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
@@ -45,7 +70,7 @@ class ProductPage extends StatelessWidget {
                               navigateToHome(context);
                             },
                             child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                              'fish.png',
                               height: 18,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
@@ -148,7 +173,7 @@ class ProductPage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                        'import package:union_shop/collection.dart',
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -179,8 +204,8 @@ class ProductPage extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Product name
-                  const Text(
-                    'Placeholder Product Name',
+                  Text(
+                    prodname,
                     style: TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
