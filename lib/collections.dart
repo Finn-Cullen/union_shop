@@ -110,12 +110,12 @@ class DisplayCollection extends StatelessWidget{
   const DisplayCollection(this.name, this.url,{super.key});
 
   void nav(BuildContext context, String coll){
-    collselected = coll; // here we nav to collection page, data is saved to 'placeholder' and is used to filter items shown
+    collselected = coll;
     Navigator.pushNamed(context, '/collection');
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     return(
       Container(
         width : 300,
