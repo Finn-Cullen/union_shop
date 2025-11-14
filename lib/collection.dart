@@ -3,7 +3,8 @@ import 'package:union_shop/product_page.dart';
 import 'package:union_shop/main.dart';
 import 'package:union_shop/about_us.dart';
 import 'package:union_shop/account_login.dart';
-import 'package:union_shop/placeholder.dart';
+import 'package:union_shop/collections_data.dart';
+import 'package:union_shop/products.dart';
 import 'package:union_shop/sale.dart';
 
 void main() {
