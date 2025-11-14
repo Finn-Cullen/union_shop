@@ -2,7 +2,7 @@
 
 // this file exists to hold data and facilitate its transfer across the system
 
-String collselected = '';
+String collselected = 'UPSU bears';
 String colltitletext = '';
 
 enum Collections{
@@ -41,37 +41,4 @@ enum Collections{
 
   final String collname;
   final String displayurl;
-}
-
-enum Products{
-  a(
-    name: 'awaw',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '£3.00',
-    collections: ['Autumn favourites']
-  ),
-  b(
-    name: 'gagaw',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '£32.00',
-    collections: ['Autumn favourites']
-  ),
-  c(
-    name: 'EW',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '£123.00',
-    collections: ['UPSU bears']
-  );
-
-  const Products({
-    required this.name,
-    required this.url,
-    required this.cost,
-    required this.collections,
-  });
-
-  final String name;
-  final String url;
-  final String cost;
-  final List<String> collections;
 }
