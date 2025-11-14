@@ -373,7 +373,7 @@ class Display extends StatelessWidget{
     return(
       Column(
         children: [
-          Image.network(url,width : 500, height : 500,),
+          Image.network(url,width : 300, height : 300,),
           Text(name,textAlign: TextAlign.left),
           Text(cost),
         ]

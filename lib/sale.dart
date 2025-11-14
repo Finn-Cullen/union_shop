@@ -177,24 +177,3 @@ class SalePage extends StatelessWidget{
       );
   }
 }
-
-class Display extends StatelessWidget{
-  final String name;
-  final String cost;
-  final String url;
-
-  const Display(this.name, this.cost, this.url,{super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return(
-      Column(
-        children: [
-          Image.network(url,width : 300, height : 300,),
-          Text(name,textAlign: TextAlign.left),
-          Text(cost),
-        ]
-      )
-    );
-  }
-}
