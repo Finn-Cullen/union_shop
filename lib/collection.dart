@@ -10,9 +10,7 @@ import 'package:union_shop/sale.dart';
 void main() {
   runApp(const UnionShopApp());
 }
-
-int page = 3;
-
+ 
 class UnionShopApp extends StatelessWidget {
   const UnionShopApp({super.key});
 
@@ -40,10 +38,20 @@ class UnionShopApp extends StatelessWidget {
   }
 }
 
-class CollectionPage extends StatelessWidget { // needs to be statefull
+class CollectionPage extends StatefulWidget { // needs to be statefull
   const CollectionPage({super.key});
-  final String filter = 'all products';
-  final String sortmethod = 'best selling';
+  
+  @override
+  State<CollectionPage> createState() {
+    return CollectionPageState();
+  }
+}
+
+class CollectionPageState extends State<CollectionPage> {
+  String filter = 'all products';
+  String sortmethod = 'best selling';
+  int page = 1;
+  Widget productlist = const Column();
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -179,11 +187,19 @@ class CollectionPage extends StatelessWidget { // needs to be statefull
   }
 
   void uppage(){
-    page += 1;
+    if(page < 2){
+      setState(() {
+        page++;
+      });
+    }
   }
 
   void backpage(){
-    page -= 1;
+    if(page > 1){
+      setState(() {
+        page--;
+      });
+    }
   }
 
   // bool stringval(String str1, String str2, String order){
@@ -220,7 +236,7 @@ class CollectionPage extends StatelessWidget { // needs to be statefull
         );
     }).toList();
     List<ProductDisplay> hold = [];
-    for(int i = (9*(1-1)); i < listofproducts.length && i < (9*1)+1; i++){
+    for(int i = (9*(page-1)); i < listofproducts.length && i < (9*page)+1; i++){
       hold.add(listofproducts[i]);
     }
     listofproducts = hold;
@@ -232,7 +248,9 @@ class CollectionPage extends StatelessWidget { // needs to be statefull
 
   @override
   Widget build(BuildContext context) {
-    final productlist = buildcoll(context);
+    setState(() {
+      productlist = buildcoll(context);
+    });
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -295,7 +313,7 @@ class CollectionPage extends StatelessWidget { // needs to be statefull
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(onPressed: backpage, child: const Icon(Icons.arrow_back)),
-                    const Text('page 1 of 2'),
+                    Text('page'+ page.toString() +'of 2'),
                     ElevatedButton(onPressed: uppage, child: const Icon(Icons.arrow_forward))
                   ],
                 ),
