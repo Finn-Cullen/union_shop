@@ -9,6 +9,7 @@ enum Products{
     featured: true,
     bestselling: 5,
     date : '1/5/2025',
+    desc: 'this is a description',
   ),
   b(
     name: 'gagaw',
@@ -19,6 +20,7 @@ enum Products{
     featured: false,
     bestselling: 2,
     date : '19/2/2024',
+    desc: 'a different description',
   ),
   c(
     name: 'EWe',
@@ -29,97 +31,8 @@ enum Products{
     featured: true,
     bestselling: 4,
     date : '2/9/2025',
-  ),
-  d(
-    name: 'EWd',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),
-  e(
-    name: 'EWc',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),
-  f(
-    name: 'EW',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),
-  g(
-    name: 'EW',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),
-  h(
-    name: 'EW',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),
-  i(
-    name: 'EW',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),
-  j(
-    name: 'EW',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),
-  k(
-    name: 'EW',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),
-  l(
-    name: 'EW',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
-    collections: ['UPSU bears'],
-    tags: ['merch'],
-    featured: true,
-    bestselling: 4,
-    date : '2/9/2025',
-  ),;
+    desc: 'yup a description',
+  );
 
   const Products({
     required this.name,
@@ -130,6 +43,7 @@ enum Products{
     required this.featured,
     required this.bestselling,
     required this.date,
+    required this.desc,
   });
 
   final String name;
@@ -140,4 +54,5 @@ enum Products{
   final bool featured;
   final int bestselling;
   final String date;
+  final String desc;
 }
