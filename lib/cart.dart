@@ -38,7 +38,7 @@ class CartPage extends StatefulWidget { // needs to be statefull
 
 class CartPageState extends State<CartPage> {
 
-  Widget cart = const Text('aaa');
+  Widget cart = const Text('aaa'); // placeholder widget to be overwritten
 
   void navtocol(BuildContext context){
     Navigator.pushNamed(context, '/collections');
@@ -50,7 +50,20 @@ class CartPageState extends State<CartPage> {
     for(int i = 0; i < cartlist.length; i++){
       list.add(ProductDisplayCart(cost: cartlist[i].cost, name: cartlist[i].name, url: cartlist[i].url,total: 0,));
     }
-    return list;
+    List<ProductDisplayCart> listfilt = [];
+    for(int i = 0; i < list.length; i++){
+      bool check = true;
+      for(int x = i; x < list.length; x++){
+        if(list[i].name == list[x].name && i != x){
+          check = false;
+        }
+      }
+      if(check){
+        // no duplicates
+        listfilt.add(list[i]);
+      }
+    }
+    return listfilt;
   }
 
   Widget buildcart(BuildContext context){

@@ -1,9 +1,9 @@
-List<CartItem> cartlist = [CartItem('agawa', '14', 'mondays'),CartItem('agawa', '14', 'mondays'),CartItem('agawa', '14', 'mondays')];
+List<CartItem> cartlist = [const CartItem(name: 'agawa',cost:  '14',url:  'mondays'),const CartItem(name: 'agaw',cost:  '14',url:  'mondays')];
 
 class CartItem{
-  final String name;
+  final String name;  
   final String cost;
   final String url;
 
-  const CartItem(this.name, this.cost, this.url);
+  const CartItem({required this.name,required this.cost,required this.url});
 }

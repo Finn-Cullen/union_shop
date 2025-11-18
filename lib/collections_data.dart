@@ -1,7 +1,3 @@
-// need to rename file, ask teach for ideas
-
-// this file exists to hold data and facilitate its transfer across the system
-
 String collselected = 'UPSU bears';
 String colltitletext = '';
 
