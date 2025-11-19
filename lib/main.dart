@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/about_us.dart';
 import 'package:union_shop/account_login.dart';
+import 'package:union_shop/cart.dart';
+import 'package:union_shop/collections.dart';
+import 'package:union_shop/collection.dart';
 import 'package:union_shop/sale.dart';
+import 'package:union_shop/product_page.dart';
+import 'package:union_shop/payment.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -22,12 +27,15 @@ class UnionShopApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/about-us': (context) => const AboutUs(),
-        '/shop': (context) => const AboutUs(),
+        '/collections': (context) => const CollectionsPage(),
+        '/collection': (context) => const CollectionPage(),
         '/print-shack': (context) => const AboutUs(),
         '/sale': (context) => const SalePage(),
         '/search': (context) => const AboutUs(),
         '/account': (context) => const Login(),
-        '/cart': (context) => const AboutUs(),
+        '/cart': (context) => const CartPage(),
+        '/product': (context) => const ProductPage(),
+        '/payment': (context) => const PayPage(),
       },
     );
   }
@@ -209,7 +217,7 @@ class Navbar extends StatelessWidget{
     Navigator.pushNamed(context, '/about-us');
   }
   void navtoshop(BuildContext context){
-    Navigator.pushNamed(context, '/shop');
+    Navigator.pushNamed(context, '/collections');
   }
   void navtoprintshack(BuildContext context){
     Navigator.pushNamed(context, '/print-shack');

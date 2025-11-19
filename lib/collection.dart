@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/product_page.dart';
 import 'package:union_shop/main.dart';
-import 'package:union_shop/about_us.dart';
-import 'package:union_shop/account_login.dart';
 import 'package:union_shop/collections_data.dart';
 import 'package:union_shop/products.dart';
+
 import 'package:union_shop/sale.dart';
 
 void main() {
@@ -23,17 +21,6 @@ class UnionShopApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
       home: const CollectionPage(),
-      initialRoute: '/',
-      routes: {
-        '/product': (context) => const ProductPage(),
-        '/about-us': (context) => const AboutUs(),
-        '/shop': (context) => const AboutUs(),
-        '/print-shack': (context) => const AboutUs(),
-        '/sale': (context) => const SalePage(),
-        '/search': (context) => const AboutUs(),
-        '/account': (context) => const Login(),
-        '/cart': (context) => const AboutUs(),
-      },
     );
   }
 }

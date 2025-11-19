@@ -1,3 +1,21 @@
+import 'package:flutter/material.dart';
+
+String prodcost = '';
+String produrl = '';
+String proddesc = '';
+String prodname = '';
+int numofprod = 0;
+Widget carttxt = const Text('');
+
+Widget carttxtbuild(){
+  if(numofprod > 0){
+    return Text(numofprod.toString() + ' of items in cart');
+  }
+  else{
+    return const Text('');
+  }
+}
+
 
 enum Products{
   a(

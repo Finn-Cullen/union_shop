@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/main.dart';
-
-String prodname = '';
-String produrl = '';
-String proddesc = '';
-String prodcost = '';
+import 'package:union_shop/cart_data.dart';
+import 'package:union_shop/cart.dart';
+import 'package:union_shop/products.dart';
 
 void main() {
   runApp(const ProductPage());
@@ -22,7 +20,9 @@ class UnionShopApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
       home: const ProductPage(),
-      initialRoute: '/',
+      routes: {
+        '/cart': (context) => const CartPage(),
+      },
     );
   }
 }
@@ -34,12 +34,15 @@ class ProductPage extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
+  void navtocart(BuildContext context){
+    instcartprod(prodname, prodcost, produrl);
+    Navigator.pushNamed(context, '/cart');
   }
 
   @override
   Widget build(BuildContext context) {
+    numofprod = totalnumprod(prodname);
+    carttxt = carttxtbuild();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -149,6 +152,16 @@ class ProductPage extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+
+            SizedBox(
+              child: Row(
+                children: [
+                  carttxt,
+                  ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
+                ],
+              ),
+
             ),
 
             // Footer
