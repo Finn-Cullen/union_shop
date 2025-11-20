@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/about_us.dart';
 import 'package:union_shop/account_login.dart';
 import 'package:union_shop/cart.dart';
+import 'package:union_shop/cart_data.dart';
 import 'package:union_shop/collections.dart';
 import 'package:union_shop/collection.dart';
 import 'package:union_shop/sale.dart';
 import 'package:union_shop/product_page.dart';
 import 'package:union_shop/payment.dart';
 import 'package:union_shop/the_print_shack.dart';
+import 'package:union_shop/print_shack_about.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -31,6 +33,7 @@ class UnionShopApp extends StatelessWidget {
         '/collections': (context) => const CollectionsPage(),
         '/collection': (context) => const CollectionPage(),
         '/print-shack': (context) => const PrintPage(),
+        '/print-shack-about': (context) => const PrintPageAbout(),
         '/sale': (context) => const SalePage(),
         '/search': (context) => const AboutUs(),
         '/account': (context) => const Login(),
@@ -220,8 +223,8 @@ class Navbar extends StatelessWidget{
   void navtoshop(BuildContext context){
     Navigator.pushNamed(context, '/collections');
   }
-  void navtoprintshack(BuildContext context){
-    Navigator.pushNamed(context, '/print-shack');
+  void navtoprintshack(BuildContext context,String link){
+    Navigator.pushNamed(context, link);
   }
   void navtosale(BuildContext context){
     Navigator.pushNamed(context, '/sale');
@@ -272,11 +275,22 @@ class Navbar extends StatelessWidget{
               'Shop'
             ),
           ),
-          TextButton( // print shack // needs to be drop down
-            onPressed: () => navtoprintshack(context),
-            child: const Text(
-              'The Print Shack'
-            ),
+          DropdownMenu<TPS>(
+            hintText: 'the print shack',
+            dropdownMenuEntries: TPS.values
+            .map<DropdownMenuEntry<TPS>>(
+              (TPS itm) {
+                return DropdownMenuEntry<TPS>(
+                  value: itm,
+                  label: itm.label,
+                );
+            }).toList(),
+            onSelected: (TPS? t){
+              if(t != null){
+                navtoprintshack(context,t.link);
+              }
+              perslineinpset();
+            },
           ),
           TextButton( // sale
             onPressed: () => navtosale(context),
