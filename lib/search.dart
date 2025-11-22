@@ -12,6 +12,7 @@ class SearchPage extends StatefulWidget { // needs to be statefull
 }
 
 class SearchPageState extends State<SearchPage> {
+  TextEditingController controller = TextEditingController();
 
   void searchitm(String inp){
     setState(() {
@@ -20,31 +21,29 @@ class SearchPageState extends State<SearchPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Navbar(),
-
-            SizedBox(
-              width: 500,
-              height: 300,
-              child: Row(
-                children: [
-                  //const TextField(),
-                  ElevatedButton(onPressed: () => searchitm('aw'), child: const Text('search')) // works, is using constant as a placeholder
-                ],
-              ),
-            ),
+            Navbar(),
+            SizedBox(height: 100,),
+            TextField(controller: controller),
+            ElevatedButton(onPressed: () => searchitm(controller.text), child: const Text('search')), // works, is using constant as a placeholder
+            SizedBox(height: 100,),
             Column(
               children: searchlist,
             ),
-
-            const Footer(),
+            SizedBox(height: 100,),
+            Footer(),
           ],
         )
-      )
+      ),
     );
   }
 }
