@@ -189,7 +189,9 @@ Widget buildcart(BuildContext context){
     for(int i = 0; i < listnum[save]; i++){
       inpfields.add(
         Text('line ' + (i+1).toString()),
-        //TextField()
+      );
+      inpfields.add(
+        TextField()
       );
     }
 
