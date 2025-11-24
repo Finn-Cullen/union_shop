@@ -171,7 +171,7 @@ class CollectionPageState extends State<CollectionPage> {
     }
     listofproducts = hold;
     if(collselected != ''){listofproducts = sortforcollections(listofproducts,collectionslist);} // sorts collections
-    if(filter != 'product'){listofproducts = filterproducts(listofproducts,taglist);} // filters
+    if(filter != 'products'){listofproducts = filterproducts(listofproducts,taglist);} // filters
     listofproducts = sortproducts(listofproducts,featlist,bestlist); // sorts
     return orderrowanscolumns(listofproducts);
   }
@@ -239,7 +239,6 @@ class CollectionPageState extends State<CollectionPage> {
                           });
                         },
                     ),
-                    Text(sortmethod),
                   ],
                 ),
               ),

@@ -21,9 +21,9 @@ enum SortMenu{
 }
 
 enum FilterMenu{
-  product(text: 'all products'),
+  product(text: 'products'),
   clothing(text: 'clothing'),
-  merch(text: 'merchendise'),
+  merch(text: 'merch'),
   psut(text: 'PSUT');
 
   const FilterMenu({
