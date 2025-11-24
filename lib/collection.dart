@@ -35,7 +35,7 @@ class CollectionPage extends StatefulWidget { // needs to be statefull
 }
 
 class CollectionPageState extends State<CollectionPage> {
-  String filter = 'all products';
+  String filter = 'products';
   String sortmethod = 'best selling';
   int page = 1;
   Widget productlist = const Column();
@@ -78,9 +78,9 @@ class CollectionPageState extends State<CollectionPage> {
 
   List<ProductDisplay> filterproducts(List<ProductDisplay> list,List<List<String>> tlist){
     List<ProductDisplay> retlist = [];
-    for(int i = 0; i < tlist.length; i++){
-      if(tlist[i].contains(filter)){
-        retlist.add(list[i]);
+    for(int disp = 0; disp < list.length && disp < tlist.length; disp++){
+      if(tlist[disp].contains(filter)){
+        retlist.add(list[disp]);
       }
     }
     return retlist;
@@ -94,36 +94,6 @@ class CollectionPageState extends State<CollectionPage> {
         if(featlist[i]){retlist.add(list[i]);} // adds featured, skips rest
       }
     }
-    // else if(sortmethod == "A-Z" || sortmethod == "Z-A"){
-    //   String order = 'greater';
-    //   List vallist = [];
-    //   if(sortmethod == "Z-A"){order = 'lesser';} // ordering by letters doesnt work
-
-    //   for(int i = 0; i < list.length; i++){
-    //     vallist.add(list[i].name);
-    //   }
-
-    //   bool check = true;
-    //   while(check){
-    //     check = false;
-
-    //     for(int i = 0; i < list.length; i++){
-    //       if(i+1 < list.length){
-    //         if(stringval(vallist[i],vallist[i+1],order)){
-    //           var holda = list[i];
-    //           list[i] = list[i+1];
-    //           list[i+1] = holda;
-    //           var holdb = vallist[i];
-    //           vallist[i] = vallist[i+1];
-    //           vallist[i+1] = holdb;
-    //           check = true;
-    //         }
-    //       }
-    //     }
-
-    //   }
-    //   retlist = list;
-    // }
     else{
       // using bubble sort to sort
       String order = 'greater'; // determines the order to be sorted by
@@ -189,20 +159,6 @@ class CollectionPageState extends State<CollectionPage> {
     }
   }
 
-  // bool stringval(String str1, String str2, String order){
-  //   for(int i = 0; i < str1.length; i++){
-  //     if(str1[i] == str2[i]){} // skips if they are equal
-  //     else if((order == 'greater' && strtoint(str1[i]) > strtoint(str2[i])) || (order == 'lesser' && strtoint(str1[i]) < strtoint(str2[i]))){
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // }
-
-  // int strtoint(String str){
-  //   return str.codeUnitAt(0);
-  // }
-
   Widget buildcoll(BuildContext context){
     List<List<String>> collectionslist = [];
     List<List<String>> taglist = [];
@@ -229,7 +185,7 @@ class CollectionPageState extends State<CollectionPage> {
     }
     listofproducts = hold;
     if(collselected != ''){listofproducts = sortforcollections(listofproducts,collectionslist);} // sorts collections
-    if(filter != 'all products'){listofproducts = filterproducts(listofproducts,taglist);} // filters
+    if(filter != 'product'){listofproducts = filterproducts(listofproducts,taglist);} // filters
     listofproducts = sortproducts(listofproducts,featlist,bestlist,datelist); // sorts
     return orderrowanscolumns(listofproducts);
   }
@@ -269,6 +225,13 @@ class CollectionPageState extends State<CollectionPage> {
                               label: itm.text,
                             );
                         }).toList(),
+                        onSelected: (FilterMenu? pers){
+                          setState(() {
+                            if(pers != null){
+                              filter = pers.text;
+                            }
+                          });
+                        },
                     ),
 
                     const Text('SORT BY'),
@@ -282,16 +245,22 @@ class CollectionPageState extends State<CollectionPage> {
                               label: itm.text,
                             );
                         }).toList(),
+                        onSelected: (SortMenu? pers){
+                          setState(() {
+                            if(pers != null){
+                              sortmethod = pers.text;
+                            }
+                          });
+                        },
                     ),
-
-                    const Text('14 products'),
+                    Text(sortmethod),
                   ],
                 ),
               ),
 
+
             SizedBox(
               width: double.infinity,
-              height: 3000,
               child: productlist,
             ),
             // Footer
@@ -301,7 +270,7 @@ class CollectionPageState extends State<CollectionPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(onPressed: backpage, child: const Icon(Icons.arrow_back)),
-                    Text('page'+ page.toString() +'of 2'),
+                    Text('page'+ page.toString()),
                     ElevatedButton(onPressed: uppage, child: const Icon(Icons.arrow_forward))
                   ],
                 ),
