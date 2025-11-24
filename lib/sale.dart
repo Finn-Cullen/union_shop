@@ -10,13 +10,8 @@ void main() {
 enum SortMenu{
   a(text: 'featured'),
   b(text: 'best selling'),
-  c(text: 'alphabetically A-Z'),
-  e(text: 'alphabetically Z-A'),
-  f(text: 'price, high to low'),
-  i(text: 'price, low to high'),
-  h(text: 'Date, old to new'),
-  g(text: 'Date, new to old'),
-  d(text: 'PSUT');
+  f(text: 'high to low'),
+  i(text: 'low to high');
 
   const SortMenu({
     required this.text,
@@ -26,8 +21,8 @@ enum SortMenu{
 }
 
 enum FilterMenu{
-  prod(text: 'all products'),
-  cloth(text: 'clothing'),
+  product(text: 'all products'),
+  clothing(text: 'clothing'),
   merch(text: 'merchendise'),
   psut(text: 'PSUT');
 

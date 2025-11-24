@@ -86,7 +86,7 @@ class CollectionPageState extends State<CollectionPage> {
     return retlist;
   }
 
-  List<ProductDisplay> sortproducts(List<ProductDisplay> list, List<bool> featlist, List<int> bestlist, List<String> datelist){
+  List<ProductDisplay> sortproducts(List<ProductDisplay> list, List<bool> featlist, List<int> bestlist){
     List<ProductDisplay> retlist = [];
 
     if(sortmethod == "featured"){ // needs its own sort method
@@ -108,18 +108,6 @@ class CollectionPageState extends State<CollectionPage> {
         }
       }
       if(sortmethod == "high to low"){order = 'lesser';}
-      if(sortmethod == "oldest to newest" || sortmethod == "newest to oldest"){
-        for(int i = 0; i < list.length; i++){
-          List<String> date = datelist[i].split('/');
-          int days = int.parse(date[0]);
-          days += int.parse(date[1]) * 30;
-          days += int.parse(date[2])*365; // this gives us the number of days which we can use to easily order the products
-          vallist.add(days);
-        }
-      }
-      if(sortmethod == "oldest to newest"){
-        order = "lesser";
-      }
       bool check = true;
       while(check){
         check = false;
@@ -165,13 +153,11 @@ class CollectionPageState extends State<CollectionPage> {
     List<ProductDisplay> listofproducts = [];
     List<bool> featlist = [];
     List<int> bestlist = [];
-    List<String> datelist = [];
     listofproducts = Products.values.map((T) {
         collectionslist.add(T.collections);
         taglist.add(T.tags);
         featlist.add(T.featured);
         bestlist.add(T.bestselling);
-        datelist.add(T.date);
         return ProductDisplay(
           T.name,
           T.cost,
@@ -186,7 +172,7 @@ class CollectionPageState extends State<CollectionPage> {
     listofproducts = hold;
     if(collselected != ''){listofproducts = sortforcollections(listofproducts,collectionslist);} // sorts collections
     if(filter != 'product'){listofproducts = filterproducts(listofproducts,taglist);} // filters
-    listofproducts = sortproducts(listofproducts,featlist,bestlist,datelist); // sorts
+    listofproducts = sortproducts(listofproducts,featlist,bestlist); // sorts
     return orderrowanscolumns(listofproducts);
   }
 

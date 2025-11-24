@@ -26,7 +26,6 @@ enum Products{
     tags: ['clothing','merch'],
     featured: true,
     bestselling: 5,
-    date : '1/5/2025',
     desc: 'this is a description',
   ),
   b(
@@ -37,7 +36,6 @@ enum Products{
     tags: ['clothing'],
     featured: false,
     bestselling: 2,
-    date : '19/2/2024',
     desc: 'a different description',
   ),
   c(
@@ -48,7 +46,6 @@ enum Products{
     tags: ['merch'],
     featured: true,
     bestselling: 4,
-    date : '2/9/2025',
     desc: 'yup a description',
   );
 
@@ -60,7 +57,6 @@ enum Products{
     required this.tags,
     required this.featured,
     required this.bestselling,
-    required this.date,
     required this.desc,
   });
 
@@ -71,6 +67,5 @@ enum Products{
   final List<String> tags;
   final bool featured;
   final int bestselling;
-  final String date;
   final String desc;
 }
