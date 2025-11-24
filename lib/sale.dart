@@ -116,8 +116,6 @@ class SalePage extends StatelessWidget{
                             );
                         }).toList(),
                     ),
-
-                    const Text('14 products'),
                   ],
                 ),
               ),
@@ -131,23 +129,23 @@ class SalePage extends StatelessWidget{
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Display('A5 notepad','sold out','https://shop.upsu.net/cdn/shop/products/IMG_0617_540x.jpg?v=1557218162'),
-                        Display('classic sweatshirts - neutral','£10.99','https://shop.upsu.net/cdn/shop/files/Neutral_-_Sept_24_540x.png?v=1750063651'),
-                        Display('recycled notebook','£1.80','https://shop.upsu.net/cdn/shop/products/IMG_3406_540x.jpg?v=1581000944'),
+                        Display('classic sweatshirts - neutral','£̶4̶2̶.̶0̶0̶   £10.99','https://shop.upsu.net/cdn/shop/files/Neutral_-_Sept_24_540x.png?v=1750063651'),
+                        Display('recycled notebook','£̶1̶2̶.̶0̶0̶   £1.80','https://shop.upsu.net/cdn/shop/products/IMG_3406_540x.jpg?v=1581000944'),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Display('iphone 5/6 charge & sunc cable','£1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844'),
-                        Display('type C charge and sync cable','£1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844'),
-                        Display('USB to USB charge & sync cable','£1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844'),
+                        Display('iphone 5/6 charge & sunc cable','£̶4̶2̶.̶0̶0̶  £1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844'),
+                        Display('type C charge and sync cable','£̶4̶2̶.̶0̶0̶   £1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844'),
+                        Display('USB to USB charge & sync cable','£̶1̶2̶.̶0̶0̶   £1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844'),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Display('Dimple Pop Fidget Keyring','£0.99','https://shop.upsu.net/cdn/shop/files/Fidget_Keyring_540x.png?v=1719226889'),
-                        Display('Nike Academy 18 tech pants','£7.00','https://shop.upsu.net/cdn/shop/files/Nike_Pants_Shopify_-_Sept_24_540x.png?v=1726483797'),
+                        Display('Dimple Pop Fidget Keyring','£̶3̶.̶0̶0̶   £0.99','https://shop.upsu.net/cdn/shop/files/Fidget_Keyring_540x.png?v=1719226889'),
+                        Display('Nike Academy 18 tech pants','£̶4̶2̶.̶0̶0̶   £7.00','https://shop.upsu.net/cdn/shop/files/Nike_Pants_Shopify_-_Sept_24_540x.png?v=1726483797'),
                         Display('Nike Academy 18 tech pants (M)','sold out','https://shop.upsu.net/cdn/shop/files/Nike_Pants_Shopify_-_Sept_24_540x.png?v=1726483797'),
                       ],
                     ),
@@ -160,7 +158,6 @@ class SalePage extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     ElevatedButton(onPressed: placeholderCallbackForButtons, child: const Icon(Icons.arrow_back)),
-                    const Text('page 1 of 2'),
                     ElevatedButton(onPressed: placeholderCallbackForButtons, child: const Icon(Icons.arrow_forward))
                   ],
                 ),
