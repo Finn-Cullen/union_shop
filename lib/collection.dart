@@ -191,8 +191,8 @@ class CollectionPageState extends State<CollectionPage> {
             
             SizedBox(
               width: double.infinity,
-              height: 400,
-              child: Text(collselected),
+              height: 100,
+              child: Center(child: Text(collselected),),
             ),
             SizedBox( // filters and sorts
                 height: 100,
