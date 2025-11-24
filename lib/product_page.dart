@@ -1,31 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/main.dart';
 import 'package:union_shop/cart_data.dart';
-import 'package:union_shop/cart.dart';
 import 'package:union_shop/products.dart';
-
-void main() {
-  runApp(const ProductPage());
-}
-
-class UnionShopApp extends StatelessWidget {
-  const UnionShopApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: prodname,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
-      ),
-      home: const ProductPage(),
-      routes: {
-        '/cart': (context) => const CartPage(),
-      },
-    );
-  }
-}
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});

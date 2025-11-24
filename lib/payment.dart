@@ -13,7 +13,7 @@ class PayPage extends StatelessWidget{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Navbar(),
-              SizedBox(width: double.infinity,height: 600,child: Center(child: Text(' no payment processor is implemented ')),),
+              SizedBox(width: double.infinity,height: 600,child: Center(child: Text('your order has been placed')),),
               Footer(),
             ],
           ),

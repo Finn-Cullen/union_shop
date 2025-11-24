@@ -5,26 +5,6 @@ import 'package:union_shop/products.dart';
 
 import 'package:union_shop/sale.dart';
 
-void main() {
-  runApp(const UnionShopApp());
-}
- 
-class UnionShopApp extends StatelessWidget {
-  const UnionShopApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Union Shop',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
-      ),
-      home: const CollectionPage(),
-    );
-  }
-}
-
 class CollectionPage extends StatefulWidget { // needs to be statefull
   const CollectionPage({super.key});
   
