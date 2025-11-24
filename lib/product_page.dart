@@ -154,14 +154,13 @@ class ProductPage extends StatelessWidget {
               ),
             ),
 
-            SizedBox(
+            Center(
               child: Row(
                 children: [
                   carttxt,
                   ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
                 ],
               ),
-
             ),
 
             // Footer
