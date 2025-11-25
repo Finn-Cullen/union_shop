@@ -27,7 +27,7 @@ class UnionShopApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
-      home: const HomeScreen(),
+      home: HomeScreen(),
       initialRoute: '/',
       routes: {
         '/about-us': (context) => const AboutUs(),
@@ -59,36 +59,30 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox( // navbar and banner
+              // Top banner
+              Navbar(),
+              Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(fit:BoxFit.fill ,image: NetworkImage("https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534"))
+                ),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Top banner
-                    const Navbar(),
-                    Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(fit:BoxFit.fill ,image: NetworkImage("https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534"))
+                    const Text('Essential range - over 20% off!',style: TextStyle(color: Colors.white, fontSize: 60),),
+                    const Text('over 20% off our essential range. come and grab yours while stock lasts',style: TextStyle(color: Colors.white,fontSize: 32),),
+                    ElevatedButton( // view all button
+                      onPressed: placeholderCallbackForButtons,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple,
                       ),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text('Essential range - over 20% off!',style: TextStyle(color: Colors.white, fontSize: 60),),
-                          const Text('over 20% off our essential range. come and grab yours while stock lasts',style: TextStyle(color: Colors.white,fontSize: 32),),
-                          ElevatedButton( // view all button
-                            onPressed: placeholderCallbackForButtons,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.deepPurple,
-                            ),
-                            child: const Text(
-                              'browse collection',
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ]
-                      )
-                    )
-                  ],
-               ),
+                      child: const Text(
+                        'browse collection',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ]
+                )
               ),
               SizedBox( // ESSENTIAL RANGE display
                 child: Column(
@@ -192,7 +186,7 @@ class HomeScreen extends StatelessWidget {
                   Image.network('https://shop.upsu.net/cdn/shop/files/The_Union_Print_Shack_Logo_-_smaller_540x.png?v=1760532830',width: 400,height: 400,)
                 ],
               ),
-              const Footer(),
+              Footer(),
             ]
           )
         )
@@ -322,9 +316,9 @@ class Footer extends StatelessWidget{
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                  Text('Latest offerss'),
-                SizedBox(
-                  child: TextField(decoration: InputDecoration(labelText: 'Email Address')), // turns out the row was evil, now gotta figure out how to add the button
-                )
+                // SizedBox(
+                //   //child: TextField(decoration: InputDecoration(labelText: 'Email Address')), // turns out the row was evil, now gotta figure out how to add the button
+                // )
               ],
             ),
           ],
