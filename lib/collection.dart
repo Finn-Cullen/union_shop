@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/main.dart';
 import 'package:union_shop/collections_data.dart';
 import 'package:union_shop/products.dart';
-
-import 'package:union_shop/sale.dart';
+import 'package:union_shop/filter_data.dart';
+import 'package:union_shop/sort_data.dart';
 
 class CollectionPage extends StatefulWidget { // needs to be statefull
   const CollectionPage({super.key});

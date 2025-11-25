@@ -1,31 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/main.dart';
-
-enum SortMenu{
-  a(text: 'featured'),
-  b(text: 'best selling'),
-  f(text: 'high to low'),
-  i(text: 'low to high');
-
-  const SortMenu({
-    required this.text,
-  });
-
-  final String text;
-}
-
-enum FilterMenu{
-  product(text: 'products'),
-  clothing(text: 'clothing'),
-  merch(text: 'merch'),
-  psut(text: 'PSUT');
-
-  const FilterMenu({
-    required this.text,
-  });
-
-  final String text;
-}
+import 'package:union_shop/filter_data.dart';
+import 'package:union_shop/sort_data.dart';
 
 class SalePage extends StatelessWidget{
   const SalePage({super.key});
