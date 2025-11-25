@@ -1,37 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/about_us.dart';
-import 'package:union_shop/sale.dart';
 import 'package:union_shop/main.dart';
-
-void main() {
-  runApp(const UnionShopApp());
-}
-
-class UnionShopApp extends StatelessWidget {
-  const UnionShopApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'about us',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
-      ),
-      home: const AboutUs(),
-      initialRoute: '/',
-      routes: {
-        '/about-us': (context) => const AboutUs(),
-        '/shop': (context) => const AboutUs(),
-        '/print-shack': (context) => const AboutUs(),
-        '/sale': (context) => const SalePage(),
-        '/search': (context) => const AboutUs(),
-        '/account': (context) => const Login(),
-        '/cart': (context) => const AboutUs(),
-      },
-    );
-  }
-}
 
 class Login extends StatelessWidget{
   const Login({super.key});
