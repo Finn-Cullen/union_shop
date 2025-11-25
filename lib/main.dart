@@ -60,14 +60,12 @@ class HomeScreen extends StatelessWidget {
           child: Column(
             children: [
               SizedBox( // navbar and banner
-                height: 620,
                 child: Column(
                   children: [
                     // Top banner
                     const Navbar(),
                     Container(
                       width: double.infinity,
-                      height: 500,
                       decoration: const BoxDecoration(
                         image: DecorationImage(fit:BoxFit.fill ,image: NetworkImage("https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534"))
                       ),
@@ -93,7 +91,6 @@ class HomeScreen extends StatelessWidget {
                ),
               ),
               SizedBox( // ESSENTIAL RANGE display
-                height: 700,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -102,7 +99,6 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Display('Limited Edition Essential Zip Hoodies', '£14.99', 'https://shop.upsu.net/cdn/shop/files/Pink_Essential_Hoodie_2a3589c2-096f-479f-ac60-d41e8a853d04_720x.jpg?v=1749131089'),
-                        Container(width: 50,),
                         const Display('Essential T-Shirt', '£6.99', 'https://shop.upsu.net/cdn/shop/files/Sage_T-shirt_720x.png?v=1759827236')
                       ],
                     )
@@ -110,7 +106,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox( // SIGNATURE RANGE display
-                height: 700,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -119,7 +114,6 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Display('Signiture hoodie', '£32.99', 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498'),
-                        Container(width: 50,),
                         const Display('Signiture T-Shirt', '£14.99', 'https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534')
                       ],
                     )
@@ -127,7 +121,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               SizedBox( // PORTSMOUTH CITY COLLECTION display
-                height: 1400,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -136,7 +129,6 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Display('portsmouth city postcard', '£1.00', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_900x.jpg?v=1752232561'),
-                        Container(width: 50,),
                         const Display('portsmouth city magnet', 'sold out', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_900x.jpg?v=1752230282')
                       ],
                     ),
@@ -144,7 +136,6 @@ class HomeScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Display('portsmouth city bookemark', '£3.00', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_900x.jpg?v=1752230004'),
-                        Container(width: 50,),
                         const Display('portsmouth city Notebook', '£7.50', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_900x.jpg?v=1757419215')
                       ],
                     )
@@ -179,8 +170,6 @@ class HomeScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 500,
-                    width: 650,
                     padding: const EdgeInsets.fromLTRB(0, 200, 200, 0) ,
                     child: Column( // for all the text
                       children: [
@@ -218,60 +207,24 @@ class Navbar extends StatelessWidget{
     // This is the event handler for buttons that don't work yet
   }
   
-  void navtoaboutus(BuildContext context){
-    Navigator.pushNamed(context, '/about-us');
-  }
-  void navtoshop(BuildContext context){
-    Navigator.pushNamed(context, '/collections');
-  }
-  void navtoprintshack(BuildContext context,String link){
-    Navigator.pushNamed(context, link);
-  }
-  void navtosale(BuildContext context){
-    Navigator.pushNamed(context, '/sale');
-  }
-  void navtosearch(BuildContext context){
-    Navigator.pushNamed(context, '/search');
-  }
-  void navtoaccount(BuildContext context){
-    Navigator.pushNamed(context, '/account');
-  }
-  void navtocart(BuildContext context){
-    Navigator.pushNamed(context, '/cart');
-  }
-  void navtohome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-  }
-
   @override
   Widget build(BuildContext context) {
     return(
       Row( // navbar
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          // Container( // top banner breaks code
-          //     width: double.infinity,
-          //     padding: const EdgeInsets.symmetric(vertical: 8),
-          //     color: const Color(0xFF4d2963),
-          //     child: const Text(
-          //     'BIG SALE! OUR ESSENTIAL RANGE HAS DROPPED IN PRICE! OVER 20% OFF! COME GRAB YOURS WHILE STOCK LASTS!',
-          //     textAlign: TextAlign.center,
-          //     style: TextStyle(color: Colors.white, fontSize: 16),
-          //   ),
-          // ),
           Image.network( // union logo at left
             'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-            height: 40,
             fit: BoxFit.cover,
           ),
-          Container(width: 300,), // adds padding
           TextButton( // home button
-            onPressed: () => navtohome(context),
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false),
             child: const Text(
               'Home'
             ),
           ),
           TextButton( // shop // needs to be drop down
-            onPressed: () => navtoshop(context),
+            onPressed: () => Navigator.pushNamed(context, '/collections'),
             child: const Text(
               'Shop'
             ),
@@ -288,19 +241,19 @@ class Navbar extends StatelessWidget{
             }).toList(),
             onSelected: (TPS? t){
               if(t != null){
-                navtoprintshack(context,t.link);
+                Navigator.pushNamed(context, t.link);
               }
               perslineinpset();
             },
           ),
           TextButton( // sale
-            onPressed: () => navtosale(context),
+            onPressed: () => Navigator.pushNamed(context, '/sale'),
             child: const Text(
               'SALE!'
             ),
           ),
           TextButton( // about
-            onPressed: () => navtoaboutus(context),
+            onPressed: () => Navigator.pushNamed(context, '/about-us'),
             child: const Text(
               'about'
             ),
@@ -311,17 +264,16 @@ class Navbar extends StatelessWidget{
               'UPSU.net'
             ),
           ),
-          Container(width: 350,), // adds padding
           IconButton( // search
-            onPressed: () => navtosearch(context), 
+            onPressed: () => Navigator.pushNamed(context, '/search'), 
             icon: const Icon(Icons.search)
           ),
           IconButton( // account
-            onPressed: () => navtoaccount(context), 
+            onPressed: () => Navigator.pushNamed(context, '/account'), 
             icon: const Icon(Icons.man)
           ),
           IconButton( // cart
-            onPressed: () => navtocart(context), 
+            onPressed: () => Navigator.pushNamed(context, '/cart'), 
             icon: const Icon(Icons.shopping_bag)
           ),
         ],
@@ -342,7 +294,6 @@ class Footer extends StatelessWidget{
     return(
       Container(
         color: Colors.grey,
-        height: 500,
         width: double.infinity,
         child: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -372,8 +323,6 @@ class Footer extends StatelessWidget{
               children: [
                  Text('Latest offerss'),
                 SizedBox(
-                  width: 600,
-                  height: 200,
                   child: TextField(decoration: InputDecoration(labelText: 'Email Address')), // turns out the row was evil, now gotta figure out how to add the button
                 )
               ],
