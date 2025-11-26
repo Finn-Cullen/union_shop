@@ -1,0 +1,38 @@
+{
+  "name": "Products",
+  "values": [
+    {
+      "name": "a",
+      "name_display": "awaw",
+      "url": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498",
+      "cost": "£3.50",
+      "collections": ["Autumn favourites"],
+      "tags": ["clothing", "merch"],
+      "featured": true,
+      "bestselling": 5,
+      "desc": "this is a description"
+    },
+    {
+      "name": "b",
+      "name_display": "gagaw",
+      "url": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498",
+      "cost": "£32.05",
+      "collections": ["Autumn favourites"],
+      "tags": ["clothing"],
+      "featured": false,
+      "bestselling": 2,
+      "desc": "a different description"
+    },
+    {
+      "name": "c",
+      "name_display": "EWe",
+      "url": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498",
+      "cost": "£123.00",
+      "collections": ["UPSU bears"],
+      "tags": ["merch"],
+      "featured": true,
+      "bestselling": 4,
+      "desc": "yup a description"
+    }
+  ]
+}

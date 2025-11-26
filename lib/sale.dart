@@ -1,11 +1,38 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 import 'package:union_shop/navigation.dart';
-import 'package:union_shop/filter_data.dart';
-import 'package:union_shop/sort_data.dart';
 import 'package:union_shop/prod_display.dart';
 
-class SalePage extends StatelessWidget {
+class SalePage extends StatefulWidget {
   const SalePage({super.key});
+
+  @override
+  State<SalePage> createState() => _SalePageState();
+}
+
+class _SalePageState extends State<SalePage> {
+  late Future<List<Map<String, dynamic>>> _filterMenuData;
+  late Future<List<Map<String, dynamic>>> _sortMenuData;
+
+  @override
+  void initState() {
+    super.initState();
+    _filterMenuData = _loadFilterMenuJson();
+    _sortMenuData = _loadSortMenuJson();
+  }
+
+  Future<List<Map<String, dynamic>>> _loadFilterMenuJson() async {
+    final jsonString = await rootBundle.loadString('assets/enums/FilterMenu.json');
+    final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
+    return List<Map<String, dynamic>>.from(jsonData['values'] as List);
+  }
+
+  Future<List<Map<String, dynamic>>> _loadSortMenuJson() async {
+    final jsonString = await rootBundle.loadString('assets/enums/SortMenu.json');
+    final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
+    return List<Map<String, dynamic>>.from(jsonData['values'] as List);
+  }
 
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
@@ -38,28 +65,51 @@ class SalePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const Text('FILTER BY'), // filters
-                  DropdownMenu<FilterMenu>(
-                    hintText: 'all products',
-                    dropdownMenuEntries: FilterMenu.values
-                        .map<DropdownMenuEntry<FilterMenu>>((FilterMenu itm) {
-                      return DropdownMenuEntry<FilterMenu>(
-                        value: itm,
-                        label: itm.text,
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: _filterMenuData,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                      }
+                      if (snapshot.hasError) {
+                        return const Text('Error loading filters');
+                      }
+                      final filterItems = snapshot.data ?? [];
+                      return DropdownMenu<Map<String, dynamic>>(
+                        hintText: 'all products',
+                        dropdownMenuEntries: filterItems
+                            .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                          return DropdownMenuEntry<Map<String, dynamic>>(
+                            value: item,
+                            label: item['text'] as String,
+                          );
+                        }).toList(),
                       );
-                    }).toList(),
+                    },
                   ),
 
                   const Text('SORT BY'),
-                  DropdownMenu<SortMenu>(
-                    // sort
-                    hintText: 'Best Selling',
-                    dropdownMenuEntries: SortMenu.values
-                        .map<DropdownMenuEntry<SortMenu>>((SortMenu itm) {
-                      return DropdownMenuEntry<SortMenu>(
-                        value: itm,
-                        label: itm.text,
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: _sortMenuData,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                      }
+                      if (snapshot.hasError) {
+                        return const Text('Error loading sorts');
+                      }
+                      final sortItems = snapshot.data ?? [];
+                      return DropdownMenu<Map<String, dynamic>>(
+                        hintText: 'Best Selling',
+                        dropdownMenuEntries: sortItems
+                            .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                          return DropdownMenuEntry<Map<String, dynamic>>(
+                            value: item,
+                            label: item['text'] as String,
+                          );
+                        }).toList(),
                       );
-                    }).toList(),
+                    },
                   ),
                 ],
               ),

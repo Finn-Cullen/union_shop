@@ -1,0 +1,21 @@
+{
+  "name": "FilterMenu",
+  "values": [
+    {
+      "name": "product",
+      "text": "products"
+    },
+    {
+      "name": "clothing",
+      "text": "clothing"
+    },
+    {
+      "name": "merch",
+      "text": "merch"
+    },
+    {
+      "name": "psut",
+      "text": "PSUT"
+    }
+  ]
+}

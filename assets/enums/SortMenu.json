@@ -1,0 +1,21 @@
+{
+  "name": "SortMenu",
+  "values": [
+    {
+      "name": "a",
+      "text": "featured"
+    },
+    {
+      "name": "b",
+      "text": "best selling"
+    },
+    {
+      "name": "f",
+      "text": "high to low"
+    },
+    {
+      "name": "i",
+      "text": "low to high"
+    }
+  ]
+}

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
+
 
 enum TPS {
   about(
@@ -19,8 +22,27 @@ enum TPS {
   final String link;
 }
 
-class Navbar extends StatelessWidget {
+class Navbar extends StatefulWidget {
   const Navbar({super.key});
+
+  @override
+  State<Navbar> createState() => _NavbarState();
+}
+
+class _NavbarState extends State<Navbar> {
+  late Future<List<Map<String, dynamic>>> _tpsData;
+
+  @override
+  void initState() {
+    super.initState();
+    _tpsData = _loadTpsJson();
+  }
+
+  Future<List<Map<String, dynamic>>> _loadTpsJson() async {
+    final jsonString = await rootBundle.loadString('assets/enums/TPS.json');
+    final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
+    return List<Map<String, dynamic>>.from(jsonData['values'] as List);
+  }
 
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
@@ -48,19 +70,34 @@ class Navbar extends StatelessWidget {
           onPressed: () => Navigator.pushNamed(context, '/collections'),
           child: const Text('Shop'),
         ),
-        DropdownMenu<TPS>(
-          hintText: 'the print shack',
-          dropdownMenuEntries:
-              TPS.values.map<DropdownMenuEntry<TPS>>((TPS itm) {
-            return DropdownMenuEntry<TPS>(
-              value: itm,
-              label: itm.label,
-            );
-          }).toList(),
-          onSelected: (TPS? t) {
-            if (t != null) {
-              Navigator.pushNamed(context, t.link);
+        FutureBuilder<List<Map<String, dynamic>>>(
+          future: _tpsData,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SizedBox(
+                width: 150,
+                child: Center(child: CircularProgressIndicator()),
+              );
             }
+            if (snapshot.hasError) {
+              return const Text('Error loading menu');
+            }
+            final tpsItems = snapshot.data ?? [];
+            return DropdownMenu<Map<String, dynamic>>(
+              hintText: 'the print shack',
+              dropdownMenuEntries: tpsItems
+                  .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                return DropdownMenuEntry<Map<String, dynamic>>(
+                  value: item,
+                  label: item['label'] as String,
+                );
+              }).toList(),
+              onSelected: (Map<String, dynamic>? selected) {
+                if (selected != null) {
+                  Navigator.pushNamed(context, selected['link'] as String);
+                }
+              },
+            );
           },
         ),
         TextButton(

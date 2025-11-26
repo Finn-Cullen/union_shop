@@ -11,8 +11,6 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.0
-  google_sign_in: ^6.2.1    # or latest version
-  email_validator: ^2.1.17  # or latest version
 
 dev_dependencies:
   flutter_test:
@@ -21,3 +19,10 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/enums/FilterMenu.json
+    - assets/enums/SortMenu.json
+    - assets/enums/Collections.json
+    - assets/enums/PersTypes.json
+    - assets/enums/TPS.json
+    - assets/enums/Products.json
