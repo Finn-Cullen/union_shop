@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/main.dart';
+import 'package:union_shop/navigation.dart';
 
 class PrintPageAbout extends StatelessWidget{
   const PrintPageAbout({super.key});

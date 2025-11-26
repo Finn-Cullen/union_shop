@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/main.dart';
+import 'package:union_shop/navigation.dart';
 import 'package:union_shop/cart_data.dart';
 
 class PrintPage extends StatefulWidget { // needs to be statefull

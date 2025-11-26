@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/cart_data.dart';
-import 'package:union_shop/main.dart';
+import 'package:union_shop/navigation.dart';
 
 class CartPage extends StatefulWidget { // needs to be statefull
   const CartPage({super.key});

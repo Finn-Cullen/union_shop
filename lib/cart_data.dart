@@ -42,26 +42,7 @@ enum PersTypes{
   final int lineoftext;
 }
 
-enum TPS{
-
-  about(
-    label: 'about',
-    link: '/print-shack-about',
-  ),
-  theprintshack(
-    label: 'the print shack',
-    link: '/print-shack',
-  )
-  ;
-
-  const TPS({
-    required this.label,
-    required this.link,
-  });
-
-  final String label;
-  final String link;
-}
+// cart handler class
 
 int totalnumprod(String name){ // total num of a certain product
     int num = 0;

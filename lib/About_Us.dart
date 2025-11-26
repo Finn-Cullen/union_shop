@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/main.dart';
+import 'package:union_shop/navigation.dart';
 
 class AboutUs extends StatelessWidget{
   const AboutUs({super.key});
