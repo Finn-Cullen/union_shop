@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/cart.dart';
 
-List cartlist = [];
-
-List<Widget> displist = [];
-
-Widget cart = const Text('aaa');
+CartData cd = CartData(); // this allows for the various pages to edit one class
 
 // cart handler class
+class CartData {
+  List cartlist = [];
+  List<Widget> displist = [];
+  Widget cart = const Text('aaa');
+
+
 
   int totalnumprod(String name){ // total num of a certain product
     int num = 0;
@@ -54,7 +55,7 @@ Widget cart = const Text('aaa');
     return listfilt;
   }
 
-Widget buildcart(BuildContext context){
+  Widget buildcart(BuildContext context){
     displist = proddisplist();
     if(cartlist.isEmpty){
         // cart empty
@@ -115,6 +116,7 @@ Widget buildcart(BuildContext context){
   void navtocol(BuildContext context){
     Navigator.pushNamed(context, '/collections');
   }
+}
 
 class CartItem{
   final String name;
@@ -122,4 +124,91 @@ class CartItem{
   final String url;
 
   const CartItem({required this.name,required this.cost,required this.url});
+}
+
+class ProductDisplayCart extends StatefulWidget {
+  final String name;
+  final String cost;
+  final String url;
+  final int total;
+  const ProductDisplayCart({required this.name,required this.cost,required this.url,required this.total,super.key});
+
+  @override
+  State<ProductDisplayCart> createState() => ProductDisplayCartState();
+}
+
+class ProductDisplayCartState extends State<ProductDisplayCart> {
+  late String name = '';
+  late String cost = '';
+  late String url = '';
+  late int total = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    name = widget.name;
+    cost = widget.cost;
+    url = widget.url;
+    total = widget.total;
+  }
+
+  void incrprod(String n, String c, String u, BuildContext context){
+    cd.instcartprod(n, c, u);
+    setState(() {
+    });
+  }
+
+  void decprod(String n, BuildContext context){
+    cd.destcartprod(n);
+    setState(() {
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    setState(() {
+      total = cd.totalnumprod(name);
+    });
+    return(
+      SizedBox(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SizedBox(
+              height: 100,
+              width: 200,
+              child: Image.network(url),
+            ),
+            SizedBox(
+              height: 100,
+              width: 600,
+              child: Text(name),
+            ),
+            SizedBox(
+              height: 100,
+              width: 200,
+              child: Text(cost),
+            ),
+            SizedBox(
+              height: 100,
+              width: 200,
+              child: Row(
+                children: [
+                  IconButton(onPressed: () => incrprod(name,cost,url,context), icon: const Icon(Icons.add)),
+                  Text(total.toString()),
+                  IconButton(onPressed: () => decprod(name,context), icon: const Icon(Icons.exposure_minus_1)),
+                ],
+              )
+              
+            ),
+            SizedBox(
+              height: 100,
+              width: 200,
+              child: Text(((double.parse(cost))*total).toString()),
+            ),
+          ],
+        )
+      )
+    );
+  }
 }

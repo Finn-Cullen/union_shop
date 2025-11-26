@@ -6,17 +6,17 @@ enum PersTypes{
 
   oneline(
     perstype: 'one line',
-    persprice: 3,
+    persprice: '£3.00',
     lineoftext: 1,
   ),
   twoline(
     perstype: 'two lines',
-    persprice: 4,
+    persprice: '£4.00',
     lineoftext: 2,
   ),
   threeline(
     perstype: 'three lines',
-    persprice: 5,
+    persprice: '£5.00',
     lineoftext: 3,
   ),
   ;
@@ -28,12 +28,12 @@ enum PersTypes{
   });
 
   final String perstype;
-  final int persprice;
+  final String persprice;
   final int lineoftext;
 }
 
 class PrintData {
-  int persprice = PersTypes.oneline.persprice;
+  String persprice = PersTypes.oneline.persprice;
   String persdesc = PersTypes.oneline.perstype;
   List<Widget> perslineinp = [];
 

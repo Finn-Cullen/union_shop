@@ -16,7 +16,7 @@ class PrintPageState extends State<PrintPage> {
   PrintData pd = PrintData();
 
   void incrprod(String n, String c, String u, BuildContext context){
-    instcartprod(n+' '+pd.persdesc, c, u);
+    cd.instcartprod(n+' '+pd.persdesc, c, u);
     Navigator.pushNamed(context, '/cart');
   }
 
@@ -29,7 +29,7 @@ class PrintPageState extends State<PrintPage> {
             const Navbar(),
             Image.network('https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869',fit: BoxFit.fill),
             const Text('Personalisation'),
-            Text('£' + pd.persprice.toString() + '.00'),
+            Text(pd.persprice),
             const Text('Tax included'),
 
             // select pers text type

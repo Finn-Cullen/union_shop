@@ -15,8 +15,8 @@ class CartPageState extends State<CartPage> {
 
   void updatepage(){
     setState(() {
-      displist = proddisplist();
-      cart = buildcart(context);
+      cd.displist = cd.proddisplist();
+      cd.cart = cd.buildcart(context);
     });
   }
 
@@ -26,11 +26,7 @@ class CartPageState extends State<CartPage> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      displist = proddisplist();
-      cart = buildcart(context);
-    });
-
+    updatepage();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -40,7 +36,7 @@ class CartPageState extends State<CartPage> {
 
             const Text('your cart', style: TextStyle(fontSize: 40),),
 
-            cart,
+            cd.cart,
 
             ElevatedButton(onPressed: updatepage, child: const Text('update page')),
 
@@ -50,93 +46,6 @@ class CartPageState extends State<CartPage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ProductDisplayCart extends StatefulWidget {
-  final String name;
-  final String cost;
-  final String url;
-  final int total;
-  const ProductDisplayCart({required this.name,required this.cost,required this.url,required this.total,super.key});
-
-  @override
-  State<ProductDisplayCart> createState() => ProductDisplayCartState();
-}
-
-class ProductDisplayCartState extends State<ProductDisplayCart> {
-  late String name = '';
-  late String cost = '';
-  late String url = '';
-  late int total = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    name = widget.name;
-    cost = widget.cost;
-    url = widget.url;
-    total = widget.total;
-  }
-
-  void incrprod(String n, String c, String u, BuildContext context){
-    instcartprod(n, c, u);
-    setState(() {
-    });
-  }
-
-  void decprod(String n, BuildContext context){
-    destcartprod(n);
-    setState(() {
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    setState(() {
-      total = totalnumprod(name);
-    });
-    return(
-      SizedBox(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 100,
-              width: 200,
-              child: Image.network(url),
-            ),
-            SizedBox(
-              height: 100,
-              width: 600,
-              child: Text(name),
-            ),
-            SizedBox(
-              height: 100,
-              width: 200,
-              child: Text(cost),
-            ),
-            SizedBox(
-              height: 100,
-              width: 200,
-              child: Row(
-                children: [
-                  IconButton(onPressed: () => incrprod(name,cost,url,context), icon: const Icon(Icons.add)),
-                  Text(total.toString()),
-                  IconButton(onPressed: () => decprod(name,context), icon: const Icon(Icons.exposure_minus_1)),
-                ],
-              )
-              
-            ),
-            SizedBox(
-              height: 100,
-              width: 200,
-              child: Text(((double.parse(cost))*total).toString()),
-            ),
-          ],
-        )
-      )
     );
   }
 }

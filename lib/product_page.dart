@@ -11,13 +11,13 @@ class ProductPage extends StatelessWidget {
   }
 
   void navtocart(BuildContext context){
-    instcartprod(prodname, prodcost, produrl);
+    cd.instcartprod(prodname, prodcost, produrl);
     Navigator.pushNamed(context, '/cart');
   }
 
   @override
   Widget build(BuildContext context) {
-    numofprod = totalnumprod(prodname);
+    numofprod = cd.totalnumprod(prodname);
     carttxt = carttxtbuild();
     return Scaffold(
       body: SingleChildScrollView(
