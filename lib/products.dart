@@ -21,7 +21,7 @@ enum Products{
   a(
     name: 'awaw',
     url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '3',
+    cost: '£3.50',
     collections: ['Autumn favourites'],
     tags: ['clothing','merch'],
     featured: true,
@@ -31,7 +31,7 @@ enum Products{
   b(
     name: 'gagaw',
     url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '32',
+    cost: '£32.05',
     collections: ['Autumn favourites'],
     tags: ['clothing'],
     featured: false,
@@ -41,7 +41,7 @@ enum Products{
   c(
     name: 'EWe',
     url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
-    cost: '123',
+    cost: '£123.00',
     collections: ['UPSU bears'],
     tags: ['merch'],
     featured: true,

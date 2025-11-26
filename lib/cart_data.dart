@@ -9,7 +9,6 @@ Widget cart = const Text('aaa');
 
 int persprice = PersTypes.oneline.persprice;
 String persdesc = PersTypes.oneline.perstype;
-
 List<Widget> perslineinp = [];
 
 enum PersTypes{
@@ -53,7 +52,9 @@ int totalnumprod(String name){ // total num of a certain product
   }
 
   void instcartprod(String name, String cost, String url){ // add product
-    cartlist.add(CartItem(name: name,cost:  cost,url:  url));
+    String costinp = cost.split('£')[cost.split('£').length-1]; // if there is a space (I.E its a sale item)
+    costinp = costinp.replaceAll('£', '');
+    cartlist.add(CartItem(name: name,cost:  costinp,url:  url));
   }
 
   void instcartprodpers(String name, String cost, String url, String word){ // add product

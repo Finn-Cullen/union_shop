@@ -20,7 +20,6 @@ class SalePage extends StatelessWidget{
             children: [
               const Navbar(),
               const SizedBox( // text at top
-                height: 300,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -31,8 +30,6 @@ class SalePage extends StatelessWidget{
                 ),
               ),
               SizedBox( // text at top
-                height: 100,
-                width: 800,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -65,8 +62,6 @@ class SalePage extends StatelessWidget{
                 ),
               ),
               const SizedBox( // products
-                height: 1500,
-                width: 1000,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -98,7 +93,6 @@ class SalePage extends StatelessWidget{
                 ),
               ),
               SizedBox(
-                height: 200,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

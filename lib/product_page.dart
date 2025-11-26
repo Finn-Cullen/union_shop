@@ -98,7 +98,7 @@ class ProductPage extends StatelessWidget {
 
                   // Product price
                   Text(
-                    '£' + prodcost + '.00',
+                    prodcost,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,

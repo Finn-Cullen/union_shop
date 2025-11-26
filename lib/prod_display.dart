@@ -10,11 +10,13 @@ class ProductDisplay extends StatelessWidget{
   const ProductDisplay(this.name, this.cost, this.url, this.desc,{super.key});
 
   void navtoprod(BuildContext context){
-    prodname = name;
-    produrl = url;
-    prodcost = cost;
-    proddesc = desc;
-    Navigator.pushNamed(context, '/product');
+    if(cost.toLowerCase() != 'sold out'){
+      prodname = name;
+      produrl = url;
+      prodcost = cost;
+      proddesc = desc;
+      Navigator.pushNamed(context, '/product');
+    }
   }
 
   @override

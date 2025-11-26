@@ -132,7 +132,7 @@ class ProductDisplayCartState extends State<ProductDisplayCart> {
             SizedBox(
               height: 100,
               width: 200,
-              child: Text(((int.parse(cost))*total).toString()),
+              child: Text(((double.parse(cost))*total).toString()),
             ),
           ],
         )
