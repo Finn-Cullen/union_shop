@@ -11,10 +11,10 @@ class ProductDisplay extends StatelessWidget{
 
   void navtoprod(BuildContext context){
     if(cost.toLowerCase() != 'sold out'){
-      prodname = name;
-      produrl = url;
-      prodcost = cost;
-      proddesc = desc;
+      pd.prodname = name;
+      pd.produrl = url;
+      pd.prodcost = cost;
+      pd.proddesc = desc;
       Navigator.pushNamed(context, '/product');
     }
   }

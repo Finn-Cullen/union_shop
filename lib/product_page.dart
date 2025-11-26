@@ -11,14 +11,14 @@ class ProductPage extends StatelessWidget {
   }
 
   void navtocart(BuildContext context){
-    cd.instcartprod(prodname, prodcost, produrl);
+    cd.instcartprod(pd.prodname, pd.prodcost, pd.produrl);
     Navigator.pushNamed(context, '/cart');
   }
 
   @override
   Widget build(BuildContext context) {
-    numofprod = cd.totalnumprod(prodname);
-    carttxt = carttxtbuild();
+    pd.numofprod = cd.totalnumprod(pd.prodname);
+    pd.carttxt = pd.carttxtbuild();
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -54,7 +54,7 @@ class ProductPage extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.network(
-                        produrl,
+                        pd.produrl,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
@@ -86,7 +86,7 @@ class ProductPage extends StatelessWidget {
 
                   // Product name
                   Text(
-                    prodname,
+                    pd.prodname,
                     style: const TextStyle(
                       fontSize: 28,
                       fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class ProductPage extends StatelessWidget {
 
                   // Product price
                   Text(
-                    prodcost,
+                    pd.prodcost,
                     style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -119,7 +119,7 @@ class ProductPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    proddesc,
+                    pd.proddesc,
                     style: const TextStyle(
                       fontSize: 16,
                       color: Colors.grey,
@@ -133,7 +133,7 @@ class ProductPage extends StatelessWidget {
             Center(
               child: Row(
                 children: [
-                  carttxt,
+                  pd.carttxt,
                   ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
                 ],
               ),
