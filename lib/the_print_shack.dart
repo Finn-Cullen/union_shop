@@ -17,7 +17,7 @@ class PrintPageState extends State<PrintPage> {
   PrintData pd = PrintData();
 
   void incrprod(String n, String c, String u, BuildContext context) {
-    cd.instcartprod(n + ' ' + pd.persdesc, c, u);
+    cd.instcartprod('$n $pd.persdesc', c, u);
     Navigator.pushNamed(context, '/cart');
   }
 

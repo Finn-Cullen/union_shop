@@ -50,7 +50,7 @@ class PrintData {
     List<Widget> inpfields = [];
     for (int i = 0; i < listnum[save]; i++) {
       inpfields.add(
-        Text('line ' + (i + 1).toString()),
+        Text('line ${(i + 1)}'),
       );
       inpfields.add(TextField());
     }

@@ -115,7 +115,7 @@ class CollectionPageState extends State<CollectionPage> {
                 children: [
                   ElevatedButton(
                       onPressed: backpage, child: const Icon(Icons.arrow_back)),
-                  Text('page' + cd.page.toString()),
+                  Text('page${cd.page}'),
                   ElevatedButton(
                       onPressed: uppage, child: const Icon(Icons.arrow_forward))
                 ],

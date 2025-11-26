@@ -68,7 +68,7 @@ class ProductData {
 
   Widget carttxtbuild() {
     if (numofprod > 0) {
-      return Text(numofprod.toString() + ' of items in cart');
+      return Text('$numofprod of items in cart');
     } else {
       return const Text('');
     }
