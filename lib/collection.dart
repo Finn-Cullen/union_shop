@@ -4,6 +4,7 @@ import 'package:union_shop/products.dart';
 import 'package:union_shop/filter_data.dart';
 import 'package:union_shop/sort_data.dart';
 import 'package:union_shop/navigation.dart';
+import 'package:union_shop/prod_display.dart';
 
 class CollectionPage extends StatefulWidget { // needs to be statefull
   const CollectionPage({super.key});
@@ -244,39 +245,6 @@ class CollectionPageState extends State<CollectionPage> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ProductDisplay extends StatelessWidget{
-  final String name;
-  final String cost;
-  final String url;
-  final String desc;
-
-  const ProductDisplay(this.name, this.cost, this.url, this.desc,{super.key});
-
-  void navtoprod(BuildContext context){
-    prodname = name;
-    produrl = url;
-    prodcost = cost;
-    proddesc = desc;
-    Navigator.pushNamed(context, '/product');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return(
-      Column(
-        children: [
-          Image.network(url,width : 500, height : 500,),
-          TextButton(
-            onPressed : () => navtoprod(context),
-            child: Text(name,textAlign: TextAlign.left),
-          ),
-          Text('£' + cost + '.00'),
-        ]
-      )
     );
   }
 }

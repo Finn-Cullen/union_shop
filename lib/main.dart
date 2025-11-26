@@ -11,6 +11,7 @@ import 'package:union_shop/the_print_shack.dart';
 import 'package:union_shop/print_shack_about.dart';
 import 'package:union_shop/search.dart';
 import 'package:union_shop/navigation.dart';
+import 'package:union_shop/prod_display.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -84,7 +85,7 @@ class HomeScreen extends StatelessWidget {
                   ]
                 )
               ),
-              SizedBox( // ESSENTIAL RANGE display
+              SizedBox( // ESSENTIAL RANGE ProductDisplay
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -92,14 +93,14 @@ class HomeScreen extends StatelessWidget {
                     Row( // images
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Display('Limited Edition Essential Zip Hoodies', '£14.99', 'https://shop.upsu.net/cdn/shop/files/Pink_Essential_Hoodie_2a3589c2-096f-479f-ac60-d41e8a853d04_720x.jpg?v=1749131089'),
-                        const Display('Essential T-Shirt', '£6.99', 'https://shop.upsu.net/cdn/shop/files/Sage_T-shirt_720x.png?v=1759827236')
+                        const ProductDisplay('Limited Edition Essential Zip Hoodies', '£14.99', 'https://shop.upsu.net/cdn/shop/files/Pink_Essential_Hoodie_2a3589c2-096f-479f-ac60-d41e8a853d04_720x.jpg?v=1749131089','product description'),
+                        const ProductDisplay('Essential T-Shirt', '£6.99', 'https://shop.upsu.net/cdn/shop/files/Sage_T-shirt_720x.png?v=1759827236','product description')
                       ],
                     )
                   ],
                 ),
               ),
-              SizedBox( // SIGNATURE RANGE display
+              SizedBox( // SIGNATURE RANGE ProductDisplay
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -107,14 +108,14 @@ class HomeScreen extends StatelessWidget {
                     Row( // images
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Display('Signiture hoodie', '£32.99', 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498'),
-                        const Display('Signiture T-Shirt', '£14.99', 'https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534')
+                        const ProductDisplay('Signiture hoodie', '£32.99', 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498','product description'),
+                        const ProductDisplay('Signiture T-Shirt', '£14.99', 'https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534','product description')
                       ],
                     )
                   ],
                 ),
               ),
-              SizedBox( // PORTSMOUTH CITY COLLECTION display
+              SizedBox( // PORTSMOUTH CITY COLLECTION ProductDisplay
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -122,15 +123,15 @@ class HomeScreen extends StatelessWidget {
                     Row( // images
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Display('portsmouth city postcard', '£1.00', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_900x.jpg?v=1752232561'),
-                        const Display('portsmouth city magnet', 'sold out', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_900x.jpg?v=1752230282')
+                        const ProductDisplay('portsmouth city postcard', '£1.00', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_900x.jpg?v=1752232561','product description'),
+                        const ProductDisplay('portsmouth city magnet', 'sold out', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_900x.jpg?v=1752230282','product description')
                       ],
                     ),
                     Row( // images
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const Display('portsmouth city bookemark', '£3.00', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_900x.jpg?v=1752230004'),
-                        const Display('portsmouth city Notebook', '£7.50', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_900x.jpg?v=1757419215')
+                        const ProductDisplay('portsmouth city bookemark', '£3.00', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_900x.jpg?v=1752230004','product description'),
+                        const ProductDisplay('portsmouth city Notebook', '£7.50', 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_900x.jpg?v=1757419215','product description')
                       ],
                     )
                   ],
@@ -146,7 +147,7 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.white),
                 ),
               ),
-              Column( // our range display
+              Column( // our range ProductDisplay
                 children: [
                   const Text("Our Range"),
                   Row(
@@ -192,25 +193,4 @@ class HomeScreen extends StatelessWidget {
         )
       );
     }
-}
-
-class Display extends StatelessWidget{
-  final String name;
-  final String cost;
-  final String url;
-
-  const Display(this.name, this.cost, this.url,{super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return(
-      Column(
-        children: [
-          Image.network(url,width : 300, height : 300,),
-          Text(name,textAlign: TextAlign.left),
-          Text(cost),
-        ]
-      )
-    );
-  }
 }
