@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/navigation.dart';
 import 'package:union_shop/cart_data.dart';
+import 'package:union_shop/personalise_data.dart';
 
 class PrintPage extends StatefulWidget { // needs to be statefull
   const PrintPage({super.key});
@@ -12,17 +13,15 @@ class PrintPage extends StatefulWidget { // needs to be statefull
 }
 
 class PrintPageState extends State<PrintPage> {
+  PrintData pd = PrintData();
 
   void incrprod(String n, String c, String u, BuildContext context){
-    instcartprodpers(n+' '+persdesc, c, u,persdesc);
+    instcartprod(n+' '+pd.persdesc, c, u);
     Navigator.pushNamed(context, '/cart');
   }
 
   @override
   Widget build(BuildContext context) {
-    // setState(() {
-    //   perslineinpset();
-    // });
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -30,12 +29,12 @@ class PrintPageState extends State<PrintPage> {
             const Navbar(),
             Image.network('https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869',fit: BoxFit.fill),
             const Text('Personalisation'),
-            Text('£' + persprice.toString() + '.00'),
+            Text('£' + pd.persprice.toString() + '.00'),
             const Text('Tax included'),
 
             // select pers text type
             DropdownMenu<PersTypes>(
-              hintText: persdesc,
+              hintText: pd.persdesc,
               dropdownMenuEntries: PersTypes.values
                 .map<DropdownMenuEntry<PersTypes>>(
                   (PersTypes itm) {
@@ -47,15 +46,15 @@ class PrintPageState extends State<PrintPage> {
               onSelected: (PersTypes? pers){
                 setState(() {
                   if(pers != null){
-                    persprice = pers.persprice;
-                    persdesc = pers.perstype;
+                    pd.persprice = pers.persprice;
+                    pd.persdesc = pers.perstype;
                   }
-                  perslineinpset();
+                  pd.perslineinpset();
                 });
               },
             ),
-            Column(children: perslineinp,), // bring this forward with sir, having textfields breaks everything and is an active bug in flutter
-            ElevatedButton(onPressed: () => incrprod('Personalised shirt', persprice.toString(), 'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869', context), child: const Text('add to cart')),
+            Column(children: pd.perslineinp,), // bring this forward with sir, having textfields breaks everything and is an active bug in flutter
+            ElevatedButton(onPressed: () => incrprod('Personalised shirt', pd.persprice.toString(), 'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869', context), child: const Text('add to cart')),
             const Footer(),
           ],
         )

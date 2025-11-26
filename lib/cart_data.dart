@@ -7,43 +7,9 @@ List<Widget> displist = [];
 
 Widget cart = const Text('aaa');
 
-int persprice = PersTypes.oneline.persprice;
-String persdesc = PersTypes.oneline.perstype;
-List<Widget> perslineinp = [];
-
-enum PersTypes{
-
-  oneline(
-    perstype: 'one line',
-    persprice: 3,
-    lineoftext: 1,
-  ),
-  twoline(
-    perstype: 'two lines',
-    persprice: 4,
-    lineoftext: 2,
-  ),
-  threeline(
-    perstype: 'three lines',
-    persprice: 5,
-    lineoftext: 3,
-  ),
-  ;
-
-  const PersTypes({
-    required this.perstype,
-    required this.persprice,
-    required this.lineoftext,
-  });
-
-  final String perstype;
-  final int persprice;
-  final int lineoftext;
-}
-
 // cart handler class
 
-int totalnumprod(String name){ // total num of a certain product
+  int totalnumprod(String name){ // total num of a certain product
     int num = 0;
     for(int i = 0; i < cartlist.length; i++){
       if(cartlist[i].name == name){num++;}
@@ -57,10 +23,6 @@ int totalnumprod(String name){ // total num of a certain product
     cartlist.add(CartItem(name: name,cost:  costinp,url:  url));
   }
 
-  void instcartprodpers(String name, String cost, String url, String word){ // add product
-    cartlist.add(CartItemPers(name: name,cost:  cost,url:  url,wordtype: word));
-  }
-
   void destcartprod(String name){ // remove product
     for(int i = 0; i < cartlist.length; i++){
       if(name == cartlist[i].name){
@@ -69,8 +31,6 @@ int totalnumprod(String name){ // total num of a certain product
       }
     }
   }
-
-
 
   List<Widget> proddisplist(){
     List<ProductDisplayCart> list = [];
@@ -156,30 +116,6 @@ Widget buildcart(BuildContext context){
     Navigator.pushNamed(context, '/collections');
   }
 
-  void perslineinpset(){
-    List listtype = [];
-    List listnum = [];
-    int save = 0;
-    PersTypes.values.map((T) {
-      listtype.add(T.persprice);
-      listnum.add(T.lineoftext);
-    }).toList();
-    for(int i = 0; i < listtype.length; i++){
-      if(listtype[i] == persprice){save = i;}
-    }
-    List<Widget> inpfields = [];
-    for(int i = 0; i < listnum[save]; i++){
-      inpfields.add(
-        Text('line ' + (i+1).toString()),
-      );
-      inpfields.add(
-        TextField()
-      );
-    }
-
-    perslineinp = inpfields;
-  }
-
 class CartItem{
   final String name;
   final String cost;
@@ -187,14 +123,3 @@ class CartItem{
 
   const CartItem({required this.name,required this.cost,required this.url});
 }
-
-class CartItemPers{
-  final String name;
-  final String cost;
-  final String url;
-  final String wordtype;
-
-  const CartItemPers({required this.name,required this.cost,required this.url,required this.wordtype});
-}
-
-  
