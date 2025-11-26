@@ -4,7 +4,7 @@ import 'package:union_shop/filter_data.dart';
 import 'package:union_shop/sort_data.dart';
 import 'package:union_shop/prod_display.dart';
 
-class SalePage extends StatelessWidget{
+class SalePage extends StatelessWidget {
   const SalePage({super.key});
 
   void placeholderCallbackForButtons() {
@@ -12,99 +12,143 @@ class SalePage extends StatelessWidget{
   }
 
   @override
-  Widget build(BuildContext context){
-    return
-      Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Navbar(),
-              const SizedBox( // text at top
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Text('SALE',style: TextStyle(fontSize: 45),),
-                    Text('Don’t miss out! Get yours before they’re all gone!'),
-                    Text('All prices shown are inclusive of the discount 🛒'),
-                  ],
-                ),
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Navbar(),
+            const SizedBox(
+              // text at top
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Text(
+                    'SALE',
+                    style: TextStyle(fontSize: 45),
+                  ),
+                  Text('Don’t miss out! Get yours before they’re all gone!'),
+                  Text('All prices shown are inclusive of the discount 🛒'),
+                ],
               ),
-              SizedBox( // text at top
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const Text('FILTER BY'), // filters
-                    DropdownMenu<FilterMenu>(
-                      hintText: 'all products',
-                      dropdownMenuEntries: FilterMenu.values
-                        .map<DropdownMenuEntry<FilterMenu>>(
-                          (FilterMenu itm) {
-                            return DropdownMenuEntry<FilterMenu>(
-                              value: itm,
-                              label: itm.text,
-                            );
-                        }).toList(),
-                    ),
+            ),
+            SizedBox(
+              // text at top
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  const Text('FILTER BY'), // filters
+                  DropdownMenu<FilterMenu>(
+                    hintText: 'all products',
+                    dropdownMenuEntries: FilterMenu.values
+                        .map<DropdownMenuEntry<FilterMenu>>((FilterMenu itm) {
+                      return DropdownMenuEntry<FilterMenu>(
+                        value: itm,
+                        label: itm.text,
+                      );
+                    }).toList(),
+                  ),
 
-                    const Text('SORT BY'),
-                    DropdownMenu<SortMenu>( // sort
-                      hintText: 'Best Selling',
-                      dropdownMenuEntries: SortMenu.values
-                        .map<DropdownMenuEntry<SortMenu>>(
-                          (SortMenu itm) {
-                            return DropdownMenuEntry<SortMenu>(
-                              value: itm,
-                              label: itm.text,
-                            );
-                        }).toList(),
-                    ),
-                  ],
-                ),
+                  const Text('SORT BY'),
+                  DropdownMenu<SortMenu>(
+                    // sort
+                    hintText: 'Best Selling',
+                    dropdownMenuEntries: SortMenu.values
+                        .map<DropdownMenuEntry<SortMenu>>((SortMenu itm) {
+                      return DropdownMenuEntry<SortMenu>(
+                        value: itm,
+                        label: itm.text,
+                      );
+                    }).toList(),
+                  ),
+                ],
               ),
-              const SizedBox( // products
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ProductDisplay('A5 notepad','sold out','https://shop.upsu.net/cdn/shop/products/IMG_0617_540x.jpg?v=1557218162','product description'),
-                        ProductDisplay('classic sweatshirts - neutral','£̶4̶2̶.̶0̶0̶   £10.99','https://shop.upsu.net/cdn/shop/files/Neutral_-_Sept_24_540x.png?v=1750063651','product description'),
-                        ProductDisplay('recycled notebook','£̶1̶2̶.̶0̶0̶   £1.80','https://shop.upsu.net/cdn/shop/products/IMG_3406_540x.jpg?v=1581000944','product description'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ProductDisplay('iphone 5/6 charge & sunc cable','£̶4̶2̶.̶0̶0̶  £1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844','product description'),
-                        ProductDisplay('type C charge and sync cable','£̶4̶2̶.̶0̶0̶   £1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844','product description'),
-                        ProductDisplay('USB to USB charge & sync cable','£̶1̶2̶.̶0̶0̶   £1.50','https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844','product description'),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        ProductDisplay('Dimple Pop Fidget Keyring','£̶3̶.̶0̶0̶   £0.99','https://shop.upsu.net/cdn/shop/files/Fidget_Keyring_540x.png?v=1719226889','product description'),
-                        ProductDisplay('Nike Academy 18 tech pants','£̶4̶2̶.̶0̶0̶   £7.00','https://shop.upsu.net/cdn/shop/files/Nike_Pants_Shopify_-_Sept_24_540x.png?v=1726483797','product description'),
-                        ProductDisplay('Nike Academy 18 tech pants (M)','sold out','https://shop.upsu.net/cdn/shop/files/Nike_Pants_Shopify_-_Sept_24_540x.png?v=1726483797','product description'),
-                      ],
-                    ),
-                  ],
-                ),
+            ),
+            const SizedBox(
+              // products
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ProductDisplay(
+                          'A5 notepad',
+                          'sold out',
+                          'https://shop.upsu.net/cdn/shop/products/IMG_0617_540x.jpg?v=1557218162',
+                          'product description'),
+                      ProductDisplay(
+                          'classic sweatshirts - neutral',
+                          '£̶4̶2̶.̶0̶0̶   £10.99',
+                          'https://shop.upsu.net/cdn/shop/files/Neutral_-_Sept_24_540x.png?v=1750063651',
+                          'product description'),
+                      ProductDisplay(
+                          'recycled notebook',
+                          '£̶1̶2̶.̶0̶0̶   £1.80',
+                          'https://shop.upsu.net/cdn/shop/products/IMG_3406_540x.jpg?v=1581000944',
+                          'product description'),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ProductDisplay(
+                          'iphone 5/6 charge & sunc cable',
+                          '£̶4̶2̶.̶0̶0̶  £1.50',
+                          'https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844',
+                          'product description'),
+                      ProductDisplay(
+                          'type C charge and sync cable',
+                          '£̶4̶2̶.̶0̶0̶   £1.50',
+                          'https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844',
+                          'product description'),
+                      ProductDisplay(
+                          'USB to USB charge & sync cable',
+                          '£̶1̶2̶.̶0̶0̶   £1.50',
+                          'https://shop.upsu.net/cdn/shop/products/IMG_0731_540x.jpg?v=1557218844',
+                          'product description'),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ProductDisplay(
+                          'Dimple Pop Fidget Keyring',
+                          '£̶3̶.̶0̶0̶   £0.99',
+                          'https://shop.upsu.net/cdn/shop/files/Fidget_Keyring_540x.png?v=1719226889',
+                          'product description'),
+                      ProductDisplay(
+                          'Nike Academy 18 tech pants',
+                          '£̶4̶2̶.̶0̶0̶   £7.00',
+                          'https://shop.upsu.net/cdn/shop/files/Nike_Pants_Shopify_-_Sept_24_540x.png?v=1726483797',
+                          'product description'),
+                      ProductDisplay(
+                          'Nike Academy 18 tech pants (M)',
+                          'sold out',
+                          'https://shop.upsu.net/cdn/shop/files/Nike_Pants_Shopify_-_Sept_24_540x.png?v=1726483797',
+                          'product description'),
+                    ],
+                  ),
+                ],
               ),
-              SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(onPressed: placeholderCallbackForButtons, child: const Icon(Icons.arrow_back)),
-                    ElevatedButton(onPressed: placeholderCallbackForButtons, child: const Icon(Icons.arrow_forward))
-                  ],
-                ),
+            ),
+            SizedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      onPressed: placeholderCallbackForButtons,
+                      child: const Icon(Icons.arrow_back)),
+                  ElevatedButton(
+                      onPressed: placeholderCallbackForButtons,
+                      child: const Icon(Icons.arrow_forward))
+                ],
               ),
-              const Footer(),
-            ],
-          ),
+            ),
+            const Footer(),
+          ],
         ),
-      );
+      ),
+    );
   }
 }

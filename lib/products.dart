@@ -2,20 +2,22 @@ import 'package:flutter/material.dart';
 
 ProductData pd = ProductData();
 
-enum Products{
+enum Products {
   a(
     name: 'awaw',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
+    url:
+        'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
     cost: '£3.50',
     collections: ['Autumn favourites'],
-    tags: ['clothing','merch'],
+    tags: ['clothing', 'merch'],
     featured: true,
     bestselling: 5,
     desc: 'this is a description',
   ),
   b(
     name: 'gagaw',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
+    url:
+        'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
     cost: '£32.05',
     collections: ['Autumn favourites'],
     tags: ['clothing'],
@@ -25,7 +27,8 @@ enum Products{
   ),
   c(
     name: 'EWe',
-    url: 'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
+    url:
+        'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
     cost: '£123.00',
     collections: ['UPSU bears'],
     tags: ['merch'],
@@ -56,7 +59,6 @@ enum Products{
 }
 
 class ProductData {
-
   String prodcost = '';
   String produrl = '';
   String proddesc = '';
@@ -64,11 +66,10 @@ class ProductData {
   int numofprod = 0;
   Widget carttxt = const Text('');
 
-  Widget carttxtbuild(){
-    if(numofprod > 0){
+  Widget carttxtbuild() {
+    if (numofprod > 0) {
       return Text(numofprod.toString() + ' of items in cart');
-    }
-    else{
+    } else {
       return const Text('');
     }
   }

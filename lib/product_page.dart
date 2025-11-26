@@ -10,7 +10,7 @@ class ProductPage extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  void navtocart(BuildContext context){
+  void navtocart(BuildContext context) {
     cd.instcartprod(pd.prodname, pd.prodcost, pd.produrl);
     Navigator.pushNamed(context, '/cart');
   }
@@ -134,7 +134,9 @@ class ProductPage extends StatelessWidget {
               child: Row(
                 children: [
                   pd.carttxt,
-                  ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
+                  ElevatedButton(
+                      onPressed: () => navtocart(context),
+                      child: const Text('add to cart'))
                 ],
               ),
             ),

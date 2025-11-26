@@ -1,4 +1,4 @@
-enum SortMenu{
+enum SortMenu {
   a(text: 'featured'),
   b(text: 'best selling'),
   f(text: 'high to low'),

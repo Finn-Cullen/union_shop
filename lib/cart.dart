@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/cart_data.dart';
 import 'package:union_shop/navigation.dart';
 
-class CartPage extends StatefulWidget { // needs to be statefull
+class CartPage extends StatefulWidget {
+  // needs to be statefull
   const CartPage({super.key});
-  
+
   @override
   State<CartPage> createState() {
     return CartPageState();
@@ -12,15 +13,14 @@ class CartPage extends StatefulWidget { // needs to be statefull
 }
 
 class CartPageState extends State<CartPage> {
-
-  void updatepage(){
+  void updatepage() {
     setState(() {
       cd.displist = cd.proddisplist();
       cd.cart = cd.buildcart(context);
     });
   }
 
-  void navtopay(BuildContext context){
+  void navtopay(BuildContext context) {
     Navigator.pushNamed(context, '/payment');
   }
 
@@ -34,13 +34,18 @@ class CartPageState extends State<CartPage> {
             // Header
             const Navbar(),
 
-            const Text('your cart', style: TextStyle(fontSize: 40),),
+            const Text(
+              'your cart',
+              style: TextStyle(fontSize: 40),
+            ),
 
             cd.cart,
 
-            ElevatedButton(onPressed: updatepage, child: const Text('update page')),
+            ElevatedButton(
+                onPressed: updatepage, child: const Text('update page')),
 
-            ElevatedButton(onPressed: () => navtopay(context), child: const Text('pay')),
+            ElevatedButton(
+                onPressed: () => navtopay(context), child: const Text('pay')),
 
             const Footer(),
           ],

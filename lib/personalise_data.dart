@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
-enum PersTypes{
-
+enum PersTypes {
   oneline(
     perstype: 'one line',
     persprice: '£3.00',
@@ -35,7 +34,7 @@ class PrintData {
   String persdesc = PersTypes.oneline.perstype;
   List<Widget> perslineinp = [];
 
-  void perslineinpset(){
+  void perslineinpset() {
     List listtype = [];
     List listnum = [];
     int save = 0;
@@ -43,17 +42,17 @@ class PrintData {
       listtype.add(T.persprice);
       listnum.add(T.lineoftext);
     }).toList();
-    for(int i = 0; i < listtype.length; i++){
-      if(listtype[i] == persprice){save = i;}
+    for (int i = 0; i < listtype.length; i++) {
+      if (listtype[i] == persprice) {
+        save = i;
+      }
     }
     List<Widget> inpfields = [];
-    for(int i = 0; i < listnum[save]; i++){
+    for (int i = 0; i < listnum[save]; i++) {
       inpfields.add(
-        Text('line ' + (i+1).toString()),
+        Text('line ' + (i + 1).toString()),
       );
-      inpfields.add(
-        TextField()
-      );
+      inpfields.add(TextField());
     }
 
     perslineinp = inpfields;

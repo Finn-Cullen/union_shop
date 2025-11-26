@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/navigation.dart';
 import 'package:union_shop/collections_data.dart';
 
-
-class CollectionsPage extends StatelessWidget{
+class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
   void placeholderCallbackForButtons() {
@@ -11,27 +10,26 @@ class CollectionsPage extends StatelessWidget{
   }
 
   @override
-  Widget build(BuildContext context){
-
+  Widget build(BuildContext context) {
     final collections = csd.buildcoll(context);
 
-    return
-      Scaffold(
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              const Navbar(),
-              const SizedBox( // text at top
-                height: 140,
-                child: Text('COLLECTIONS',style: TextStyle(fontSize: 60)),
-              ),
-              SizedBox( // products
-                child: collections
-              ),
-              const Footer(),
-            ],
-          ),
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Navbar(),
+            const SizedBox(
+              // text at top
+              height: 140,
+              child: Text('COLLECTIONS', style: TextStyle(fontSize: 60)),
+            ),
+            SizedBox(
+                // products
+                child: collections),
+            const Footer(),
+          ],
         ),
-      );
+      ),
+    );
   }
 }

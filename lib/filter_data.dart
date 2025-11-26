@@ -1,4 +1,4 @@
-enum FilterMenu{
+enum FilterMenu {
   product(text: 'products'),
   clothing(text: 'clothing'),
   merch(text: 'merch'),
