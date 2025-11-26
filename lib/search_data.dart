@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/products.dart';
 import 'package:union_shop/prod_display.dart';
 
-List<Widget> searchlist = [];
+class SearchData {
 
+  List<Widget> searchlist = [];
 
-void search(String inp){
-  List<Widget> sealist = [];
-  Products.values.map((T) {
-    if(T.name.contains(inp)){
-      sealist.add(ProductDisplay(T.name,T.cost,T.url,T.desc,));
-    }
-    }).toList();
-    searchlist = sealist;
+  void search(String inp){
+    List<Widget> sealist = [];
+    Products.values.map((T) {
+      if(T.name.contains(inp)){
+        sealist.add(ProductDisplay(T.name,T.cost,T.url,T.desc,));
+      }
+      }).toList();
+      searchlist = sealist;
+  }
 }

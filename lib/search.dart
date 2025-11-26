@@ -13,16 +13,12 @@ class SearchPage extends StatefulWidget { // needs to be statefull
 
 class SearchPageState extends State<SearchPage> {
   TextEditingController controller = TextEditingController();
+  SearchData sd = SearchData();
 
   void searchitm(String inp){
     setState(() {
-      search(inp);
+      sd.search(inp);
     });
-  }
-
-  @override
-  void initState() {
-    super.initState();
   }
 
   @override
@@ -37,7 +33,7 @@ class SearchPageState extends State<SearchPage> {
             ElevatedButton(onPressed: () => searchitm(controller.text), child: const Text('search')), // works, is using constant as a placeholder
             SizedBox(height: 100,),
             Column(
-              children: searchlist,
+              children: sd.searchlist,
             ),
             SizedBox(height: 100,),
             Footer(),
