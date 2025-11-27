@@ -11,7 +11,7 @@ class ProductPage extends StatelessWidget {
   }
 
   void navtocart(BuildContext context) {
-    cd.instcartprod(pd.prodname, pd.prodcost, pd.produrl);
+    cd.instcartprod(pd.prodname, pd.prodcost, pd.prodpath);
     Navigator.pushNamed(context, '/cart');
   }
 
@@ -54,8 +54,8 @@ class ProductPage extends StatelessWidget {
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
-                      child: Image.network(
-                        pd.produrl,
+                      child: Image.asset(
+                        pd.prodpath,
                         fit: BoxFit.cover,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(

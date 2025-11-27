@@ -124,7 +124,7 @@ class CollectionData {
     final map = await buildlist();
     final name = map.map((v) => v["name"]).toList();
     final cost = map.map((v) => v["cost"]).toList();
-    final url = map.map((v) => v["url"]).toList();
+    final path = map.map((v) => v["path"]).toList();
     final desc = map.map((v) => v["desc"]).toList();
 
     final taglist = map.map((v) => v["tags"]).toList();
@@ -133,7 +133,7 @@ class CollectionData {
     final featlist = map.map((v) => v["featured"]).toList();
 
     for(int i = 0; i < name.length; i++){
-      listofproducts.add(ProductDisplay(name[i], cost[i], url[i], desc[i]));
+      listofproducts.add(ProductDisplay(name[i], cost[i], path[i], desc[i]));
     }
 
     List<ProductDisplay> hold = [];

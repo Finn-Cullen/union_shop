@@ -31,10 +31,10 @@ class CollectionsData {
     List<Widget> listofcollections = [];
     final map = await buildlist();
     final collnames = map.map((v) => v["collname"]).toList();
-    final urls = map.map((v) => v["displayurl"]).toList();
+    final paths = map.map((v) => v["displaypath"]).toList();
 
     for(int i = 0; i < collnames.length; i++){
-      listofcollections.add(DisplayCollection(collnames[i], urls[i]));
+      listofcollections.add(DisplayCollection(collnames[i], paths[i]));
     }
 
     collections = orderrowanscolumns(listofcollections);
@@ -55,9 +55,9 @@ class CollectionsData {
 
 class DisplayCollection extends StatelessWidget{
   final String name;
-  final String url;
+  final String path;
 
-  const DisplayCollection(this.name, this.url,{super.key});
+  const DisplayCollection(this.name, this.path,{super.key});
 
   void nav(BuildContext context, String coll){
     csd.collselected = coll;
@@ -71,7 +71,7 @@ class DisplayCollection extends StatelessWidget{
         width : 300,
         height : 300,
         decoration: BoxDecoration(
-          image: DecorationImage(fit:BoxFit.fill ,image: NetworkImage(url))
+          image: DecorationImage(fit:BoxFit.fill ,image: AssetImage(path)),
         ),
         child: Center(child: TextButton(onPressed: () => nav(context,name), child: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20)))),
         

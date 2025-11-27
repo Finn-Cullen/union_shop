@@ -19,12 +19,12 @@ class CartData {
     return num;
   }
 
-  void instcartprod(String name, String cost, String url) {
+  void instcartprod(String name, String cost, String path) {
     // add product
     String costinp = cost.split('£')[cost.split('£').length -
         1]; // if there is a space (I.E its a sale item)
     costinp = costinp.replaceAll('£', '');
-    cartlist.add(CartItem(name: name, cost: costinp, url: url));
+    cartlist.add(CartItem(name: name, cost: costinp, path: path));
   }
 
   void destcartprod(String name) {
@@ -44,7 +44,7 @@ class CartData {
       list.add(ProductDisplayCart(
           cost: cartlist[i].cost,
           name: cartlist[i].name,
-          url: cartlist[i].url,
+          path: cartlist[i].path,
           total: 0));
     }
     List<ProductDisplayCart> listfilt = [];
@@ -130,20 +130,20 @@ class CartData {
 class CartItem {
   final String name;
   final String cost;
-  final String url;
+  final String path;
 
-  const CartItem({required this.name, required this.cost, required this.url});
+  const CartItem({required this.name, required this.cost, required this.path});
 }
 
 class ProductDisplayCart extends StatefulWidget {
   final String name;
   final String cost;
-  final String url;
+  final String path;
   final int total;
   const ProductDisplayCart(
       {required this.name,
       required this.cost,
-      required this.url,
+      required this.path,
       required this.total,
       super.key});
 
@@ -154,7 +154,7 @@ class ProductDisplayCart extends StatefulWidget {
 class ProductDisplayCartState extends State<ProductDisplayCart> {
   late String name = '';
   late String cost = '';
-  late String url = '';
+  late String path = '';
   late int total = 0;
 
   @override
@@ -162,7 +162,7 @@ class ProductDisplayCartState extends State<ProductDisplayCart> {
     super.initState();
     name = widget.name;
     cost = widget.cost;
-    url = widget.url;
+    path = widget.path;
     total = widget.total;
   }
 
@@ -188,7 +188,7 @@ class ProductDisplayCartState extends State<ProductDisplayCart> {
         SizedBox(
           height: 100,
           width: 200,
-          child: Image.network(url),
+          child: Image.asset(path),
         ),
         SizedBox(
           height: 100,
@@ -206,7 +206,7 @@ class ProductDisplayCartState extends State<ProductDisplayCart> {
             child: Row(
               children: [
                 IconButton(
-                    onPressed: () => incrprod(name, cost, url, context),
+                    onPressed: () => incrprod(name, cost, path, context),
                     icon: const Icon(Icons.add)),
                 Text(total.toString()),
                 IconButton(

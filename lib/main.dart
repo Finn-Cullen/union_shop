@@ -70,7 +70,7 @@ class HomeScreen extends StatelessWidget {
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: AssetImage(
-                          "assets/images/magnet_A.jpg"))),
+                          "assets/images/pink_hoodie.jpg"))),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -110,12 +110,12 @@ class HomeScreen extends StatelessWidget {
                     const ProductDisplay(
                         'Limited Edition Essential Zip Hoodies',
                         '£14.99',
-                        'https://shop.upsu.net/cdn/shop/files/Pink_Essential_Hoodie_2a3589c2-096f-479f-ac60-d41e8a853d04_720x.jpg?v=1749131089',
+                        'assets/images/magnet_B.jpg',
                         'product description'),
                     const ProductDisplay(
                         'Essential T-Shirt',
                         '£6.99',
-                        'https://shop.upsu.net/cdn/shop/files/Sage_T-shirt_720x.png?v=1759827236',
+                        'assets/images/magnet_C.jpg',
                         'product description')
                   ],
                 )
@@ -138,12 +138,12 @@ class HomeScreen extends StatelessWidget {
                     const ProductDisplay(
                         'Signiture hoodie',
                         '£32.99',
-                        'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
+                        'assets/images/magnet_B.jpg',
                         'product description'),
                     const ProductDisplay(
                         'Signiture T-Shirt',
                         '£14.99',
-                        'https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534',
+                        'assets/images/magnet_B.jpg',
                         'product description')
                   ],
                 )
@@ -166,12 +166,12 @@ class HomeScreen extends StatelessWidget {
                     const ProductDisplay(
                         'portsmouth city postcard',
                         '£1.00',
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_900x.jpg?v=1752232561',
+                        'assets/images/magnet_C.jpg',
                         'product description'),
                     const ProductDisplay(
                         'portsmouth city magnet',
                         'sold out',
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_900x.jpg?v=1752230282',
+                        'assets/images/magnet_C.jpg',
                         'product description')
                   ],
                 ),
@@ -182,12 +182,12 @@ class HomeScreen extends StatelessWidget {
                     const ProductDisplay(
                         'portsmouth city bookemark',
                         '£3.00',
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_900x.jpg?v=1752230004',
+                        'assets/images/magnet_B.jpg',
                         'product description'),
                     const ProductDisplay(
                         'portsmouth city Notebook',
                         '£7.50',
-                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_900x.jpg?v=1757419215',
+                        'assets/images/magnet_B.jpg',
                         'product description')
                   ],
                 )

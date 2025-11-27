@@ -5,7 +5,7 @@ ProductData pd = ProductData();
 enum Products {
   a(
     name: 'awaw',
-    url:
+    path:
         'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
     cost: '£3.50',
     collections: ['Autumn favourites'],
@@ -16,7 +16,7 @@ enum Products {
   ),
   b(
     name: 'gagaw',
-    url:
+    path:
         'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
     cost: '£32.05',
     collections: ['Autumn favourites'],
@@ -27,7 +27,7 @@ enum Products {
   ),
   c(
     name: 'EWe',
-    url:
+    path:
         'https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498',
     cost: '£123.00',
     collections: ['UPSU bears'],
@@ -39,7 +39,7 @@ enum Products {
 
   const Products({
     required this.name,
-    required this.url,
+    required this.path,
     required this.cost,
     required this.collections,
     required this.tags,
@@ -49,7 +49,7 @@ enum Products {
   });
 
   final String name;
-  final String url;
+  final String path;
   final String cost;
   final List<String> collections;
   final List<String> tags;
@@ -60,7 +60,7 @@ enum Products {
 
 class ProductData {
   String prodcost = '';
-  String produrl = '';
+  String prodpath = '';
   String proddesc = '';
   String prodname = '';
   int numofprod = 0;

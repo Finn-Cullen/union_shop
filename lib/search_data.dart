@@ -12,7 +12,7 @@ class SearchData {
         sealist.add(ProductDisplay(
           T.name,
           T.cost,
-          T.url,
+          T.path,
           T.desc,
         ));
       }
