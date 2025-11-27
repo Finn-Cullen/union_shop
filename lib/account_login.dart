@@ -28,9 +28,9 @@ class Login extends StatelessWidget {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Image.network(
+                          Image.asset(
                             // union logo
-                            'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                            'assets/images/logo.png',
                             height: 40,
                             fit: BoxFit.cover,
                           ),
