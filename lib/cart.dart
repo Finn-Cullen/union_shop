@@ -21,6 +21,11 @@ class CartPageState extends State<CartPage> {
   }
 
   void navtopay(BuildContext context) {
+    cd.cartlist = [];
+    setState(() {
+      cd.displist = cd.proddisplist();
+      cd.cart = cd.buildcart(context);
+    }); // empties cart
     Navigator.pushNamed(context, '/payment');
   }
 
