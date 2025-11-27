@@ -16,6 +16,13 @@ class PrintPage extends StatefulWidget {
 class PrintPageState extends State<PrintPage> {
   PrintData pd = PrintData();
 
+  @override
+  void initState() {
+    super.initState();
+    pd.perslineinpset();
+    pd.data = pd.loaddata();
+  }
+
   void incrprod(String n, String c, String u, BuildContext context) {
     cd.instcartprod('$n $pd.persdesc', c, u);
     Navigator.pushNamed(context, '/cart');
@@ -36,25 +43,61 @@ class PrintPageState extends State<PrintPage> {
         const Text('Tax included'),
 
         // select pers text type
-        DropdownMenu<PersTypes>(
-          hintText: pd.persdesc,
-          dropdownMenuEntries: PersTypes.values
-              .map<DropdownMenuEntry<PersTypes>>((PersTypes itm) {
-            return DropdownMenuEntry<PersTypes>(
-              value: itm,
-              label: itm.perstype,
+        // DropdownMenu<PersTypes>(
+        //   hintText: pd.persdesc,
+        //   dropdownMenuEntries: PersTypes.values
+        //       .map<DropdownMenuEntry<PersTypes>>((PersTypes itm) {
+        //     return DropdownMenuEntry<PersTypes>(
+        //       value: itm,
+        //       label: itm.perstype,
+        //     );
+        //   }).toList(),
+        //   onSelected: (PersTypes? pers) {
+        //     setState(() {
+        //       if (pers != null) {
+        //         pd.persprice = pers.persprice;
+        //         pd.persdesc = pers.perstype;
+        //       }
+        //       pd.perslineinpset();
+        //     });
+        //   },
+        // ),
+
+        FutureBuilder<List<Map<String, dynamic>>>(
+          future: pd.data,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SizedBox(
+                  width: 150,
+                  child: Center(child: CircularProgressIndicator()));
+            }
+            if (snapshot.hasError) {
+              return const Text('Error loading data');
+            }
+            final sortItems = snapshot.data ?? [];
+            return DropdownMenu<Map<String, dynamic>>(
+              hintText: 'Best Selling',
+              dropdownMenuEntries: sortItems
+                  .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                return DropdownMenuEntry<Map<String, dynamic>>(
+                  value: item,
+                  label: item['perstype'] as String,
+                );
+              }).toList(),
+              onSelected: (Map<String, dynamic>? selected) {
+                if (selected != null) {
+                  setState(() {
+                    pd.persprice = selected['persprice'] as String;
+                    pd.persdesc = selected['perstype'] as String;
+                    pd.perslineinpset();
+                  });
+                }
+              },
             );
-          }).toList(),
-          onSelected: (PersTypes? pers) {
-            setState(() {
-              if (pers != null) {
-                pd.persprice = pers.persprice;
-                pd.persdesc = pers.perstype;
-              }
-              pd.perslineinpset();
-            });
           },
         ),
+
+
         Column(
           children: pd.perslineinp,
         ), // bring this forward with sir, having textfields breaks everything and is an active bug in flutter
