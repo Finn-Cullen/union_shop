@@ -43,6 +43,7 @@ class _SalePageState extends State<SalePage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const Navbar(),
             const SizedBox(

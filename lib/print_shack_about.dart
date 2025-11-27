@@ -9,6 +9,7 @@ class PrintPageAbout extends StatelessWidget {
     return const Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Navbar(),
             SizedBox(

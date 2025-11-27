@@ -27,6 +27,7 @@ class SearchPageState extends State<SearchPage> {
     return Scaffold(
       body: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Navbar(),
           SizedBox(

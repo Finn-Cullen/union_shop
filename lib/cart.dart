@@ -21,20 +21,23 @@ class CartPageState extends State<CartPage> {
   }
 
   void navtopay(BuildContext context) {
-    cd.cartlist = [];
     setState(() {
-      cd.displist = cd.proddisplist();
+      cd.cartlist = [];
+      cd.displist = [];
       cd.cart = cd.buildcart(context);
-    }); // empties cart
+    });
     Navigator.pushNamed(context, '/payment');
   }
 
   @override
   Widget build(BuildContext context) {
-    updatepage();
+    setState(() {
+      updatepage();
+    });
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             // Header
             const Navbar(),

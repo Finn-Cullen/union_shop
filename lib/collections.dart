@@ -31,6 +31,7 @@ class CollectionsPageState extends State<CollectionsPage> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const Navbar(),
             const SizedBox(

@@ -33,6 +33,7 @@ class PrintPageState extends State<PrintPage> {
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         const Navbar(),
         Image.network(

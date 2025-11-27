@@ -9,7 +9,7 @@ class PayPage extends StatelessWidget {
     return const Scaffold(
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Navbar(),
             SizedBox(
