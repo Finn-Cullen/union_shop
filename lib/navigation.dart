@@ -2,26 +2,6 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
-
-enum TPS {
-  about(
-    label: 'about',
-    link: '/print-shack-about',
-  ),
-  theprintshack(
-    label: 'the print shack',
-    link: '/print-shack',
-  );
-
-  const TPS({
-    required this.label,
-    required this.link,
-  });
-
-  final String label;
-  final String link;
-}
-
 class Navbar extends StatefulWidget {
   const Navbar({super.key});
 

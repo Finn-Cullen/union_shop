@@ -1,47 +1,19 @@
 import 'package:flutter/material.dart';
-
-enum PersTypes {
-  oneline(
-    perstype: 'one line',
-    persprice: '£3.00',
-    lineoftext: 1,
-  ),
-  twoline(
-    perstype: 'two lines',
-    persprice: '£4.00',
-    lineoftext: 2,
-  ),
-  threeline(
-    perstype: 'three lines',
-    persprice: '£5.00',
-    lineoftext: 3,
-  ),
-  ;
-
-  const PersTypes({
-    required this.perstype,
-    required this.persprice,
-    required this.lineoftext,
-  });
-
-  final String perstype;
-  final String persprice;
-  final int lineoftext;
-}
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 class PrintData {
-  String persprice = PersTypes.oneline.persprice;
-  String persdesc = PersTypes.oneline.perstype;
-  List<Widget> perslineinp = [];
+  String persprice = '£3.00';
+  String persdesc = 'description';
+  late List<Widget> perslineinp = [TextField()];
 
-  void perslineinpset() {
-    List listtype = [];
-    List listnum = [];
+  void perslineinpset() async {
     int save = 0;
-    PersTypes.values.map((T) {
-      listtype.add(T.persprice);
-      listnum.add(T.lineoftext);
-    }).toList();
+
+    final map = await buildlist();
+    final listtype = map.map((v) => v["persprice"]).toList();
+    final listnum = map.map((v) => v["lineoftext"]).toList();
+
     for (int i = 0; i < listtype.length; i++) {
       if (listtype[i] == persprice) {
         save = i;
@@ -56,5 +28,15 @@ class PrintData {
     }
 
     perslineinp = inpfields;
+  }
+
+  Future<List<Map<String, dynamic>>> buildlist() async {
+    final jsonstring = await loadJson();
+    final data = jsonDecode(jsonstring)['values'];
+    return List<Map<String, dynamic>>.from(data);
+  }
+
+  Future<String> loadJson() async {
+    return await rootBundle.loadString('assets/enums/Collections.json');
   }
 }

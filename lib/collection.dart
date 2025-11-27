@@ -16,7 +16,9 @@ class CollectionPage extends StatefulWidget {
 }
 
 class CollectionPageState extends State<CollectionPage> {
-
+  late Future<List<Map<String, dynamic>>> _filterMenuData;
+  late Future<List<Map<String, dynamic>>> _sortMenuData;
+  
   void uppage() {
     if (cd.page < 2) {
       setState(() {
@@ -38,9 +40,6 @@ class CollectionPageState extends State<CollectionPage> {
       cd.buildcoll(context);
     });
   }
-
-  late Future<List<Map<String, dynamic>>> _filterMenuData;
-  late Future<List<Map<String, dynamic>>> _sortMenuData;
 
   @override
   void initState() {
@@ -148,8 +147,6 @@ class CollectionPageState extends State<CollectionPage> {
                           });
                         },
                       );
-
-
                     },
                   ),
                 ],

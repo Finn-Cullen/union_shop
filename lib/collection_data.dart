@@ -10,7 +10,7 @@ class CollectionData {
   String filter = 'products';
   String sortmethod = 'best selling';
   int page = 1;
-  Widget productlist = const Column();
+  late Widget productlist = const Column();
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
