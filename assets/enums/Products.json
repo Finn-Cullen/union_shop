@@ -3,7 +3,7 @@
   "values": [
     {
       "name": "awaw",
-      "url": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498",
+      "path": "asset/images/shirt.png",
       "cost": "£3.50",
       "collections": ["Autumn favourites"],
       "tags": ["clothing", "merch"],
@@ -13,7 +13,7 @@
     },
     {
       "name": "gagaw",
-      "url": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498",
+      "path": "asset/images/shirt.png",
       "cost": "£32.05",
       "collections": ["Autumn favourites"],
       "tags": ["clothing"],
@@ -23,7 +23,7 @@
     },
     {
       "name": "EWe",
-      "url": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498",
+      "path": "asset/images/shirt.png",
       "cost": "£123.00",
       "collections": ["UPSU bears"],
       "tags": ["merch"],
