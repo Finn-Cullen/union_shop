@@ -36,8 +36,8 @@ class PrintPageState extends State<PrintPage> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         const Navbar(),
-        Image.network(
-            'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869',
+        Image.asset(
+            'assets/images/print_shack.png',
             fit: BoxFit.fill),
         const Text('Personalisation'),
         Text(pd.persprice),
