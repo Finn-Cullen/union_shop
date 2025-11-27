@@ -64,12 +64,13 @@ class HomeScreen extends StatelessWidget {
           // Top banner
           Navbar(),
           Container(
+              height: 600,
               width: double.infinity,
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: AssetImage(
-                          'assets/images/pink_hoodie.jpg'))),
+                          "assets/images/magnet_A.jpg"))),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
