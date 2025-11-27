@@ -34,9 +34,9 @@ class _NavbarState extends State<Navbar> {
       // navbar
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Image.network(
+        Image.asset(
           // union logo at left
-          'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+          'assets/images/logo.png',
           fit: BoxFit.cover,
         ),
         TextButton(
