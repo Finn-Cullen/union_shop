@@ -2,17 +2,14 @@
   "name": "Collections",
   "values": [
     {
-      "name": "af",
       "collname": "Autumn favourites",
       "displayurl": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498"
     },
     {
-      "name": "bf",
       "collname": "black friday",
       "displayurl": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498"
     },
     {
-      "name": "ub",
       "collname": "UPSU bears",
       "displayurl": "https://shop.upsu.net/cdn/shop/files/SageHoodie_720x.png?v=1745583498"
     }

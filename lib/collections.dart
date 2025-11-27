@@ -11,7 +11,7 @@ class CollectionsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final collections = csd.buildcoll(context);
+    csd.buildcoll(context);
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -25,7 +25,7 @@ class CollectionsPage extends StatelessWidget {
             ),
             SizedBox(
                 // products
-                child: collections),
+                child: csd.collections),
             const Footer(),
           ],
         ),
