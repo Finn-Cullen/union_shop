@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/collection_data.dart';
 import 'package:union_shop/collections_data.dart';
-import 'package:union_shop/filter_data.dart';
-import 'package:union_shop/sort_data.dart';
 import 'package:union_shop/navigation.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 class CollectionPage extends StatefulWidget {
   // needs to be statefull
@@ -39,6 +39,28 @@ class CollectionPageState extends State<CollectionPage> {
     });
   }
 
+  late Future<List<Map<String, dynamic>>> _filterMenuData;
+  late Future<List<Map<String, dynamic>>> _sortMenuData;
+
+  @override
+  void initState() {
+    super.initState();
+    _filterMenuData = _loadFilterMenuJson();
+    _sortMenuData = _loadSortMenuJson();
+  }
+
+  Future<List<Map<String, dynamic>>> _loadFilterMenuJson() async {
+    final jsonString = await rootBundle.loadString('assets/enums/FilterMenu.json');
+    final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
+    return List<Map<String, dynamic>>.from(jsonData['values'] as List);
+  }
+
+  Future<List<Map<String, dynamic>>> _loadSortMenuJson() async {
+    final jsonString = await rootBundle.loadString('assets/enums/SortMenu.json');
+    final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
+    return List<Map<String, dynamic>>.from(jsonData['values'] as List);
+  }
+
   @override
   Widget build(BuildContext context){
     setState(() {
@@ -59,48 +81,75 @@ class CollectionPageState extends State<CollectionPage> {
               ),
             ),
             SizedBox(
-              // filters and sorts
-              height: 100,
-              width: 800,
+              // text at top
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   const Text('FILTER BY'), // filters
-                  DropdownMenu<FilterMenu>(
-                    hintText: 'all products',
-                    dropdownMenuEntries: FilterMenu.values
-                        .map<DropdownMenuEntry<FilterMenu>>((FilterMenu itm) {
-                      return DropdownMenuEntry<FilterMenu>(
-                        value: itm,
-                        label: itm.text,
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: _filterMenuData,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                      }
+                      if (snapshot.hasError) {
+                        return const Text('Error loading filters');
+                      }
+                      final filterItems = snapshot.data ?? [];
+
+
+                      return DropdownMenu<Map<String, dynamic>>(
+                        hintText: 'all products',
+                        dropdownMenuEntries: filterItems
+                            .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                          return DropdownMenuEntry<Map<String, dynamic>>(
+                            value: item,
+                            label: item['text'] as String,
+                          );
+                        }).toList(),
+                        onSelected: (Map<String, dynamic>? value) {
+                          setState(() {
+                            cd.filter = value?['text'] as String;
+                            cd.buildcoll(context);
+                          });
+                        },
                       );
-                    }).toList(),
-                    onSelected: (FilterMenu? pers) {
-                      setState(() {
-                        if (pers != null) {
-                          cd.filter = pers.text;
-                        }
-                      });
+
+
                     },
                   ),
 
                   const Text('SORT BY'),
-                  DropdownMenu<SortMenu>(
-                    // sort
-                    hintText: 'Best Selling',
-                    dropdownMenuEntries: SortMenu.values
-                        .map<DropdownMenuEntry<SortMenu>>((SortMenu itm) {
-                      return DropdownMenuEntry<SortMenu>(
-                        value: itm,
-                        label: itm.text,
+                  FutureBuilder<List<Map<String, dynamic>>>(
+                    future: _sortMenuData,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                      }
+                      if (snapshot.hasError) {
+                        return const Text('Error loading sorts');
+                      }
+                      final sortItems = snapshot.data ?? [];
+
+
+                      return DropdownMenu<Map<String, dynamic>>(
+                        hintText: 'Best Selling',
+                        dropdownMenuEntries: sortItems
+                            .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                          return DropdownMenuEntry<Map<String, dynamic>>(
+                            value: item,
+                            label: item['text'] as String,
+                          );
+                        }).toList(),
+                        onSelected: (Map<String, dynamic>? value) {
+                          setState(() {
+                            cd.sortmethod = value?['text'] as String;
+                            cd.buildcoll(context);
+                          });
+                        },
                       );
-                    }).toList(),
-                    onSelected: (SortMenu? pers) {
-                      setState(() {
-                        if (pers != null) {
-                          cd.sortmethod = pers.text;
-                        }
-                      });
+
+
                     },
                   ),
                 ],
