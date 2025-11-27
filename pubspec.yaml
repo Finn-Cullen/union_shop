@@ -26,3 +26,8 @@ flutter:
     - assets/enums/PersTypes.json
     - assets/enums/TPS.json
     - assets/enums/Products.json
+    - assets/images/logo.png
+    - assets/images/magnet_A.jpg
+    - assets/images/Magnet_B.jpg
+    - assets/images/Magnet_C.jpg
+    - assets/images/print_shack.png
