@@ -1,7 +1,10 @@
 import 'package:union_shop/prod_display.dart';
-import 'package:union_shop/products.dart';
 import 'package:union_shop/collections_data.dart';
 import 'package:flutter/material.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
+
+CollectionData cd = CollectionData();
 
 class CollectionData {
   String filter = 'products';
@@ -39,7 +42,7 @@ class CollectionData {
   }
 
   List<ProductDisplay> sortforcollections(
-      List<ProductDisplay> dlist, List<List<String>> clist) {
+      List<ProductDisplay> dlist, List<dynamic> clist) {
     List<ProductDisplay> retlist = [];
     for (int disp = 0; disp < dlist.length; disp++) {
       if (clist[disp].contains(csd.collselected)) {
@@ -50,7 +53,7 @@ class CollectionData {
   }
 
   List<ProductDisplay> filterproducts(
-      List<ProductDisplay> list, List<List<String>> tlist) {
+      List<ProductDisplay> list, List<dynamic> tlist) {
     List<ProductDisplay> retlist = [];
     for (int disp = 0; disp < list.length && disp < tlist.length; disp++) {
       if (tlist[disp].contains(filter)) {
@@ -61,7 +64,7 @@ class CollectionData {
   }
 
   List<ProductDisplay> sortproducts(
-      List<ProductDisplay> list, List<bool> featlist, List<int> bestlist) {
+      List<ProductDisplay> list, List<dynamic> featlist, List<dynamic> bestlist) {
     List<ProductDisplay> retlist = [];
 
     if (sortmethod == "featured") {
@@ -115,24 +118,24 @@ class CollectionData {
     return retlist;
   }
 
-  Widget buildcoll(BuildContext context) {
-    List<List<String>> collectionslist = [];
-    List<List<String>> taglist = [];
+  void buildcoll(BuildContext context) async {
     List<ProductDisplay> listofproducts = [];
-    List<bool> featlist = [];
-    List<int> bestlist = [];
-    listofproducts = Products.values.map((T) {
-      collectionslist.add(T.collections);
-      taglist.add(T.tags);
-      featlist.add(T.featured);
-      bestlist.add(T.bestselling);
-      return ProductDisplay(
-        T.name,
-        T.cost,
-        T.url,
-        T.desc,
-      );
-    }).toList();
+
+    final map = await buildlist();
+    final name = map.map((v) => v["name"]).toList();
+    final cost = map.map((v) => v["cost"]).toList();
+    final url = map.map((v) => v["url"]).toList();
+    final desc = map.map((v) => v["desc"]).toList();
+
+    final taglist = map.map((v) => v["tags"]).toList();
+    final collectionslist = map.map((v) => v["collections"]).toList();
+    final bestlist = map.map((v) => v["bestselling"]).toList();
+    final featlist = map.map((v) => v["featured"]).toList();
+
+    for(int i = 0; i < name.length; i++){
+      listofproducts.add(ProductDisplay(name[i], cost[i], url[i], desc[i]));
+    }
+
     List<ProductDisplay> hold = [];
     for (int i = (9 * (page - 1));
         i < listofproducts.length && i < (9 * page) + 1;
@@ -147,6 +150,16 @@ class CollectionData {
       listofproducts = filterproducts(listofproducts, taglist);
     } // filters
     listofproducts = sortproducts(listofproducts, featlist, bestlist); // sorts
-    return orderrowanscolumns(listofproducts);
+    productlist = orderrowanscolumns(listofproducts);
+  }
+
+  Future<List<Map<String, dynamic>>> buildlist() async {
+    final jsonstring = await loadJson();
+    final data = jsonDecode(jsonstring)['values'];
+    return List<Map<String, dynamic>>.from(data);
+  }
+
+  Future<String> loadJson() async {
+    return await rootBundle.loadString('assets/enums/Products.json');
   }
 }

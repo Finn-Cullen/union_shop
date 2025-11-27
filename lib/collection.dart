@@ -16,7 +16,6 @@ class CollectionPage extends StatefulWidget {
 }
 
 class CollectionPageState extends State<CollectionPage> {
-  CollectionData cd = CollectionData();
 
   void uppage() {
     if (cd.page < 2) {
@@ -34,12 +33,17 @@ class CollectionPageState extends State<CollectionPage> {
     }
   }
 
-  @override
-  Widget build(BuildContext context) {
+  void reloadpage(BuildContext context) {
     setState(() {
-      cd.productlist = cd.buildcoll(context);
+      cd.buildcoll(context);
     });
+  }
 
+  @override
+  Widget build(BuildContext context){
+    setState(() {
+      cd.buildcoll(context);
+    });
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -121,6 +125,9 @@ class CollectionPageState extends State<CollectionPage> {
                 ],
               ),
             ),
+            
+            ElevatedButton(onPressed: () => reloadpage(context), child: Text('Reload Page')),
+
             const Footer(),
           ],
         ),
