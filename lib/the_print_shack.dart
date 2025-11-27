@@ -24,7 +24,7 @@ class PrintPageState extends State<PrintPage> {
   }
 
   void incrprod(String n, String c, String u, BuildContext context) {
-    cd.instcartprod('$n $pd.persdesc', c, u);
+    cd.instcartprod(n.toString(), c, u);
     Navigator.pushNamed(context, '/cart');
   }
 
@@ -41,27 +41,6 @@ class PrintPageState extends State<PrintPage> {
         const Text('Personalisation'),
         Text(pd.persprice),
         const Text('Tax included'),
-
-        // select pers text type
-        // DropdownMenu<PersTypes>(
-        //   hintText: pd.persdesc,
-        //   dropdownMenuEntries: PersTypes.values
-        //       .map<DropdownMenuEntry<PersTypes>>((PersTypes itm) {
-        //     return DropdownMenuEntry<PersTypes>(
-        //       value: itm,
-        //       label: itm.perstype,
-        //     );
-        //   }).toList(),
-        //   onSelected: (PersTypes? pers) {
-        //     setState(() {
-        //       if (pers != null) {
-        //         pd.persprice = pers.persprice;
-        //         pd.persdesc = pers.perstype;
-        //       }
-        //       pd.perslineinpset();
-        //     });
-        //   },
-        // ),
 
         FutureBuilder<List<Map<String, dynamic>>>(
           future: pd.data,
