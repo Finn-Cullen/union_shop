@@ -68,8 +68,8 @@ class HomeScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       fit: BoxFit.fill,
-                      image: NetworkImage(
-                          "https://shop.upsu.net/cdn/shop/files/Signature_T-Shirt_Indigo_Blue_2_720x.jpg?v=1758290534"))),
+                      image: AssetImage(
+                          'assets/images/pink_hoodie.jpg'))),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -211,23 +211,23 @@ class HomeScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Image.network(
-                    'https://shop.upsu.net/cdn/shop/files/PurpleHoodieFinal_540x.jpg?v=1742201957',
+                  Image.asset(
+                    'assets/images/magnet_C.jpg',
                     width: 300,
                     height: 300,
                   ),
-                  Image.network(
-                    'https://shop.upsu.net/cdn/shop/products/IMG_0651_540x.jpg?v=1557218799',
+                  Image.asset(
+                    'assets/images/magnet_A.jpg',
                     width: 300,
                     height: 300,
                   ),
-                  Image.network(
-                    'https://shop.upsu.net/cdn/shop/products/GradGrey_540x.jpg?v=1657288025',
+                  Image.asset(
+                    'assets/images/magnet_B.jpg',
                     width: 300,
                     height: 300,
                   ),
-                  Image.network(
-                    'https://shop.upsu.net/cdn/shop/products/IMG_0617_540x.jpg?v=1557218162',
+                  Image.asset(
+                    'assets/images/magnet_C.jpg',
                     width: 300,
                     height: 300,
                   ),
@@ -266,8 +266,8 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Image.network(
-                'https://shop.upsu.net/cdn/shop/files/The_Union_Print_Shack_Logo_-_smaller_540x.png?v=1760532830',
+              Image.asset(
+                'assets/images/print_shack.png',
                 width: 400,
                 height: 400,
               )
