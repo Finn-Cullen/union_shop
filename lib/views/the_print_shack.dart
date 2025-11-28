@@ -24,7 +24,7 @@ class PrintPageState extends State<PrintPage> {
   }
 
   void incrprod(String n, String c, String u, BuildContext context) {
-    cd.instcartprod(n.toString(), c, u);
+    cd.instcartprod('$n ${pd.persdesc.toString()}', c, u);
     Navigator.pushNamed(context, '/cart');
   }
 
@@ -54,7 +54,7 @@ class PrintPageState extends State<PrintPage> {
                   }
                   final sortItems = snapshot.data ?? [];
                   return DropdownMenu<Map<String, dynamic>>(
-                    hintText: 'Best Selling',
+                    hintText: 'one line',
                     dropdownMenuEntries: sortItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
                       return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['perstype'] as String);
                     }).toList(),
@@ -74,7 +74,7 @@ class PrintPageState extends State<PrintPage> {
               Column(children: pd.perslineinp),
 
               ElevatedButton(
-                onPressed: () => incrprod('Personalised shirt', pd.persprice.toString(), 'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869', context),
+                onPressed: () => incrprod('Personalised shirt', pd.persprice.toString(), 'assets/images/pink_hoodie.jpg', context),
                 child: const Text('add to cart'),
               ),
               const Footer(),
