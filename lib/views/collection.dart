@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/collection_data.dart';
-import 'package:union_shop/collections_data.dart';
-import 'package:union_shop/navigation.dart';
+import 'package:union_shop/repositories/collection_data.dart';
+import 'package:union_shop/repositories/collections_data.dart';
+import 'package:union_shop/models/navigation.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
@@ -20,7 +20,7 @@ class CollectionPageState extends State<CollectionPage> {
   late Future<List<Map<String, dynamic>>> _sortMenuData;
 
   void uppage() {
-    if (cd.page < 2) {
+    if (cd.page < cd.page_limit) {
       setState(() {
         cd.page++;
       });
