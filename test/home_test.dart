@@ -16,7 +16,8 @@ void main() {
         tester.view.resetDevicePixelRatio();
       });
 
-      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: Navbar())));
+      await tester
+          .pumpWidget(const MaterialApp(home: Scaffold(body: Navbar())));
       await tester.pumpAndSettle();
 
       expect(find.byIcon(Icons.search), findsOneWidget);
@@ -24,7 +25,8 @@ void main() {
       expect(find.byIcon(Icons.shopping_bag), findsWidgets);
     });
 
-    testWidgets('Footer shows opening hours text (mobile layout)', (tester) async {
+    testWidgets('Footer shows opening hours text (mobile layout)',
+        (tester) async {
       // ensure consistent desktop-like size for layout
       tester.view.physicalSize = const Size(1280, 1024);
       tester.view.devicePixelRatio = 1.0;
@@ -35,7 +37,8 @@ void main() {
 
       // Wrap footer in a narrow box so it uses the mobile layout path
       await tester.pumpWidget(const MaterialApp(
-        home: Scaffold(body: Center(child: SizedBox(width: 360, child: Footer()))),
+        home: Scaffold(
+            body: Center(child: SizedBox(width: 360, child: Footer()))),
       ));
       await tester.pumpAndSettle();
 
@@ -52,7 +55,8 @@ void main() {
       });
       final widget = MaterialApp(
         home: Scaffold(
-          body: ProductDisplay('Test Name', '£9.99', 'assets/images/magnet_B.jpg', 'desc'),
+          body: ProductDisplay(
+              'Test Name', '£9.99', 'assets/images/magnet_B.jpg', 'desc'),
         ),
       );
 
