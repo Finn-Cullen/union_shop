@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
- 
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -21,7 +20,8 @@ void main() {
     await tester.pumpWidget(DefaultAssetBundle(
       bundle: bundle,
       child: MaterialApp(
-        home: Scaffold(body: SizedBox(width: 2000, child: const CollectionsPage())),
+        home: Scaffold(
+            body: SizedBox(width: 2000, child: const CollectionsPage())),
       ),
     ));
 
@@ -41,7 +41,8 @@ class TestAssetBundle extends CachingAssetBundle {
   }
 
   @override
-  Future<T> loadStructuredBinaryData<T>(String key, FutureOr<T> Function(ByteData) loader) async {
+  Future<T> loadStructuredBinaryData<T>(
+      String key, FutureOr<T> Function(ByteData) loader) async {
     final codec = const StandardMessageCodec();
     final dynamic encoded = codec.encodeMessage(<String, List<String>>{});
     if (encoded is ByteData) return loader(encoded);
@@ -52,9 +53,15 @@ class TestAssetBundle extends CachingAssetBundle {
   @override
   Future<String> loadString(String key, {bool cache = true}) async {
     if (key.contains('Collections.json')) {
-      return jsonEncode({'values': [{'collname': 'UPSU bears', 'displaypath': 'assets/images/logo.png'}]});
+      return jsonEncode({
+        'values': [
+          {'collname': 'UPSU bears', 'displaypath': 'assets/images/logo.png'}
+        ]
+      });
     }
-    if (key.contains('FilterMenu.json') || key.contains('SortMenu.json') || key.contains('TPS.json')) {
+    if (key.contains('FilterMenu.json') ||
+        key.contains('SortMenu.json') ||
+        key.contains('TPS.json')) {
       return jsonEncode({'values': []});
     }
     return '';
