@@ -40,8 +40,8 @@ class CollectionData {
     return retlist;
   }
 
-  List<ProductDisplay> sortproducts(
-      List<ProductDisplay> list, List<dynamic> featlist, List<dynamic> bestlist) {
+  List<ProductDisplay> sortproducts(List<ProductDisplay> list,
+      List<dynamic> featlist, List<dynamic> bestlist) {
     List<ProductDisplay> retlist = [];
 
     if (sortmethod == "featured") {
@@ -110,7 +110,7 @@ class CollectionData {
     final bestlist = map.map((v) => v["bestselling"]).toList();
     final featlist = map.map((v) => v["featured"]).toList();
 
-    for(int i = 0; i < name.length; i++){
+    for (int i = 0; i < name.length; i++) {
       listofproducts.add(ProductDisplay(name[i], cost[i], path[i], desc[i]));
     }
 
@@ -130,9 +130,8 @@ class CollectionData {
     listofproducts = sortproducts(listofproducts, featlist, bestlist); // sorts
     pagelimit = (listofproducts.length / 9).ceil();
     productlist = Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: listofproducts);
-
-    
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: listofproducts);
   }
 
   Future<List<Map<String, dynamic>>> buildlist() async {
