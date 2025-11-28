@@ -63,6 +63,15 @@ class CartData {
     return listfilt;
   }
 
+  double subtotal() {
+    double total = 0.0;
+    for (final item in cartlist) {
+      final v = double.tryParse(item.cost) ?? 0.0;
+      total += v;
+    }
+    return total;
+  }
+
   Widget buildcart(BuildContext context) {
     displist = proddisplist();
     if (cartlist.isEmpty) {
@@ -91,32 +100,37 @@ class CartData {
 
           const SizedBox(
               child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               SizedBox(
-                height: 100,
-                width: 800,
                 child: Text('product'),
               ),
               SizedBox(
-                height: 100,
-                width: 200,
                 child: Text('price'),
               ),
               SizedBox(
-                height: 100,
-                width: 200,
                 child: Text('quantity'),
               ),
               SizedBox(
-                height: 100,
-                width: 200,
                 child: Text('total'),
               ),
             ],
           )), // text at top
           Column(
-              mainAxisAlignment: MainAxisAlignment.center, children: displist)
+              mainAxisAlignment: MainAxisAlignment.center, children: displist),
+          const SizedBox(height: 12),
+          // Subtotal row
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 8.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                const Text('Subtotal: ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+                const SizedBox(width: 8),
+                Text('£' + subtotal().toStringAsFixed(2), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF4d2963))),
+              ],
+            ),
+          )
         ],
       ));
     }
@@ -183,26 +197,22 @@ class ProductDisplayCartState extends State<ProductDisplayCart> {
     });
     return (SizedBox(
         child: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         SizedBox(
           height: 100,
-          width: 200,
           child: Image.asset(path),
         ),
         SizedBox(
           height: 100,
-          width: 600,
           child: Text(name),
         ),
         SizedBox(
           height: 100,
-          width: 200,
           child: Text(cost),
         ),
         SizedBox(
             height: 100,
-            width: 200,
             child: Row(
               children: [
                 IconButton(
@@ -216,7 +226,6 @@ class ProductDisplayCartState extends State<ProductDisplayCart> {
             )),
         SizedBox(
           height: 100,
-          width: 200,
           child: Text(((double.parse(cost)) * total).toString()),
         ),
       ],
