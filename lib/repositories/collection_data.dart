@@ -10,7 +10,7 @@ class CollectionData {
   String filter = 'products';
   String sortmethod = 'best selling';
   int page = 1;
-  int page_limit = 0;
+  int pagelimit = 0;
   late Widget productlist = const Column();
   late Future<List<Map<String, dynamic>>> datalist;
 
@@ -153,7 +153,7 @@ class CollectionData {
       listofproducts = filterproducts(listofproducts, taglist);
     } // filters
     listofproducts = sortproducts(listofproducts, featlist, bestlist); // sorts
-    page_limit = (listofproducts.length / 9).ceil();
+    pagelimit = (listofproducts.length / 9).ceil();
     productlist = orderrowanscolumns(listofproducts);
 
     
