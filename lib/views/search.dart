@@ -24,32 +24,29 @@ class SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 600;
+      return Scaffold(
+        body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Navbar(),
-          SizedBox(
-            height: 100,
+            children: [
+              Navbar(),
+              SizedBox(height: isMobile ? 40 : 100),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: isMobile ? 12 : 80),
+                child: TextField(controller: controller),
+              ),
+              const SizedBox(height: 12),
+              ElevatedButton(onPressed: () => searchitm(controller.text), child: const Text('search')),
+              SizedBox(height: isMobile ? 40 : 100),
+              Column(children: sd.searchlist),
+              SizedBox(height: isMobile ? 40 : 100),
+              Footer(),
+            ],
           ),
-          TextField(controller: controller),
-          ElevatedButton(
-              onPressed: () => searchitm(controller.text),
-              child: const Text(
-                  'search')), // works, is using constant as a placeholder
-          SizedBox(
-            height: 100,
-          ),
-          Column(
-            children: sd.searchlist,
-          ),
-          SizedBox(
-            height: 100,
-          ),
-          Footer(),
-        ],
-      )),
-    );
+        ),
+      );
+    });
   }
 }
