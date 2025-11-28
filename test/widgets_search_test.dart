@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:typed_data';
+ 
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -11,12 +11,12 @@ void main() {
   testWidgets('Search page performs search and shows results', (tester) async {
     final bundle = TestAssetBundle();
 
-    final binding = tester.binding;
-    binding.window.physicalSizeTestValue = const Size(2400, 1600);
-    binding.window.devicePixelRatioTestValue = 1.0;
+    // set a large test window to avoid layout overflow
+    tester.view.physicalSize = const Size(2400, 1600);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      binding.window.clearPhysicalSizeTestValue();
-      binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
 
     await tester.pumpWidget(DefaultAssetBundle(

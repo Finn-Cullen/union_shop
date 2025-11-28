@@ -98,24 +98,17 @@ class CartData {
                 style: TextStyle(color: Colors.deepPurple),
               )),
 
-          const SizedBox(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              SizedBox(
-                child: Text('product'),
-              ),
-              SizedBox(
-                child: Text('price'),
-              ),
-              SizedBox(
-                child: Text('quantity'),
-              ),
-              SizedBox(
-                child: Text('total'),
-              ),
-            ],
-          )), // text at top
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Row(
+              children: const [
+                Expanded(child: Text('product')),
+                Expanded(child: Text('price')),
+                Expanded(child: Text('quantity')),
+                Expanded(child: Text('total')),
+              ],
+            ),
+          ), // text at top
           Column(
               mainAxisAlignment: MainAxisAlignment.center, children: displist),
           const SizedBox(height: 12),
@@ -127,7 +120,11 @@ class CartData {
               children: [
                 const Text('Subtotal: ', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 const SizedBox(width: 8),
-                Text('£' + subtotal().toStringAsFixed(2), style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF4d2963))),
+                Flexible(
+                  child: Text('£ ${subtotal().toStringAsFixed(2)}',
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xFF4d2963))),
+                ),
               ],
             ),
           )
@@ -194,40 +191,79 @@ class ProductDisplayCartState extends State<ProductDisplayCart> {
   Widget build(BuildContext context) {
     // update total from global cart data without calling setState() during build
     total = cd.totalnumprod(name);
-    return (SizedBox(
+    return SizedBox(
         child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        SizedBox(
-          height: 100,
-          child: Image.asset(path),
+        Flexible(
+          flex: 2,
+          child: SizedBox(
+            height: 100,
+            child: Image.asset(path, fit: BoxFit.contain),
+          ),
         ),
-        SizedBox(
-          height: 100,
-          child: Text(name),
+        Flexible(
+          flex: 3,
+          child: SizedBox(
+            height: 100,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(name, overflow: TextOverflow.ellipsis),
+            ),
+          ),
         ),
-        SizedBox(
-          height: 100,
-          child: Text(cost),
+        Flexible(
+          flex: 2,
+          child: SizedBox(
+            height: 100,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(cost),
+            ),
+          ),
         ),
-        SizedBox(
+        Flexible(
+          flex: 3,
+          child: SizedBox(
             height: 100,
             child: Row(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                IconButton(
-                    onPressed: () => incrprod(name, cost, path, context),
-                    icon: const Icon(Icons.add)),
-                Text(total.toString()),
-                IconButton(
-                    onPressed: () => decprod(name, context),
-                    icon: const Icon(Icons.exposure_minus_1)),
+                SizedBox(
+                  width: 30,
+                  child: IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      onPressed: () => incrprod(name, cost, path, context),
+                      icon: const Icon(Icons.add)),
+                ),
+                SizedBox(
+                  width: 20,
+                  child: Center(child: Text(total.toString())),
+                ),
+                SizedBox(
+                  width: 30,
+                  child: IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      onPressed: () => decprod(name, context),
+                      icon: const Icon(Icons.exposure_minus_1)),
+                ),
               ],
-            )),
-        SizedBox(
-          height: 100,
-          child: Text(((double.parse(cost)) * total).toString()),
+            ),
+          ),
+        ),
+        Flexible(
+          flex: 2,
+          child: SizedBox(
+            height: 100,
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: Text(((double.parse(cost)) * total).toString()),
+            ),
+          ),
         ),
       ],
-    )));
+    ));
   }
 }

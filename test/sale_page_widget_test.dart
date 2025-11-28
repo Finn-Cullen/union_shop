@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -65,11 +64,11 @@ class TestAssetBundle extends CachingAssetBundle {
 void main() {
   testWidgets('SalePage shows header, filters and product items', (WidgetTester tester) async {
     // set up a larger test window to avoid RenderFlex overflow
-    tester.binding.window.physicalSizeTestValue = const Size(2000, 1200);
-    tester.binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.physicalSize = const Size(2000, 1200);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      tester.binding.window.clearPhysicalSizeTestValue();
-      tester.binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
 
     final bundle = TestAssetBundle({});

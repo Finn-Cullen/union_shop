@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
+ 
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,12 +13,11 @@ void main() {
     final bundle = TestAssetBundle();
 
     // enlarge the test window to avoid tight layout overflows
-    final binding = tester.binding;
-    binding.window.physicalSizeTestValue = const Size(800, 1200);
-    binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      binding.window.clearPhysicalSizeTestValue();
-      binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
 
     await tester.pumpWidget(DefaultAssetBundle(

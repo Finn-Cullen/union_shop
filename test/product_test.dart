@@ -4,20 +4,17 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/models/products.dart';
 
 void main() {
-  final binding = TestWidgetsFlutterBinding.ensureInitialized();
-
-  setUpAll(() {
-    binding.window.physicalSizeTestValue = const Size(1280, 1024);
-    binding.window.devicePixelRatioTestValue = 1.0;
-  });
-
-  tearDownAll(() {
-    binding.window.clearPhysicalSizeTestValue();
-    binding.window.clearDevicePixelRatioTestValue();
-  });
+  TestWidgetsFlutterBinding.ensureInitialized();
 
   group('Product Page Tests', () {
     testWidgets('basic product texts render', (tester) async {
+      // set test window to desktop-like size to avoid layout overflows
+      tester.view.physicalSize = const Size(1280, 1024);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
       pd.prodname = 'Test Product';
       pd.prodcost = '£15.00';
       pd.proddesc = 'A test description';
@@ -36,6 +33,13 @@ void main() {
     });
 
     testWidgets('quantity controls and add to cart button exist', (tester) async {
+      // ensure consistent window for this test
+      tester.view.physicalSize = const Size(1280, 1024);
+      tester.view.devicePixelRatio = 1.0;
+      addTearDown(() {
+        tester.view.resetPhysicalSize();
+        tester.view.resetDevicePixelRatio();
+      });
       await tester.pumpWidget(const MaterialApp(
         home: Scaffold(
           body: Center(
