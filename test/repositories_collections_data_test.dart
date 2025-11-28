@@ -4,7 +4,8 @@ import 'package:union_shop/repositories/collections_data.dart';
 
 void main() {
   group('CollectionsData', () {
-    testWidgets('orderrowanscolumns returns a Column with children', (tester) async {
+    testWidgets('orderrowanscolumns returns a Column with children',
+        (tester) async {
       final cs = CollectionsData();
       final widgets = [const Text('a'), const Text('b'), const Text('c')];
       final res = cs.orderrowanscolumns(widgets);
@@ -13,7 +14,9 @@ void main() {
       expect(col.children.length, widgets.length);
     });
 
-    test('orderrowanscolumns returns Column with same children (non-widget check)', () {
+    test(
+        'orderrowanscolumns returns Column with same children (non-widget check)',
+        () {
       final csd = CollectionsData();
       final widgets = [Text('a'), Text('b')];
       final result = csd.orderrowanscolumns(widgets);
