@@ -1,61 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:union_shop/main.dart';
+import 'package:union_shop/models/prod_display.dart';
+import 'package:union_shop/models/navigation.dart';
+import 'package:union_shop/models/navigation.dart' show Footer;
 
 void main() {
+  final binding = TestWidgetsFlutterBinding.ensureInitialized();
+
+  setUpAll(() {
+    // use a wide test window to avoid RenderFlex overflow errors in navbar/footer
+    binding.window.physicalSizeTestValue = const Size(1280, 1024);
+    binding.window.devicePixelRatioTestValue = 1.0;
+  });
+
+  tearDownAll(() {
+    binding.window.clearPhysicalSizeTestValue();
+    binding.window.clearDevicePixelRatioTestValue();
+  });
+
   group('Home Page Tests', () {
-    testWidgets('should display home page with basic elements', (tester) async {
-      await tester.pumpWidget(const UnionShopApp());
-      await tester.pump();
+    testWidgets('Navbar shows header icons', (tester) async {
+      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: Navbar())));
+      await tester.pumpAndSettle();
 
-      // Check that basic UI elements are present
-      expect(
-        find.text('PLACEHOLDER HEADER TEXT - STUDENTS TO UPDATE!'),
-        findsOneWidget,
-      );
-      expect(find.text('Placeholder Hero Title'), findsOneWidget);
-      expect(find.text('PLACEHOLDER PRODUCTS SECTION'), findsOneWidget);
-      expect(find.text('BROWSE PRODUCTS'), findsOneWidget);
-      expect(find.text('VIEW ALL PRODUCTS'), findsOneWidget);
-    });
-
-    testWidgets('should display product cards', (tester) async {
-      await tester.pumpWidget(const UnionShopApp());
-      await tester.pump();
-
-      // Check that product cards are displayed
-      expect(find.text('Placeholder Product 1'), findsOneWidget);
-      expect(find.text('Placeholder Product 2'), findsOneWidget);
-      expect(find.text('Placeholder Product 3'), findsOneWidget);
-      expect(find.text('Placeholder Product 4'), findsOneWidget);
-
-      // Check prices are displayed
-      expect(find.text('£10.00'), findsOneWidget);
-      expect(find.text('£15.00'), findsOneWidget);
-      expect(find.text('£20.00'), findsOneWidget);
-      expect(find.text('£25.00'), findsOneWidget);
-    });
-
-    testWidgets('should display header icons', (tester) async {
-      await tester.pumpWidget(const UnionShopApp());
-      await tester.pump();
-
-      // Check that header icons are present
       expect(find.byIcon(Icons.search), findsOneWidget);
-      expect(find.byIcon(Icons.shopping_bag_outlined), findsOneWidget);
-      expect(find.byIcon(Icons.menu), findsOneWidget);
+      expect(find.byIcon(Icons.man), findsWidgets);
+      expect(find.byIcon(Icons.shopping_bag), findsWidgets);
     });
 
-    testWidgets('should display footer', (tester) async {
-      await tester.pumpWidget(const UnionShopApp());
-      await tester.pump();
+    testWidgets('Footer shows opening hours text (mobile layout)', (tester) async {
+      // Wrap footer in a narrow box so it uses the mobile layout path
+      await tester.pumpWidget(const MaterialApp(
+        home: Scaffold(body: Center(child: SizedBox(width: 360, child: Footer()))),
+      ));
+      await tester.pumpAndSettle();
 
-      // Check that footer is present
-      expect(find.text('Placeholder Footer'), findsOneWidget);
-      expect(
-        find.text('Students should customise this footer section'),
-        findsOneWidget,
+      expect(find.text('Opening Hours'), findsOneWidget);
+      expect(find.textContaining('PLEASE NOTE THE UNION SHOP'), findsOneWidget);
+    });
+
+    testWidgets('ProductDisplay builds with name and cost', (tester) async {
+      final widget = MaterialApp(
+        home: Scaffold(
+          body: ProductDisplay('Test Name', '£9.99', 'assets/images/magnet_B.jpg', 'desc'),
+        ),
       );
+
+      await tester.pumpWidget(widget);
+      await tester.pumpAndSettle();
+
+      expect(find.text('Test Name'), findsOneWidget);
+      expect(find.text('£9.99'), findsOneWidget);
     });
   });
 }

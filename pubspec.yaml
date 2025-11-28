@@ -15,7 +15,21 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^6.0.0
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/enums/FilterMenu.json
+    - assets/enums/SortMenu.json
+    - assets/enums/Collections.json
+    - assets/enums/PersTypes.json
+    - assets/enums/TPS.json
+    - assets/enums/Products.json
+    - assets/images/logo.png
+    - assets/images/magnet_A.jpg
+    - assets/images/Magnet_B.jpg
+    - assets/images/Magnet_C.jpg
+    - assets/images/print_shack.png
+    - assets/images/pink_hoodie.jpg
+    - assets/images/Tshirt.jpg

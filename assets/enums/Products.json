@@ -1,0 +1,125 @@
+{
+  "name": "Products",
+  "values": [
+    {
+      "name": "shirt 1",
+      "path": "assets/images/pink_hoodie.jpg",
+      "cost": "£3.50",
+      "collections": ["Autumn favourites"],
+      "tags": ["clothing", "merch"],
+      "featured": true,
+      "bestselling": 5,
+      "desc": "this is a description"
+    },
+    {
+      "name": "shirt 2",
+      "path": "assets/images/pink_hoodie.jpg",
+      "cost": "£32.05",
+      "collections": ["Autumn favourites"],
+      "tags": ["clothing"],
+      "featured": false,
+      "bestselling": 2,
+      "desc": "a different description"
+    },
+    {
+      "name": "shirt 3",
+      "path": "assets/images/pink_hoodie.jpg",
+      "cost": "£123.00",
+      "collections": ["UPSU bears"],
+      "tags": ["merch"],
+      "featured": false,
+      "bestselling": 4,
+      "desc": "yup a description"
+    },
+    {
+      "name": "shirt 4",
+      "path": "assets/images/pink_hoodie.jpg",
+      "cost": "£3.00",
+      "collections": ["UPSU bears","Autumn favourites"],
+      "tags": ["merch"],
+      "featured": true,
+      "bestselling": 1,
+      "desc": "yup a product description"
+    },
+    {
+      "name": "shirt 5",
+      "path": "assets/images/pink_hoodie.jpg",
+      "cost": "£12.00",
+      "collections": ["UPSU bears","black friday"],
+      "tags": ["merch"],
+      "featured": false,
+      "bestselling": 3,
+      "desc": "my description"
+    },
+    {
+      "name": "shirt 6",
+      "path": "assets/images/pink_hoodie.jpg",
+      "cost": "£1.00",
+      "collections": ["UPSU bears","Autumn favourites"],
+      "tags": ["merch"],
+      "featured": false,
+      "bestselling": 2,
+      "desc": "yup a pink hoodie is a shirt"
+    },
+    {
+      "name": "shirt 7",
+      "path": "assets/images/pink_hoodie.jpg",
+      "cost": "£23.00",
+      "collections": ["UPSU bears","Autumn favourites"],
+      "tags": ["merch"],
+      "featured": false,
+      "bestselling": 4,
+      "desc": "quality description here"
+    },
+    {
+      "name": "magnet 1",
+      "path": "assets/images/magnet_A.jpg",
+      "cost": "£13.00",
+      "collections": ["UPSU bears","black friday"],
+      "tags": ["merch"],
+      "featured": true,
+      "bestselling": 45,
+      "desc": "good magnet"
+    },
+    {
+      "name": "magnet 2",
+      "path": "assets/images/magnet_A.jpg",
+      "cost": "£670.00",
+      "collections": ["UPSU bears","black friday"],
+      "tags": ["merch"],
+      "featured": false,
+      "bestselling": 6,
+      "desc": "bad magnet"
+    },
+    {
+      "name": "magnet 3",
+      "path": "assets/images/magnet_C.jpg",
+      "cost": "55.00",
+      "collections": ["UPSU bears","Autumn favourites"],
+      "tags": ["merch"],
+      "featured": false,
+      "bestselling": 3,
+      "desc": "mediocre magnet"
+    },
+    {
+      "name": "magnet 4",
+      "path": "assets/images/magnet_C.jpg",
+      "cost": "1.00",
+      "collections": ["UPSU bears","Autumn favourites"],
+      "tags": ["merch"],
+      "featured": true,
+      "bestselling": 7,
+      "desc": "love this magnet"
+    },
+    {
+      "name": "magnet 5",
+      "path": "assets/images/magnet_C.jpg",
+      "cost": "sold out",
+      "collections": ["UPSU bears","Autumn favourites"],
+      "tags": ["merch"],
+      "featured": false,
+      "bestselling": 1,
+      "desc": "this magnets alright"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Collections",
+  "values": [
+    {
+      "collname": "Autumn favourites",
+      "displaypath": "assets/images/magnet_A.jpg"
+    },
+    {
+      "collname": "black friday",
+      "displaypath": "assets/images/magnet_A.jpg"
+    },
+    {
+      "collname": "UPSU bears",
+      "displaypath": "assets/images/magnet_A.jpg"
+    }
+  ]
+}

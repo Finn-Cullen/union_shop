@@ -1,5 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/product_page.dart';
+import 'package:union_shop/views/about.dart';
+import 'package:union_shop/views/account_login.dart';
+import 'package:union_shop/views/cart.dart';
+import 'package:union_shop/views/collections.dart';
+import 'package:union_shop/views/collection.dart';
+import 'package:union_shop/views/sale.dart';
+import 'package:union_shop/views/product_page.dart';
+import 'package:union_shop/views/payment.dart';
+import 'package:union_shop/views/the_print_shack.dart';
+import 'package:union_shop/views/print_shack_about.dart';
+import 'package:union_shop/views/search.dart';
+import 'package:union_shop/models/navigation.dart';
+import 'package:union_shop/models/prod_display.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -11,31 +23,32 @@ class UnionShopApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Union Shop',
+      title: 'Union Homepage',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
-      home: const HomeScreen(),
-      // By default, the app starts at the '/' route, which is the HomeScreen
+      home: HomeScreen(),
       initialRoute: '/',
-      // When navigating to '/product', build and return the ProductPage
-      // In your browser, try this link: http://localhost:49856/#/product
-      routes: {'/product': (context) => const ProductPage()},
+      routes: {
+        '/about-us': (context) => const AboutUs(),
+        '/collections': (context) => const CollectionsPage(),
+        '/collection': (context) => const CollectionPage(),
+        '/print-shack': (context) => const PrintPage(),
+        '/print-shack-about': (context) => const PrintPageAbout(),
+        '/sale': (context) => const SalePage(),
+        '/search': (context) => const SearchPage(),
+        '/account': (context) => const Login(),
+        '/cart': (context) => const CartPage(),
+        '/product': (context) => const ProductPage(),
+        '/payment': (context) => const PayPage(),
+      },
     );
   }
 }
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  void navigateToHome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-  }
-
-  void navigateToProduct(BuildContext context) {
-    Navigator.pushNamed(context, '/product');
-  }
 
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
@@ -44,324 +57,271 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Header
-            Container(
-              height: 100,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  // Top banner
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: const Color(0xFF4d2963),
-                    child: const Text(
-                      'PLACEHOLDER HEADER TEXT',
+      body: LayoutBuilder(builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+        final heroHeight = isMobile ? 400.0 : 600.0;
+
+        Widget productRow(List<Widget> items) {
+          // Use a Wrap so items flow on small screens
+          return Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 12,
+            runSpacing: 12,
+            children: items,
+          );
+        }
+
+        final productWidth = isMobile ? 160.0 : 300.0;
+
+        return SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              // Top banner
+              Navbar(),
+              Container(
+                height: heroHeight,
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    fit: BoxFit.fill,
+                    image: AssetImage("assets/images/pink_hoodie.jpg"),
+                  ),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Essential range - over 20% off!',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: isMobile ? 28 : 60,
+                      ),
                       textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
                     ),
-                  ),
-                  // Main header
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
-                          const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
+                    const SizedBox(height: 8),
+                    Text(
+                      'over 20% off our essential range. come and grab yours while stock lasts',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: isMobile ? 14 : 32,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 12),
+                    ElevatedButton(
+                      onPressed: placeholderCallbackForButtons,
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.deepPurple,
+                      ),
+                      child: const Text(
+                        'browse collection',
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            // Hero Section
-            SizedBox(
-              height: 400,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  // Background image
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.black.withValues(alpha: 0.7),
-                        ),
-                      ),
-                    ),
-                  ),
-                  // Content overlay
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    top: 80,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const Text(
-                          'Placeholder Hero Title',
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            height: 1.2,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          "This is placeholder text for the hero section.",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.white,
-                            height: 1.5,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: placeholderCallbackForButtons,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                            shape: const RoundedRectangleBorder(
-                              borderRadius: BorderRadius.zero,
-                            ),
-                          ),
-                          child: const Text(
-                            'BROWSE PRODUCTS',
-                            style: TextStyle(fontSize: 14, letterSpacing: 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-
-            // Products Section
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.all(40.0),
+              // ESSENTIAL RANGE
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 20),
                 child: Column(
                   children: [
-                    const Text(
-                      'PRODUCTS SECTION',
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Colors.black,
-                        letterSpacing: 1,
-                      ),
+                    Text(
+                      'ESSENTIAL RANGE - OVER 20% OFF!',
+                      style: TextStyle(fontSize: isMobile ? 16 : 20),
                     ),
-                    const SizedBox(height: 48),
-                    GridView.count(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount:
-                          MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                      crossAxisSpacing: 24,
-                      mainAxisSpacing: 48,
-                      children: const [
-                        ProductCard(
-                          title: 'Placeholder Product 1',
-                          price: '£10.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 2',
-                          price: '£15.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 3',
-                          price: '£20.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
-                        ProductCard(
-                          title: 'Placeholder Product 4',
-                          price: '£25.00',
-                          imageUrl:
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                        ),
+                    const SizedBox(height: 8),
+                    productRow([
+                      SizedBox(
+                        width: productWidth,
+                        child: ProductDisplay(
+                            'Limited Edition Essential Zip Hoodies',
+                            '£14.99',
+                            'assets/images/magnet_B.jpg',
+                            'product description'),
+                      ),
+                      SizedBox(
+                        width: productWidth,
+                        child: ProductDisplay(
+                            'Essential T-Shirt',
+                            '£6.99',
+                            'assets/images/magnet_C.jpg',
+                            'product description'),
+                      ),
+                    ]),
+                  ],
+                ),
+              ),
+
+              // SIGNATURE RANGE
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 20),
+                child: Column(
+                  children: [
+                    Text('SIGNATURE RANGE', style: TextStyle(fontSize: isMobile ? 16 : 20)),
+                    const SizedBox(height: 8),
+                    productRow([
+                      SizedBox(
+                        width: productWidth,
+                        child: ProductDisplay(
+                            'Signiture hoodie',
+                            '£32.99',
+                            'assets/images/magnet_B.jpg',
+                            'product description'),
+                      ),
+                      SizedBox(
+                        width: productWidth,
+                        child: ProductDisplay(
+                            'Signiture T-Shirt',
+                            '£14.99',
+                            'assets/images/magnet_B.jpg',
+                            'product description'),
+                      ),
+                    ]),
+                  ],
+                ),
+              ),
+
+              // PORTSMOUTH CITY COLLECTION
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 20),
+                child: Column(
+                  children: [
+                    Text('PORTSMOUTH CITY COLLECTION', style: TextStyle(fontSize: isMobile ? 16 : 20)),
+                    const SizedBox(height: 8),
+                    productRow([
+                      SizedBox(
+                        width: productWidth,
+                        child: ProductDisplay(
+                            'portsmouth city postcard',
+                            '£1.00',
+                            'assets/images/magnet_C.jpg',
+                            'product description'),
+                      ),
+                      SizedBox(
+                        width: productWidth,
+                        child: ProductDisplay(
+                            'portsmouth city magnet',
+                            'sold out',
+                            'assets/images/magnet_C.jpg',
+                            'product description'),
+                      ),
+                    ]),
+                    const SizedBox(height: 12),
+                    productRow([
+                      SizedBox(
+                        width: productWidth,
+                        child: ProductDisplay(
+                            'portsmouth city bookemark',
+                            '£3.00',
+                            'assets/images/magnet_B.jpg',
+                            'product description'),
+                      ),
+                      SizedBox(
+                        width: productWidth,
+                        child: ProductDisplay(
+                            'portsmouth city Notebook',
+                            '£7.50',
+                            'assets/images/magnet_B.jpg',
+                            'product description'),
+                      ),
+                    ]),
+                  ],
+                ),
+              ),
+
+              ElevatedButton(
+                onPressed: placeholderCallbackForButtons,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                ),
+                child: const Text(
+                  'View All',
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+
+              // Our Range images
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 24),
+                child: Column(
+                  children: [
+                    const Text("Our Range"),
+                    const SizedBox(height: 8),
+                    Wrap(
+                      alignment: WrapAlignment.center,
+                      spacing: 12,
+                      runSpacing: 12,
+                      children: [
+                        Image.asset('assets/images/magnet_C.jpg', width: isMobile ? 150 : 300, height: isMobile ? 150 : 300),
+                        Image.asset('assets/images/magnet_A.jpg', width: isMobile ? 150 : 300, height: isMobile ? 150 : 300),
+                        Image.asset('assets/images/magnet_B.jpg', width: isMobile ? 150 : 300, height: isMobile ? 150 : 300),
+                        Image.asset('assets/images/magnet_C.jpg', width: isMobile ? 150 : 300, height: isMobile ? 150 : 300),
                       ],
                     ),
                   ],
                 ),
               ),
-            ),
 
-            // Footer
-            Container(
-              width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+              // personal touch section
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: isMobile ? 12 : 40, horizontal: isMobile ? 12 : 40),
+                child: isMobile
+                    ? Column(
+                        children: [
+                          Column(
+                            children: [
+                              Text('Add a Personal Touch', style: TextStyle(fontSize: isMobile ? 18 : 20)),
+                              const SizedBox(height: 8),
+                              Text(
+                                'First add your item of clothing to your cart then click below to add your text! One line of text contains 10 characters!',
+                                style: TextStyle(fontSize: isMobile ? 12 : 16),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(height: 8),
+                              ElevatedButton(
+                                onPressed: placeholderCallbackForButtons,
+                                style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
+                                child: const Text('CLICK HERE TO ADD TEXT!', style: TextStyle(color: Colors.white)),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 12),
+                          Image.asset('assets/images/print_shack.png', width: isMobile ? 200 : 400, height: isMobile ? 200 : 400),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.fromLTRB(0, 200, 200, 0),
+                            child: Column(
+                              children: [
+                                const Text('Add a Personal Touch', style: TextStyle(fontSize: 20)),
+                                const Text(
+                                  'First add your item of clothing to your cart then click below to add your text! One line of text contains 10 characters!',
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                                ElevatedButton(
+                                  onPressed: placeholderCallbackForButtons,
+                                  style: ElevatedButton.styleFrom(backgroundColor: Colors.deepPurple),
+                                  child: const Text('CLICK HERE TO ADD TEXT!', style: TextStyle(color: Colors.white)),
+                                )
+                              ],
+                            ),
+                          ),
+                          Image.asset('assets/images/print_shack.png', width: 400, height: 400),
+                        ],
+                      ),
               ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
 
-class ProductCard extends StatelessWidget {
-  final String title;
-  final String price;
-  final String imageUrl;
-
-  const ProductCard({
-    super.key,
-    required this.title,
-    required this.price,
-    required this.imageUrl,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, '/product');
-      },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: Image.network(
-              imageUrl,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return Container(
-                  color: Colors.grey[300],
-                  child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
-                  ),
-                );
-              },
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 4),
-              Text(
-                title,
-                style: const TextStyle(fontSize: 14, color: Colors.black),
-                maxLines: 2,
-              ),
-              const SizedBox(height: 4),
-              Text(
-                price,
-                style: const TextStyle(fontSize: 13, color: Colors.grey),
-              ),
+              Footer(),
             ],
           ),
-        ],
-      ),
+        );
+      }),
     );
   }
 }

@@ -1,0 +1,23 @@
+{
+  "name": "PersTypes",
+  "values": [
+    {
+      "name": "oneline",
+      "perstype": "one line",
+      "persprice": "£3.00",
+      "lineoftext": 1
+    },
+    {
+      "name": "twoline",
+      "perstype": "two lines",
+      "persprice": "£4.00",
+      "lineoftext": 2
+    },
+    {
+      "name": "threeline",
+      "perstype": "three lines",
+      "persprice": "£5.00",
+      "lineoftext": 3
+    }
+  ]
+}
