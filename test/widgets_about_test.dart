@@ -1,5 +1,5 @@
 import 'dart:async';
- 
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -20,7 +20,8 @@ void main() {
 
     await tester.pumpWidget(DefaultAssetBundle(
       bundle: bundle,
-      child: MaterialApp(home: Scaffold(body: SizedBox(width: 2000, child: const AboutUs()))),
+      child: MaterialApp(
+          home: Scaffold(body: SizedBox(width: 2000, child: const AboutUs()))),
     ));
 
     await tester.pumpAndSettle();
@@ -40,7 +41,8 @@ class TestAssetBundle extends CachingAssetBundle {
   }
 
   @override
-  Future<T> loadStructuredBinaryData<T>(String key, FutureOr<T> Function(ByteData) loader) async {
+  Future<T> loadStructuredBinaryData<T>(
+      String key, FutureOr<T> Function(ByteData) loader) async {
     final codec = const StandardMessageCodec();
     final dynamic encoded = codec.encodeMessage(<String, List<String>>{});
     if (encoded is ByteData) return loader(encoded);
