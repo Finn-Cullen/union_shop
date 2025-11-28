@@ -17,7 +17,9 @@ class PayPage extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: isMobile ? 300 : 600,
-                child: Center(child: Text('your order has been placed', style: TextStyle(fontSize: isMobile ? 16 : 20))),
+                child: Center(
+                    child: Text('your order has been placed',
+                        style: TextStyle(fontSize: isMobile ? 16 : 20))),
               ),
               const Footer(),
             ],
