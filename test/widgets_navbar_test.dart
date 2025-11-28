@@ -1,5 +1,5 @@
 import 'dart:async';
- 
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -49,7 +49,8 @@ class TestAssetBundle extends CachingAssetBundle {
   }
 
   @override
-  Future<T> loadStructuredBinaryData<T>(String key, FutureOr<T> Function(ByteData) loader) async {
+  Future<T> loadStructuredBinaryData<T>(
+      String key, FutureOr<T> Function(ByteData) loader) async {
     final codec = const StandardMessageCodec();
     final dynamic encoded = codec.encodeMessage(<String, List<String>>{});
     if (encoded is ByteData) return loader(encoded);
@@ -58,5 +59,6 @@ class TestAssetBundle extends CachingAssetBundle {
   }
 
   @override
-  Future<String> loadString(String key, {bool cache = true}) async => throw Exception('no asset');
+  Future<String> loadString(String key, {bool cache = true}) async =>
+      throw Exception('no asset');
 }
