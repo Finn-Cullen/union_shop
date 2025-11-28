@@ -68,135 +68,183 @@ class CollectionPageState extends State<CollectionPage> {
     setState(() {
       cd.buildcoll(context);
     });
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // Header
-            const Navbar(),
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 800;
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              // Header
+              const Navbar(),
 
-            SizedBox(
-              width: double.infinity,
-              height: 100,
-              child: Center(
-                child: Text(csd.collselected),
+              SizedBox(
+                width: double.infinity,
+                height: isMobile ? 80 : 100,
+                child: Center(
+                  child: Text(csd.collselected, style: TextStyle(fontSize: isMobile ? 18 : 20)),
+                ),
               ),
-            ),
-            SizedBox(
-              // text at top
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  const Text('FILTER BY'), // filters
-                  FutureBuilder<List<Map<String, dynamic>>>(
-                    future: _filterMenuData,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const SizedBox(
-                            width: 150,
-                            child: Center(child: CircularProgressIndicator()));
-                      }
-                      if (snapshot.hasError) {
-                        return const Text('Error loading filters');
-                      }
-                      final filterItems = snapshot.data ?? [];
 
-                      return DropdownMenu<Map<String, dynamic>>(
-                        hintText: 'all products',
-                        dropdownMenuEntries: filterItems
-                            .map<DropdownMenuEntry<Map<String, dynamic>>>(
-                                (item) {
-                          return DropdownMenuEntry<Map<String, dynamic>>(
-                            value: item,
-                            label: item['text'] as String,
-                          );
-                        }).toList(),
-                        onSelected: (Map<String, dynamic>? value) {
-                          setState(() {
-                            cd.filter = value?['text'] as String;
-                            cd.buildcoll(context);
-                          });
-                        },
-                      );
-                    },
-                  ),
+              // Filters / Sort - stack vertically on small screens
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                child: isMobile
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const Text('FILTER BY'),
+                          FutureBuilder<List<Map<String, dynamic>>>(
+                            future: _filterMenuData,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                              }
+                              if (snapshot.hasError) {
+                                return const Text('Error loading filters');
+                              }
+                              final filterItems = snapshot.data ?? [];
+                              return DropdownMenu<Map<String, dynamic>>(
+                                hintText: 'all products',
+                                dropdownMenuEntries: filterItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                                  return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['text'] as String);
+                                }).toList(),
+                                onSelected: (Map<String, dynamic>? value) {
+                                  setState(() {
+                                    cd.filter = value?['text'] as String;
+                                    cd.buildcoll(context);
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(height: 8),
+                          const Text('SORT BY'),
+                          FutureBuilder<List<Map<String, dynamic>>>(
+                            future: _sortMenuData,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                              }
+                              if (snapshot.hasError) {
+                                return const Text('Error loading sorts');
+                              }
+                              final sortItems = snapshot.data ?? [];
+                              return DropdownMenu<Map<String, dynamic>>(
+                                hintText: 'Best Selling',
+                                dropdownMenuEntries: sortItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                                  return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['text'] as String);
+                                }).toList(),
+                                onSelected: (Map<String, dynamic>? value) {
+                                  setState(() {
+                                    cd.sortmethod = value?['text'] as String;
+                                    cd.buildcoll(context);
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const Text('FILTER BY'),
+                          FutureBuilder<List<Map<String, dynamic>>>(
+                            future: _filterMenuData,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                              }
+                              if (snapshot.hasError) {
+                                return const Text('Error loading filters');
+                              }
+                              final filterItems = snapshot.data ?? [];
+                              return DropdownMenu<Map<String, dynamic>>(
+                                hintText: 'all products',
+                                dropdownMenuEntries: filterItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                                  return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['text'] as String);
+                                }).toList(),
+                                onSelected: (Map<String, dynamic>? value) {
+                                  setState(() {
+                                    cd.filter = value?['text'] as String;
+                                    cd.buildcoll(context);
+                                  });
+                                },
+                              );
+                            },
+                          ),
 
-                  const Text('SORT BY'),
-                  FutureBuilder<List<Map<String, dynamic>>>(
-                    future: _sortMenuData,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const SizedBox(
-                            width: 150,
-                            child: Center(child: CircularProgressIndicator()));
-                      }
-                      if (snapshot.hasError) {
-                        return const Text('Error loading sorts');
-                      }
-                      final sortItems = snapshot.data ?? [];
-
-                      return DropdownMenu<Map<String, dynamic>>(
-                        hintText: 'Best Selling',
-                        dropdownMenuEntries: sortItems
-                            .map<DropdownMenuEntry<Map<String, dynamic>>>(
-                                (item) {
-                          return DropdownMenuEntry<Map<String, dynamic>>(
-                            value: item,
-                            label: item['text'] as String,
-                          );
-                        }).toList(),
-                        onSelected: (Map<String, dynamic>? value) {
-                          setState(() {
-                            cd.sortmethod = value?['text'] as String;
-                            cd.buildcoll(context);
-                          });
-                        },
-                      );
-                    },
-                  ),
-                ],
+                          const Text('SORT BY'),
+                          FutureBuilder<List<Map<String, dynamic>>>(
+                            future: _sortMenuData,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState == ConnectionState.waiting) {
+                                return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                              }
+                              if (snapshot.hasError) {
+                                return const Text('Error loading sorts');
+                              }
+                              final sortItems = snapshot.data ?? [];
+                              return DropdownMenu<Map<String, dynamic>>(
+                                hintText: 'Best Selling',
+                                dropdownMenuEntries: sortItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                                  return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['text'] as String);
+                                }).toList(),
+                                onSelected: (Map<String, dynamic>? value) {
+                                  setState(() {
+                                    cd.sortmethod = value?['text'] as String;
+                                    cd.buildcoll(context);
+                                  });
+                                },
+                              );
+                            },
+                          ),
+                        ],
+                      ),
               ),
-            ),
 
-            
-            FutureBuilder<List<Map<String, dynamic>>>(
-              future: cd.datalist,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SizedBox(
-                      width: 150,
-                      child: Center(child: CircularProgressIndicator()));
-                }
-                if (snapshot.hasError) {
-                  return const Text('Error loading data');
-                }
-                cd.buildcoll(context);
-                return SizedBox(
-                  width: double.infinity,
-                  child: cd.productlist,
-                );
-              },
-            ),
-            // Footer
-            SizedBox(
-              height: 200,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                      onPressed: backpage, child: const Icon(Icons.arrow_back)),
-                  Text('page${cd.page}'),
-                  ElevatedButton(
-                      onPressed: uppage, child: const Icon(Icons.arrow_forward))
-                ],
+              FutureBuilder<List<Map<String, dynamic>>>(
+                future: cd.datalist,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                  }
+                  if (snapshot.hasError) {
+                    return const Text('Error loading data');
+                  }
+                  cd.buildcoll(context);
+                  return SizedBox(width: double.infinity, child: cd.productlist);
+                },
               ),
-            ),
+              // Footer / pagination
+              SizedBox(
+                height: isMobile ? 120 : 200,
+                child: isMobile
+                    ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                          ElevatedButton(onPressed: backpage, child: const Icon(Icons.arrow_back)),
+                          const SizedBox(width: 12),
+                          Text('page${cd.page}'),
+                          const SizedBox(width: 12),
+                          ElevatedButton(onPressed: uppage, child: const Icon(Icons.arrow_forward)),
+                        ])
+                      ])
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(onPressed: backpage, child: const Icon(Icons.arrow_back)),
+                          Text('page${cd.page}'),
+                          ElevatedButton(onPressed: uppage, child: const Icon(Icons.arrow_forward))
+                        ],
+                      ),
+              ),
 
-            const Footer(),
-          ],
+              const Footer(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
