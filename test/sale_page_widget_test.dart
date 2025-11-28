@@ -62,7 +62,8 @@ class TestAssetBundle extends CachingAssetBundle {
 }
 
 void main() {
-  testWidgets('SalePage shows header, filters and product items', (WidgetTester tester) async {
+  testWidgets('SalePage shows header, filters and product items',
+      (WidgetTester tester) async {
     // set up a larger test window to avoid RenderFlex overflow
     tester.view.physicalSize = const Size(2000, 1200);
     tester.view.devicePixelRatio = 1.0;
@@ -91,6 +92,7 @@ void main() {
     expect(find.text('SORT BY'), findsOneWidget);
 
     // Check that at least one product display label from the page exists
-    expect(find.textContaining('classic sweatshirts - neutral'), findsOneWidget);
+    expect(
+        find.textContaining('classic sweatshirts - neutral'), findsOneWidget);
   });
 }
