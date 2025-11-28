@@ -21,17 +21,22 @@ class ProductDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (Column(children: [
-      Image.asset(
-        path,
-        width: 500,
-        height: 500,
-      ),
-      TextButton(
-        onPressed: () => navtoprod(context),
-        child: Text(name, textAlign: TextAlign.left),
-      ),
-      Text(cost),
-    ]));
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 200;
+      final imageSize = isMobile ? 140.0 : 300.0;
+      return Column(children: [
+        Image.asset(
+          path,
+          width: imageSize,
+          height: imageSize,
+          fit: BoxFit.cover,
+        ),
+        TextButton(
+          onPressed: () => navtoprod(context),
+          child: Text(name, textAlign: TextAlign.left),
+        ),
+        Text(cost),
+      ]);
+    });
   }
 }
