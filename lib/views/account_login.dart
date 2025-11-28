@@ -53,10 +53,13 @@ class Login extends StatelessWidget {
                                 style: TextStyle(color: Colors.white),
                               ),
                             ),
-                            const Text('-------------------------------or-------------------------------'),
+                            const Text(
+                                '-------------------------------or-------------------------------'),
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 12.0),
-                              child: TextField(decoration: InputDecoration(labelText: 'Email')),
+                              child: TextField(
+                                  decoration:
+                                      InputDecoration(labelText: 'Email')),
                             ),
                             ElevatedButton(
                               onPressed: placeholderCallbackForButtons,
@@ -66,7 +69,8 @@ class Login extends StatelessWidget {
                               ),
                               child: const Text(
                                 'continue',
-                                style: TextStyle(color: Color.fromARGB(255, 87, 87, 87)),
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 87, 87, 87)),
                               ),
                             ),
                           ],
