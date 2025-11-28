@@ -30,66 +30,58 @@ class PrintPageState extends State<PrintPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 600;
+      return Scaffold(
         body: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        const Navbar(),
-        Image.asset(
-            'assets/images/print_shack.png',
-            fit: BoxFit.fill),
-        const Text('Personalisation'),
-        Text(pd.persprice),
-        const Text('Tax included'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Navbar(),
+              Image.asset('assets/images/print_shack.png', width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, fit: BoxFit.cover),
+              Text('Personalisation', style: TextStyle(fontSize: isMobile ? 18 : 20)),
+              Text(pd.persprice),
+              const Text('Tax included'),
 
-        FutureBuilder<List<Map<String, dynamic>>>(
-          future: pd.data,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const SizedBox(
-                  width: 150,
-                  child: Center(child: CircularProgressIndicator()));
-            }
-            if (snapshot.hasError) {
-              return const Text('Error loading data');
-            }
-            final sortItems = snapshot.data ?? [];
-            return DropdownMenu<Map<String, dynamic>>(
-              hintText: 'Best Selling',
-              dropdownMenuEntries: sortItems
-                  .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
-                return DropdownMenuEntry<Map<String, dynamic>>(
-                  value: item,
-                  label: item['perstype'] as String,
-                );
-              }).toList(),
-              onSelected: (Map<String, dynamic>? selected) {
-                if (selected != null) {
-                  setState(() {
-                    pd.persprice = selected['persprice'] as String;
-                    pd.persdesc = selected['perstype'] as String;
-                    pd.perslineinpset();
-                  });
-                }
-              },
-            );
-          },
+              FutureBuilder<List<Map<String, dynamic>>>(
+                future: pd.data,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                  }
+                  if (snapshot.hasError) {
+                    return const Text('Error loading data');
+                  }
+                  final sortItems = snapshot.data ?? [];
+                  return DropdownMenu<Map<String, dynamic>>(
+                    hintText: 'Best Selling',
+                    dropdownMenuEntries: sortItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                      return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['perstype'] as String);
+                    }).toList(),
+                    onSelected: (Map<String, dynamic>? selected) {
+                      if (selected != null) {
+                        setState(() {
+                          pd.persprice = selected['persprice'] as String;
+                          pd.persdesc = selected['perstype'] as String;
+                          pd.perslineinpset();
+                        });
+                      }
+                    },
+                  );
+                },
+              ),
+
+              Column(children: pd.perslineinp),
+
+              ElevatedButton(
+                onPressed: () => incrprod('Personalised shirt', pd.persprice.toString(), 'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869', context),
+                child: const Text('add to cart'),
+              ),
+              const Footer(),
+            ],
+          ),
         ),
-
-
-        Column(
-          children: pd.perslineinp,
-        ), // bring this forward with sir, having textfields breaks everything and is an active bug in flutter
-        ElevatedButton(
-            onPressed: () => incrprod(
-                'Personalised shirt',
-                pd.persprice.toString(),
-                'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869',
-                context),
-            child: const Text('add to cart')),
-        const Footer(),
-      ],
-    )));
+      );
+    });
   }
 }
