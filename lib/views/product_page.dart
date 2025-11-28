@@ -159,17 +159,21 @@ class _ProductPageState extends State<ProductPage> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  if (_quantity > 1) setState(() => _quantity--);
+                                  if (_quantity > 1)
+                                    setState(() => _quantity--);
                                 },
                                 icon: const Icon(Icons.remove),
                               ),
-                              Text('$_quantity', style: const TextStyle(fontSize: 18)),
+                              Text('$_quantity',
+                                  style: const TextStyle(fontSize: 18)),
                               IconButton(
                                 onPressed: () => setState(() => _quantity++),
                                 icon: const Icon(Icons.add),
                               ),
-                          const SizedBox(width: 8),
-                          ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
+                              const SizedBox(width: 8),
+                              ElevatedButton(
+                                  onPressed: () => navtocart(context),
+                                  child: const Text('add to cart'))
                             ],
                           )
                         ],
@@ -185,13 +189,16 @@ class _ProductPageState extends State<ProductPage> {
                             },
                             icon: const Icon(Icons.remove),
                           ),
-                          Text('$_quantity', style: const TextStyle(fontSize: 18)),
+                          Text('$_quantity',
+                              style: const TextStyle(fontSize: 18)),
                           IconButton(
                             onPressed: () => setState(() => _quantity++),
                             icon: const Icon(Icons.add),
                           ),
                           const SizedBox(width: 8),
-                          ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
+                          ElevatedButton(
+                              onPressed: () => navtocart(context),
+                              child: const Text('add to cart'))
                         ],
                       ),
               ),
