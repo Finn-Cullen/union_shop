@@ -15,7 +15,8 @@ void main() {
       ]
     });
 
-    binding.defaultBinaryMessenger.setMockMessageHandler('flutter/assets', (message) async {
+    binding.defaultBinaryMessenger.setMockMessageHandler('flutter/assets',
+        (message) async {
       final key = utf8.decode(message!.buffer.asUint8List());
       if (key == 'assets/enums/Collections.json') {
         final bytes = utf8.encode(jsonContent);
