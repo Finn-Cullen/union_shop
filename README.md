@@ -3,6 +3,110 @@
 
 This repository contains a small Flutter app used for teaching/testing purposes (a simple shop UI and repositories). The test-suite includes both unit and widget tests and a helper to compute coverage.
 
+## Product overview
+
+`union_shop` is a compact, modular Flutter sample app that models an online shop. It is structured to show clear separations between UI (views), application models, and repository/business logic. The project is intentionally small so it is easy to read, test, and extend — making it a good learning base for testing Flutter apps and building maintainable UI-driven code.
+
+Key design goals:
+
+- Minimal, readable code: small classes and straightforward widget composition to make behavior easy to follow.
+- Testability-first tweaks: small production changes were made where necessary to make widgets stable under test (for example removing `setState()` calls during `build`).
+- Reusable test patterns: standardized ways to provide assets and window sizing to avoid brittle widget tests.
+
+## Features
+
+- Modular repositories:
+	- `collections`: collection loading, filtering, and sorting logic.
+	- `cart`: cart item handling, subtotal calculation, and cart display widgets.
+	- `search`: search helpers and fallback behavior.
+- Models and UI components:
+	- `ProductDisplay` and `ProductDisplayCart` components for rendering products.
+	- Small `Navbar` / `Footer` components used across views.
+- Tests:
+	- Unit tests for repository and model logic (collection sorting/filtering, cart operations, search fallback).
+	- Widget tests for UI pages and components (product display, collections, cart, about, search, and others).
+	- A helper script, `compute_coverage.py`, parses the `lcov.info` output to compute an overall coverage percentage.
+- Test support utilities/patterns:
+	- `TestAssetBundle` pattern in tests that provides a minimal valid PNG byte buffer and small JSON strings to satisfy `rootBundle` lookups, avoiding AssetImage/manifest failures in tests.
+	- Tests often set the test window size (`tester.binding.window.physicalSizeTestValue` and `devicePixelRatioTestValue`) to prevent `RenderFlex` overflow errors in small synthetic layouts.
+
+## Usage
+
+This section covers common developer tasks: running the app, launching tests, and debugging test failures.
+
+- Run the app locally (choose a device or use the default connected device):
+
+```powershell
+flutter run
+```
+
+- Run the app on a specific device (example: Windows desktop):
+
+```powershell
+flutter devices
+flutter run -d <device-id>
+```
+
+- Run all tests:
+
+```powershell
+flutter test
+```
+
+- Run a single test file (helpful when iterating on a failing test):
+
+```powershell
+flutter test test/sale_page_widget_test.dart
+```
+
+- Run tests with coverage and compute percentage:
+
+```powershell
+flutter test --coverage
+python compute_coverage.py
+```
+
+- Run a single test by name (useful to re-run a failing test):
+
+```powershell
+dart test test/sale_page_widget_test.dart -r expanded --plain-name "SalePage shows header, filters and product items"
+```
+
+- Debugging failing widget tests:
+	- Use a `DefaultAssetBundle` with a `TestAssetBundle` (see tests under `test/`) to provide minimal PNG bytes and JSON for assets.
+	- Increase the virtual test window size inside widget tests when you see `RenderFlex` overflow errors:
+
+```dart
+tester.binding.window.physicalSizeTestValue = const Size(1200, 2000);
+tester.binding.window.devicePixelRatioTestValue = 1.0;
+addTearDown((){
+	tester.binding.window.clearPhysicalSizeTestValue();
+	tester.binding.window.clearDevicePixelRatioTestValue();
+});
+```
+
+- Making widgets testable:
+	- Prefer small testability hooks (injectable flags or image providers) rather than trying to replicate the engine's binary AssetManifest format in tests. This repo adds `SalePage(useProductDisplay: false)` as an example.
+
+## Quick actions
+
+## Quick actions
+
+- Install dependencies:
+
+```powershell
+flutter pub get
+```
+
+- Run the full test suite with coverage and compute the coverage percentage:
+
+```powershell
+flutter test --coverage
+python compute_coverage.py
+```
+
+The project writes an lcov report to `coverage/lcov.info` and the helper `compute_coverage.py` parses that file and prints `LF`, `LH`, and the coverage percent.
+
 ## Quick actions
 
 - Install dependencies:
