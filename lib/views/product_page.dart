@@ -3,15 +3,30 @@ import 'package:union_shop/models/navigation.dart';
 import 'package:union_shop/repositories/cart_data.dart';
 import 'package:union_shop/models/products.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  int _quantity = 1;
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
   void navtocart(BuildContext context) {
-    cd.instcartprod(pd.prodname, pd.prodcost, pd.prodpath);
+    // Add the selected quantity to the cart
+    for (int i = 0; i < _quantity; i++) {
+      cd.instcartprod(pd.prodname, pd.prodcost, pd.prodpath);
+    }
+    // Update product counters and UI
+    setState(() {
+      pd.numofprod = cd.totalnumprod(pd.prodname);
+      pd.carttxt = pd.carttxtbuild();
+    });
     Navigator.pushNamed(context, '/cart');
   }
 
@@ -139,13 +154,43 @@ class ProductPage extends StatelessWidget {
                         children: [
                           pd.carttxt,
                           const SizedBox(height: 8),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  if (_quantity > 1) setState(() => _quantity--);
+                                },
+                                icon: const Icon(Icons.remove),
+                              ),
+                              Text('$_quantity', style: const TextStyle(fontSize: 18)),
+                              IconButton(
+                                onPressed: () => setState(() => _quantity++),
+                                icon: const Icon(Icons.add),
+                              ),
+                          const SizedBox(width: 8),
                           ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
+                            ],
+                          )
                         ],
                       )
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           pd.carttxt,
+                          const SizedBox(width: 12),
+                          IconButton(
+                            onPressed: () {
+                              if (_quantity > 1) setState(() => _quantity--);
+                            },
+                            icon: const Icon(Icons.remove),
+                          ),
+                          Text('$_quantity', style: const TextStyle(fontSize: 18)),
+                          IconButton(
+                            onPressed: () => setState(() => _quantity++),
+                            icon: const Icon(Icons.add),
+                          ),
+                          const SizedBox(width: 8),
                           ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
                         ],
                       ),
