@@ -19,134 +19,144 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     pd.numofprod = cd.totalnumprod(pd.prodname);
     pd.carttxt = pd.carttxtbuild();
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // Header
-            Container(
-              height: 100,
-              color: Colors.white,
-              child: const Column(
-                children: [
-                  // Top banner
-                  Navbar(),
-                  // Main header
-                ],
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 600;
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              // Header
+              Container(
+                height: isMobile ? 80 : 100,
+                color: Colors.white,
+                child: const Column(
+                  children: [
+                    // Top banner
+                    Navbar(),
+                    // Main header
+                  ],
+                ),
               ),
-            ),
 
-            // Product details
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Product image
-                  Container(
-                    height: 300,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      color: Colors.grey[200],
-                    ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        pd.prodpath,
-                        fit: BoxFit.cover,
-                        errorBuilder: (context, error, stackTrace) {
-                          return Container(
-                            color: Colors.grey[300],
-                            child: const Center(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.image_not_supported,
-                                    size: 64,
-                                    color: Colors.grey,
-                                  ),
-                                  SizedBox(height: 8),
-                                  Text(
-                                    'Image unavailable',
-                                    style: TextStyle(color: Colors.grey),
-                                  ),
-                                ],
+              // Product details
+              Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(isMobile ? 12 : 24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Product image
+                    Container(
+                      height: isMobile ? 200 : 300,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: Colors.grey[200],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.asset(
+                          pd.prodpath,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey[300],
+                              child: const Center(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.image_not_supported,
+                                      size: 64,
+                                      color: Colors.grey,
+                                    ),
+                                    SizedBox(height: 8),
+                                    Text(
+                                      'Image unavailable',
+                                      style: TextStyle(color: Colors.grey),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
                     ),
-                  ),
 
-                  const SizedBox(height: 24),
+                    SizedBox(height: isMobile ? 12 : 24),
 
-                  // Product name
-                  Text(
-                    pd.prodname,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+                    // Product name
+                    Text(
+                      pd.prodname,
+                      style: TextStyle(
+                        fontSize: isMobile ? 20 : 28,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 12),
+                    SizedBox(height: isMobile ? 8 : 12),
 
-                  // Product price
-                  Text(
-                    pd.prodcost,
-                    style: const TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4d2963),
+                    // Product price
+                    Text(
+                      pd.prodcost,
+                      style: TextStyle(
+                        fontSize: isMobile ? 18 : 24,
+                        fontWeight: FontWeight.bold,
+                        color: const Color(0xFF4d2963),
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 24),
+                    SizedBox(height: isMobile ? 12 : 24),
 
-                  // Product description
-                  const Text(
-                    'Description',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
+                    // Product description
+                    Text(
+                      'Description',
+                      style: TextStyle(
+                        fontSize: isMobile ? 16 : 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    pd.proddesc,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                      height: 1.5,
+                    SizedBox(height: isMobile ? 6 : 8),
+                    Text(
+                      pd.proddesc,
+                      style: TextStyle(
+                        fontSize: isMobile ? 14 : 16,
+                        color: Colors.grey,
+                        height: 1.5,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
 
-            Center(
-              child: Row(
-                children: [
-                  pd.carttxt,
-                  ElevatedButton(
-                      onPressed: () => navtocart(context),
-                      child: const Text('add to cart'))
-                ],
+              Center(
+                child: isMobile
+                    ? Column(
+                        children: [
+                          pd.carttxt,
+                          const SizedBox(height: 8),
+                          ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
+                        ],
+                      )
+                    : Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          pd.carttxt,
+                          ElevatedButton(onPressed: () => navtocart(context), child: const Text('add to cart'))
+                        ],
+                      ),
               ),
-            ),
 
-            // Footer
-            const Footer()
-          ],
+              // Footer
+              const Footer()
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
