@@ -159,8 +159,9 @@ class _ProductPageState extends State<ProductPage> {
                             children: [
                               IconButton(
                                 onPressed: () {
-                                  if (_quantity > 1)
+                                  if (_quantity > 1){
                                     setState(() => _quantity--);
+                                  }
                                 },
                                 icon: const Icon(Icons.remove),
                               ),
