@@ -50,7 +50,8 @@ class TestAssetBundle extends CachingAssetBundle {
   }
 
   @override
-  Future<T> loadStructuredBinaryData<T>(String key, FutureOr<T> Function(ByteData) loader) async {
+  Future<T> loadStructuredBinaryData<T>(
+      String key, FutureOr<T> Function(ByteData) loader) async {
     final codec = const StandardMessageCodec();
     final dynamic encoded = codec.encodeMessage(<String, List<String>>{});
     if (encoded is ByteData) return loader(encoded);
