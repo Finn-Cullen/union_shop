@@ -20,7 +20,7 @@ class CollectionPageState extends State<CollectionPage> {
   late Future<List<Map<String, dynamic>>> _sortMenuData;
 
   void uppage() {
-    if (cd.page < cd.pagelimit) {
+    if (cd.page <= cd.pagelimit) {
       setState(() {
         cd.page++;
       });
