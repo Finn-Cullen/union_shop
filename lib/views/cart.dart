@@ -34,31 +34,37 @@ class CartPageState extends State<CartPage> {
     setState(() {
       updatepage();
     });
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            // Header
-            const Navbar(),
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 600;
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              // Header
+              const Navbar(),
 
-            const Text(
-              'your cart',
-              style: TextStyle(fontSize: 40),
-            ),
+              Text(
+                'your cart',
+                style: TextStyle(fontSize: isMobile ? 28 : 40),
+              ),
 
-            cd.cart,
+              cd.cart,
 
-            ElevatedButton(
-                onPressed: updatepage, child: const Text('update page')),
+              Wrap(
+                spacing: 12,
+                alignment: WrapAlignment.center,
+                children: [
+                  ElevatedButton(onPressed: updatepage, child: const Text('update page')),
+                  ElevatedButton(onPressed: () => navtopay(context), child: const Text('pay')),
+                ],
+              ),
 
-            ElevatedButton(
-                onPressed: () => navtopay(context), child: const Text('pay')),
-
-            const Footer(),
-          ],
+              const Footer(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
