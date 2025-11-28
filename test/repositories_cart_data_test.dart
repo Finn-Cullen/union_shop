@@ -20,7 +20,8 @@ void main() {
       expect(c.totalnumprod('apple'), 1);
     });
 
-    test('proddisplist returns unique products and subtotal computes correctly', () {
+    test('proddisplist returns unique products and subtotal computes correctly',
+        () {
       final c = CartData();
       c.cartlist.clear();
       c.instcartprod('apple', '£3.50', 'path1');
