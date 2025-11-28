@@ -82,7 +82,8 @@ class CollectionPageState extends State<CollectionPage> {
                 width: double.infinity,
                 height: isMobile ? 80 : 100,
                 child: Center(
-                  child: Text(csd.collselected, style: TextStyle(fontSize: isMobile ? 18 : 20)),
+                  child: Text(csd.collselected,
+                      style: TextStyle(fontSize: isMobile ? 18 : 20)),
                 ),
               ),
 
@@ -97,8 +98,12 @@ class CollectionPageState extends State<CollectionPage> {
                           FutureBuilder<List<Map<String, dynamic>>>(
                             future: _filterMenuData,
                             builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const SizedBox(
+                                    width: 150,
+                                    child: Center(
+                                        child: CircularProgressIndicator()));
                               }
                               if (snapshot.hasError) {
                                 return const Text('Error loading filters');
@@ -106,8 +111,13 @@ class CollectionPageState extends State<CollectionPage> {
                               final filterItems = snapshot.data ?? [];
                               return DropdownMenu<Map<String, dynamic>>(
                                 hintText: 'all products',
-                                dropdownMenuEntries: filterItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
-                                  return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['text'] as String);
+                                dropdownMenuEntries: filterItems.map<
+                                    DropdownMenuEntry<
+                                        Map<String, dynamic>>>((item) {
+                                  return DropdownMenuEntry<
+                                          Map<String, dynamic>>(
+                                      value: item,
+                                      label: item['text'] as String);
                                 }).toList(),
                                 onSelected: (Map<String, dynamic>? value) {
                                   setState(() {
@@ -123,8 +133,12 @@ class CollectionPageState extends State<CollectionPage> {
                           FutureBuilder<List<Map<String, dynamic>>>(
                             future: _sortMenuData,
                             builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const SizedBox(
+                                    width: 150,
+                                    child: Center(
+                                        child: CircularProgressIndicator()));
                               }
                               if (snapshot.hasError) {
                                 return const Text('Error loading sorts');
@@ -132,8 +146,13 @@ class CollectionPageState extends State<CollectionPage> {
                               final sortItems = snapshot.data ?? [];
                               return DropdownMenu<Map<String, dynamic>>(
                                 hintText: 'Best Selling',
-                                dropdownMenuEntries: sortItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
-                                  return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['text'] as String);
+                                dropdownMenuEntries: sortItems.map<
+                                    DropdownMenuEntry<
+                                        Map<String, dynamic>>>((item) {
+                                  return DropdownMenuEntry<
+                                          Map<String, dynamic>>(
+                                      value: item,
+                                      label: item['text'] as String);
                                 }).toList(),
                                 onSelected: (Map<String, dynamic>? value) {
                                   setState(() {
@@ -153,8 +172,12 @@ class CollectionPageState extends State<CollectionPage> {
                           FutureBuilder<List<Map<String, dynamic>>>(
                             future: _filterMenuData,
                             builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const SizedBox(
+                                    width: 150,
+                                    child: Center(
+                                        child: CircularProgressIndicator()));
                               }
                               if (snapshot.hasError) {
                                 return const Text('Error loading filters');
@@ -162,8 +185,13 @@ class CollectionPageState extends State<CollectionPage> {
                               final filterItems = snapshot.data ?? [];
                               return DropdownMenu<Map<String, dynamic>>(
                                 hintText: 'all products',
-                                dropdownMenuEntries: filterItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
-                                  return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['text'] as String);
+                                dropdownMenuEntries: filterItems.map<
+                                    DropdownMenuEntry<
+                                        Map<String, dynamic>>>((item) {
+                                  return DropdownMenuEntry<
+                                          Map<String, dynamic>>(
+                                      value: item,
+                                      label: item['text'] as String);
                                 }).toList(),
                                 onSelected: (Map<String, dynamic>? value) {
                                   setState(() {
@@ -174,13 +202,16 @@ class CollectionPageState extends State<CollectionPage> {
                               );
                             },
                           ),
-
                           const Text('SORT BY'),
                           FutureBuilder<List<Map<String, dynamic>>>(
                             future: _sortMenuData,
                             builder: (context, snapshot) {
-                              if (snapshot.connectionState == ConnectionState.waiting) {
-                                return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const SizedBox(
+                                    width: 150,
+                                    child: Center(
+                                        child: CircularProgressIndicator()));
                               }
                               if (snapshot.hasError) {
                                 return const Text('Error loading sorts');
@@ -188,8 +219,13 @@ class CollectionPageState extends State<CollectionPage> {
                               final sortItems = snapshot.data ?? [];
                               return DropdownMenu<Map<String, dynamic>>(
                                 hintText: 'Best Selling',
-                                dropdownMenuEntries: sortItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
-                                  return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['text'] as String);
+                                dropdownMenuEntries: sortItems.map<
+                                    DropdownMenuEntry<
+                                        Map<String, dynamic>>>((item) {
+                                  return DropdownMenuEntry<
+                                          Map<String, dynamic>>(
+                                      value: item,
+                                      label: item['text'] as String);
                                 }).toList(),
                                 onSelected: (Map<String, dynamic>? value) {
                                   setState(() {
@@ -208,34 +244,49 @@ class CollectionPageState extends State<CollectionPage> {
                 future: cd.datalist,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                    return const SizedBox(
+                        width: 150,
+                        child: Center(child: CircularProgressIndicator()));
                   }
                   if (snapshot.hasError) {
                     return const Text('Error loading data');
                   }
                   cd.buildcoll(context);
-                  return SizedBox(width: double.infinity, child: cd.productlist);
+                  return SizedBox(
+                      width: double.infinity, child: cd.productlist);
                 },
               ),
               // Footer / pagination
               SizedBox(
                 height: isMobile ? 120 : 200,
                 child: isMobile
-                    ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                        Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                          ElevatedButton(onPressed: backpage, child: const Icon(Icons.arrow_back)),
-                          const SizedBox(width: 12),
-                          Text('page${cd.page}'),
-                          const SizedBox(width: 12),
-                          ElevatedButton(onPressed: uppage, child: const Icon(Icons.arrow_forward)),
-                        ])
-                      ])
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                            Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  ElevatedButton(
+                                      onPressed: backpage,
+                                      child: const Icon(Icons.arrow_back)),
+                                  const SizedBox(width: 12),
+                                  Text('page${cd.page}'),
+                                  const SizedBox(width: 12),
+                                  ElevatedButton(
+                                      onPressed: uppage,
+                                      child: const Icon(Icons.arrow_forward)),
+                                ])
+                          ])
                     : Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton(onPressed: backpage, child: const Icon(Icons.arrow_back)),
+                          ElevatedButton(
+                              onPressed: backpage,
+                              child: const Icon(Icons.arrow_back)),
                           Text('page${cd.page}'),
-                          ElevatedButton(onPressed: uppage, child: const Icon(Icons.arrow_forward))
+                          ElevatedButton(
+                              onPressed: uppage,
+                              child: const Icon(Icons.arrow_forward))
                         ],
                       ),
               ),

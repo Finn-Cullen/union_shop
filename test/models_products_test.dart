@@ -5,7 +5,8 @@ import 'package:union_shop/models/products.dart';
 void main() {
   test('Products enum contains expected members and fields', () {
     // basic sanity checks for enum values
-    expect(Products.values.map((e) => e.name).toList(), containsAll(['awaw', 'gagaw', 'EWe']));
+    expect(Products.values.map((e) => e.name).toList(),
+        containsAll(['awaw', 'gagaw', 'EWe']));
 
     final p = Products.a;
     expect(p.cost, isNotEmpty);

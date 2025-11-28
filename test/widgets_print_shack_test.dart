@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:typed_data';
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -11,17 +11,18 @@ void main() {
   testWidgets('Print page shows Personalisation and price', (tester) async {
     final bundle = TestAssetBundle();
 
-    final binding = tester.binding;
-    binding.window.physicalSizeTestValue = const Size(2400, 1600);
-    binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.physicalSize = const Size(2400, 1600);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      binding.window.clearPhysicalSizeTestValue();
-      binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
 
     await tester.pumpWidget(DefaultAssetBundle(
       bundle: bundle,
-      child: MaterialApp(home: Scaffold(body: SizedBox(width: 2000, child: const PrintPage()))),
+      child: MaterialApp(
+          home:
+              Scaffold(body: SizedBox(width: 2000, child: const PrintPage()))),
     ));
 
     await tester.pumpAndSettle();
@@ -41,7 +42,8 @@ class TestAssetBundle extends CachingAssetBundle {
   }
 
   @override
-  Future<T> loadStructuredBinaryData<T>(String key, FutureOr<T> Function(ByteData) loader) async {
+  Future<T> loadStructuredBinaryData<T>(
+      String key, FutureOr<T> Function(ByteData) loader) async {
     final codec = const StandardMessageCodec();
     final dynamic encoded = codec.encodeMessage(<String, List<String>>{});
     if (encoded is ByteData) return loader(encoded);
@@ -52,7 +54,11 @@ class TestAssetBundle extends CachingAssetBundle {
   @override
   Future<String> loadString(String key, {bool cache = true}) async {
     if (key.contains('PersTypes.json')) {
-      return jsonEncode({'values': [{'perstype': 'one line', 'persprice': '£3.00', 'lineoftext': 1}]});
+      return jsonEncode({
+        'values': [
+          {'perstype': 'one line', 'persprice': '£3.00', 'lineoftext': 1}
+        ]
+      });
     }
     return '';
   }

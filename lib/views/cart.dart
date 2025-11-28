@@ -55,8 +55,11 @@ class CartPageState extends State<CartPage> {
                 spacing: 12,
                 alignment: WrapAlignment.center,
                 children: [
-                  ElevatedButton(onPressed: updatepage, child: const Text('update page')),
-                  ElevatedButton(onPressed: () => navtopay(context), child: const Text('pay')),
+                  ElevatedButton(
+                      onPressed: updatepage, child: const Text('update page')),
+                  ElevatedButton(
+                      onPressed: () => navtopay(context),
+                      child: const Text('pay')),
                 ],
               ),
 

@@ -12,9 +12,11 @@ class SearchData {
   Future<void> search(String inp) async {
     final List<Widget> sealist = [];
     try {
-      final jsonString = await rootBundle.loadString('assets/enums/Products.json');
+      final jsonString =
+          await rootBundle.loadString('assets/enums/Products.json');
       final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
-      final values = List<Map<String, dynamic>>.from(jsonData['values'] as List);
+      final values =
+          List<Map<String, dynamic>>.from(jsonData['values'] as List);
 
       final needle = inp.toLowerCase();
       for (final item in values) {

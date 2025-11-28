@@ -36,7 +36,9 @@ class SearchPageState extends State<SearchPage> {
                 child: TextField(controller: controller),
               ),
               const SizedBox(height: 12),
-              ElevatedButton(onPressed: () => searchitm(controller.text), child: const Text('search')),
+              ElevatedButton(
+                  onPressed: () => searchitm(controller.text),
+                  child: const Text('search')),
               SizedBox(height: isMobile ? 40 : 100),
               Column(children: sd.searchlist),
               SizedBox(height: isMobile ? 40 : 100),

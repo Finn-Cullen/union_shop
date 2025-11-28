@@ -4,7 +4,8 @@ import 'package:union_shop/models/prod_display.dart';
 import 'package:union_shop/models/products.dart';
 
 void main() {
-  testWidgets('ProductDisplay.navtoprod sets ProductData and navigates', (tester) async {
+  testWidgets('ProductDisplay.navtoprod sets ProductData and navigates',
+      (tester) async {
     // reset global product data
     pd = ProductData();
 
@@ -17,7 +18,9 @@ void main() {
       home: Scaffold(
         body: Builder(builder: (context) {
           return TextButton(
-            onPressed: () => ProductDisplay('Test Product', '£3.00', 'p', 'desc').navtoprod(context),
+            onPressed: () =>
+                ProductDisplay('Test Product', '£3.00', 'p', 'desc')
+                    .navtoprod(context),
             child: const Text('invoke'),
           );
         }),
@@ -31,7 +34,6 @@ void main() {
     expect(pd.prodname, 'Test Product');
     expect(observer.pushed, isTrue);
   });
-
 }
 
 class _RecordingNavigatorObserver extends NavigatorObserver {

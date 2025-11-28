@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +8,9 @@ import 'package:union_shop/views/cart.dart';
 import 'package:union_shop/repositories/cart_data.dart';
 
 void main() {
-  testWidgets('Cart page displays cart header and product rows when items present', (tester) async {
+  testWidgets(
+      'Cart page displays cart header and product rows when items present',
+      (tester) async {
     // ensure cart empty then add an item
     cd.cartlist = [];
     cd.displist = [];
@@ -18,12 +19,11 @@ void main() {
     final bundle = TestAssetBundle();
 
     // enlarge test window to avoid layout overflows
-    final binding = tester.binding;
-    binding.window.physicalSizeTestValue = const Size(800, 1200);
-    binding.window.devicePixelRatioTestValue = 1.0;
+    tester.view.physicalSize = const Size(800, 1200);
+    tester.view.devicePixelRatio = 1.0;
     addTearDown(() {
-      binding.window.clearPhysicalSizeTestValue();
-      binding.window.clearDevicePixelRatioTestValue();
+      tester.view.resetPhysicalSize();
+      tester.view.resetDevicePixelRatio();
     });
 
     await tester.pumpWidget(DefaultAssetBundle(
@@ -53,7 +53,8 @@ class TestAssetBundle extends CachingAssetBundle {
   }
 
   @override
-  Future<T> loadStructuredBinaryData<T>(String key, FutureOr<T> Function(ByteData) loader) async {
+  Future<T> loadStructuredBinaryData<T>(
+      String key, FutureOr<T> Function(ByteData) loader) async {
     final codec = const StandardMessageCodec();
     final dynamic encoded = codec.encodeMessage(<String, List<String>>{});
     if (encoded is ByteData) return loader(encoded);

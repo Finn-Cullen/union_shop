@@ -8,7 +8,8 @@ void main() {
       cd = CartData();
       cd.cartlist.clear();
 
-      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: SizedBox())));
+      await tester
+          .pumpWidget(const MaterialApp(home: Scaffold(body: SizedBox())));
       final BuildContext context = tester.element(find.byType(SizedBox));
 
       final widget = cd.buildcart(context);
@@ -43,7 +44,8 @@ void main() {
       cd.cartlist.clear();
       cd.instcartprod('apple', '£3.00', 'p');
 
-      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: SizedBox())));
+      await tester
+          .pumpWidget(const MaterialApp(home: Scaffold(body: SizedBox())));
       final BuildContext context = tester.element(find.byType(SizedBox));
 
       final widget = cd.buildcart(context);
@@ -72,4 +74,3 @@ void main() {
     });
   });
 }
-

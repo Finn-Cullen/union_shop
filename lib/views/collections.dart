@@ -13,7 +13,6 @@ class CollectionsPage extends StatefulWidget {
 }
 
 class CollectionsPageState extends State<CollectionsPage> {
-
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
@@ -24,7 +23,7 @@ class CollectionsPageState extends State<CollectionsPage> {
     });
   }
 
-    @override
+  @override
   void initState() {
     super.initState();
     csd.datalist = csd.buildlist();
@@ -44,23 +43,26 @@ class CollectionsPageState extends State<CollectionsPage> {
               SizedBox(
                 // text at top
                 height: isMobile ? 100 : 140,
-                child: Center(child: Text('COLLECTIONS', style: TextStyle(fontSize: isMobile ? 28 : 60))),
+                child: Center(
+                    child: Text('COLLECTIONS',
+                        style: TextStyle(fontSize: isMobile ? 28 : 60))),
               ),
-
               FutureBuilder<List<Map<String, dynamic>>>(
                 future: csd.datalist,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                    return const SizedBox(
+                        width: 150,
+                        child: Center(child: CircularProgressIndicator()));
                   }
                   if (snapshot.hasError) {
                     return const Text('Error loading data');
                   }
                   csd.buildcoll(context);
-                  return SizedBox(width: double.infinity, child: csd.collections);
+                  return SizedBox(
+                      width: double.infinity, child: csd.collections);
                 },
               ),
-
               const Footer(),
             ],
           ),
