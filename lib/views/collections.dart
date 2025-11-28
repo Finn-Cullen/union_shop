@@ -33,42 +33,39 @@ class CollectionsPageState extends State<CollectionsPage> {
   @override
   Widget build(BuildContext context) {
     csd.buildcoll(context);
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 600;
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              const Navbar(),
+              SizedBox(
+                // text at top
+                height: isMobile ? 100 : 140,
+                child: Center(child: Text('COLLECTIONS', style: TextStyle(fontSize: isMobile ? 28 : 60))),
+              ),
 
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            const Navbar(),
-            const SizedBox(
-              // text at top
-              height: 140,
-              child: Text('COLLECTIONS', style: TextStyle(fontSize: 60)),
-            ),
+              FutureBuilder<List<Map<String, dynamic>>>(
+                future: csd.datalist,
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                  }
+                  if (snapshot.hasError) {
+                    return const Text('Error loading data');
+                  }
+                  csd.buildcoll(context);
+                  return SizedBox(width: double.infinity, child: csd.collections);
+                },
+              ),
 
-            FutureBuilder<List<Map<String, dynamic>>>(
-              future: csd.datalist,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const SizedBox(
-                      width: 150,
-                      child: Center(child: CircularProgressIndicator()));
-                }
-                if (snapshot.hasError) {
-                  return const Text('Error loading data');
-                }
-                csd.buildcoll(context);
-                return SizedBox(
-                  width: double.infinity,
-                  child: csd.collections,
-                );
-              },
-            ),
-
-            const Footer(),
-          ],
+              const Footer(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
