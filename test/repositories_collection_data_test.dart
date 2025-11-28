@@ -10,7 +10,10 @@ void main() {
       final p1 = ProductDisplay('A', '£1.00', 'p', 'd');
       final p2 = ProductDisplay('B', '£2.00', 'p', 'd');
       final products = [p1, p2];
-      final tags = [ ['clothing'], ['other'] ];
+      final tags = [
+        ['clothing'],
+        ['other']
+      ];
       final filtered = cd.filterproducts(products, tags);
       expect(filtered.length, 1);
       expect(filtered.first, p1);
@@ -21,7 +24,10 @@ void main() {
       final p1 = ProductDisplay('A', '£1.00', 'p', 'd');
       final p2 = ProductDisplay('B', '£2.00', 'p', 'd');
       final products = [p1, p2];
-      final collLists = [ ['UPSU bears'], ['Other'] ];
+      final collLists = [
+        ['UPSU bears'],
+        ['Other']
+      ];
       // csd.collselected default is 'UPSU bears'
       final sorted = cd.sortforcollections(products, collLists);
       expect(sorted.length, 1);
