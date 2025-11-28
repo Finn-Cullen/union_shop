@@ -32,7 +32,8 @@ void main() {
       expect(find.text('A test description'), findsOneWidget);
     });
 
-    testWidgets('quantity controls and add to cart button exist', (tester) async {
+    testWidgets('quantity controls and add to cart button exist',
+        (tester) async {
       // ensure consistent window for this test
       tester.view.physicalSize = const Size(1280, 1024);
       tester.view.devicePixelRatio = 1.0;
