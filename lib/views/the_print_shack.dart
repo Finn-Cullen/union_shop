@@ -38,16 +38,21 @@ class PrintPageState extends State<PrintPage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               const Navbar(),
-              Image.asset('assets/images/print_shack.png', width: isMobile ? 200 : 400, height: isMobile ? 200 : 400, fit: BoxFit.cover),
-              Text('Personalisation', style: TextStyle(fontSize: isMobile ? 18 : 20)),
+              Image.asset('assets/images/print_shack.png',
+                  width: isMobile ? 200 : 400,
+                  height: isMobile ? 200 : 400,
+                  fit: BoxFit.cover),
+              Text('Personalisation',
+                  style: TextStyle(fontSize: isMobile ? 18 : 20)),
               Text(pd.persprice),
               const Text('Tax included'),
-
               FutureBuilder<List<Map<String, dynamic>>>(
                 future: pd.data,
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                    return const SizedBox(
+                        width: 150,
+                        child: Center(child: CircularProgressIndicator()));
                   }
                   if (snapshot.hasError) {
                     return const Text('Error loading data');
@@ -55,8 +60,10 @@ class PrintPageState extends State<PrintPage> {
                   final sortItems = snapshot.data ?? [];
                   return DropdownMenu<Map<String, dynamic>>(
                     hintText: 'one line',
-                    dropdownMenuEntries: sortItems.map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
-                      return DropdownMenuEntry<Map<String, dynamic>>(value: item, label: item['perstype'] as String);
+                    dropdownMenuEntries: sortItems
+                        .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                      return DropdownMenuEntry<Map<String, dynamic>>(
+                          value: item, label: item['perstype'] as String);
                     }).toList(),
                     onSelected: (Map<String, dynamic>? selected) {
                       if (selected != null) {
@@ -70,11 +77,13 @@ class PrintPageState extends State<PrintPage> {
                   );
                 },
               ),
-
               Column(children: pd.perslineinp),
-
               ElevatedButton(
-                onPressed: () => incrprod('Personalised shirt', pd.persprice.toString(), 'assets/images/pink_hoodie.jpg', context),
+                onPressed: () => incrprod(
+                    'Personalised shirt',
+                    pd.persprice.toString(),
+                    'assets/images/pink_hoodie.jpg',
+                    context),
                 child: const Text('add to cart'),
               ),
               const Footer(),
