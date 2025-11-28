@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/about.dart';
-import 'package:union_shop/account_login.dart';
-import 'package:union_shop/cart.dart';
-import 'package:union_shop/collections.dart';
-import 'package:union_shop/collection.dart';
-import 'package:union_shop/sale.dart';
-import 'package:union_shop/product_page.dart';
-import 'package:union_shop/payment.dart';
-import 'package:union_shop/the_print_shack.dart';
-import 'package:union_shop/print_shack_about.dart';
-import 'package:union_shop/search.dart';
+import 'package:union_shop/views/about.dart';
+import 'package:union_shop/views/account_login.dart';
+import 'package:union_shop/views/cart.dart';
+import 'package:union_shop/views/collections.dart';
+import 'package:union_shop/views/collection.dart';
+import 'package:union_shop/views/sale.dart';
+import 'package:union_shop/views/product_page.dart';
+import 'package:union_shop/views/payment.dart';
+import 'package:union_shop/views/the_print_shack.dart';
+import 'package:union_shop/views/print_shack_about.dart';
+import 'package:union_shop/views/search.dart';
 import 'package:union_shop/navigation.dart';
 import 'package:union_shop/prod_display.dart';
 
