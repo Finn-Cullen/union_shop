@@ -18,31 +18,6 @@ class CollectionData {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  Widget orderrowanscolumns(List<Widget> list) {
-    List<Widget> prod = []; // max number of rows is 3
-    for (int i = 0; i < list.length;) {
-      // this function turns a list of items into a set of rows in a column
-      List<Widget> disp = [];
-      disp.add(list[i]);
-      if (i + 1 < list.length) {
-        disp.add(list[i +
-            1]); // this prevents it from grabbing index positions that are out of bounds
-      }
-      if (i + 2 < list.length) {
-        disp.add(list[i + 2]);
-      }
-      Widget widg = Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: disp,
-      );
-      i += 3;
-      prod.add(widg);
-    }
-
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: prod);
-  }
-
   List<ProductDisplay> sortforcollections(
       List<ProductDisplay> dlist, List<dynamic> clist) {
     List<ProductDisplay> retlist = [];
@@ -154,7 +129,8 @@ class CollectionData {
     } // filters
     listofproducts = sortproducts(listofproducts, featlist, bestlist); // sorts
     pagelimit = (listofproducts.length / 9).ceil();
-    productlist = orderrowanscolumns(listofproducts);
+    productlist = Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: listofproducts);
 
     
   }
