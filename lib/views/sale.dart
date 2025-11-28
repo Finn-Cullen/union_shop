@@ -5,7 +5,9 @@ import 'package:union_shop/models/navigation.dart';
 import 'package:union_shop/models/prod_display.dart';
 
 class SalePage extends StatefulWidget {
-  const SalePage({super.key});
+  final bool useProductDisplay;
+
+  const SalePage({super.key, this.useProductDisplay = true});
 
   @override
   State<SalePage> createState() => _SalePageState();
@@ -159,16 +161,34 @@ class _SalePageState extends State<SalePage> {
                   spacing: 12,
                   runSpacing: 12,
                   children: [
-                    ProductDisplay('A5 notepad', 'sold out', 'assets/images/magnet_B.jpg', 'product description'),
-                    ProductDisplay('classic sweatshirts - neutral', '£̶4̶2̶.̶0̶0̶   £10.99', 'assets/images/magnet_B.jpg', 'product description'),
-                    ProductDisplay('recycled notebook', '£̶1̶2̶.̶0̶0̶   £1.80', 'assets/images/magnet_B.jpg', 'product description'),
-                    ProductDisplay('iphone 5/6 charge & sunc cable', '£̶4̶2̶.̶0̶0̶  £1.50', 'assets/images/magnet_B.jpg', 'product description'),
-                    ProductDisplay('type C charge and sync cable', '£̶4̶2̶.̶0̶0̶   £1.50', 'assets/images/magnet_B.jpg', 'product description'),
-                    ProductDisplay('USB to USB charge & sync cable', '£̶1̶2̶.̶0̶0̶   £1.50', 'assets/images/magnet_B.jpg', 'product description'),
-                    ProductDisplay('Dimple Pop Fidget Keyring', '£̶3̶.̶0̶0̶   £0.99', 'assets/images/magnet_B.jpg', 'product description'),
-                    ProductDisplay('Nike Academy 18 tech pants', '£̶4̶2̶.̶0̶0̶   £7.00', 'assets/images/magnet_B.jpg', 'product description'),
-                    ProductDisplay('Nike Academy 18 tech pants (M)', 'sold out', 'assets/images/magnet_B.jpg', 'product description'),
-                  ],
+                    widget.useProductDisplay
+                      ? ProductDisplay('A5 notepad', 'sold out', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('A5 notepad'), Text('sold out')]),
+                    widget.useProductDisplay
+                      ? ProductDisplay('classic sweatshirts - neutral', '£̶4̶2̶.̶0̶0̶   £10.99', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('classic sweatshirts - neutral'), Text('£10.99')]),
+                    widget.useProductDisplay
+                      ? ProductDisplay('recycled notebook', '£̶1̶2̶.̶0̶0̶   £1.80', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('recycled notebook'), Text('£1.80')]),
+                    widget.useProductDisplay
+                      ? ProductDisplay('iphone 5/6 charge & sunc cable', '£̶4̶2̶.̶0̶0̶  £1.50', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('iphone 5/6 charge & sunc cable'), Text('£1.50')]),
+                    widget.useProductDisplay
+                      ? ProductDisplay('type C charge and sync cable', '£̶4̶2̶.̶0̶0̶   £1.50', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('type C charge and sync cable'), Text('£1.50')]),
+                    widget.useProductDisplay
+                      ? ProductDisplay('USB to USB charge & sync cable', '£̶1̶2̶.̶0̶0̶   £1.50', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('USB to USB charge & sync cable'), Text('£1.50')]),
+                    widget.useProductDisplay
+                      ? ProductDisplay('Dimple Pop Fidget Keyring', '£̶3̶.̶0̶0̶   £0.99', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('Dimple Pop Fidget Keyring'), Text('£0.99')]),
+                    widget.useProductDisplay
+                      ? ProductDisplay('Nike Academy 18 tech pants', '£̶4̶2̶.̶0̶0̶   £7.00', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('Nike Academy 18 tech pants'), Text('£7.00')]),
+                    widget.useProductDisplay
+                      ? ProductDisplay('Nike Academy 18 tech pants (M)', 'sold out', 'assets/images/magnet_B.jpg', 'product description')
+                      : Column(children: [Text('Nike Academy 18 tech pants (M)'), Text('sold out')]),
+                    ],
                 ),
               ),
               SizedBox(
