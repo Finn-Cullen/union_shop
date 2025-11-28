@@ -192,9 +192,8 @@ class ProductDisplayCartState extends State<ProductDisplayCart> {
 
   @override
   Widget build(BuildContext context) {
-    setState(() {
-      total = cd.totalnumprod(name);
-    });
+    // update total from global cart data without calling setState() during build
+    total = cd.totalnumprod(name);
     return (SizedBox(
         child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
