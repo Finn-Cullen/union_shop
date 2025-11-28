@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/navigation.dart';
-import 'package:union_shop/collections_data.dart';
+import 'package:union_shop/models/navigation.dart';
+import 'package:union_shop/repositories/collections_data.dart';
 
 class CollectionsPage extends StatefulWidget {
   // needs to be statefull

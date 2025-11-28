@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:union_shop/navigation.dart';
-import 'package:union_shop/prod_display.dart';
+import 'package:union_shop/models/navigation.dart';
+import 'package:union_shop/models/prod_display.dart';
 
 class SalePage extends StatefulWidget {
   const SalePage({super.key});

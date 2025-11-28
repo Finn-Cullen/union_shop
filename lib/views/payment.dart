@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/navigation.dart';
+import 'package:union_shop/models/navigation.dart';
 
 class PayPage extends StatelessWidget {
   const PayPage({super.key});
