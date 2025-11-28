@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/products.dart';
+import 'package:union_shop/models/products.dart';
 
 class ProductDisplay extends StatelessWidget {
   final String name;

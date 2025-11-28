@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/products.dart';
-import 'package:union_shop/prod_display.dart';
+import 'package:union_shop/models/products.dart';
+import 'package:union_shop/models/prod_display.dart';
 
 class SearchData {
   List<Widget> searchlist = [];

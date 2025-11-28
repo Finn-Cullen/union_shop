@@ -1,5 +1,5 @@
-import 'package:union_shop/prod_display.dart';
-import 'package:union_shop/collections_data.dart';
+import 'package:union_shop/models/prod_display.dart';
+import 'package:union_shop/repositories/collections_data.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter/services.dart';
