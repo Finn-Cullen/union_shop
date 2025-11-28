@@ -8,6 +8,7 @@ class CollectionsData {
   String collselected = 'UPSU bears';
   String colltitletext = '';
   Widget collections = Text('No collections found');
+  late Future<List<Map<String, dynamic>>> datalist;
 
   Widget orderrowanscolumns(List<Widget> list){
     List<Widget> prod = [];
@@ -30,6 +31,7 @@ class CollectionsData {
   void buildcoll(BuildContext context) async {
     List<Widget> listofcollections = [];
     final map = await buildlist();
+    datalist = buildlist();
     final collnames = map.map((v) => v["collname"]).toList();
     final paths = map.map((v) => v["displaypath"]).toList();
 

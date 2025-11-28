@@ -18,7 +18,7 @@ class CollectionPage extends StatefulWidget {
 class CollectionPageState extends State<CollectionPage> {
   late Future<List<Map<String, dynamic>>> _filterMenuData;
   late Future<List<Map<String, dynamic>>> _sortMenuData;
-  
+
   void uppage() {
     if (cd.page < 2) {
       setState(() {
@@ -46,22 +46,25 @@ class CollectionPageState extends State<CollectionPage> {
     super.initState();
     _filterMenuData = _loadFilterMenuJson();
     _sortMenuData = _loadSortMenuJson();
+    cd.datalist = cd.buildlist();
   }
 
   Future<List<Map<String, dynamic>>> _loadFilterMenuJson() async {
-    final jsonString = await rootBundle.loadString('assets/enums/FilterMenu.json');
+    final jsonString =
+        await rootBundle.loadString('assets/enums/FilterMenu.json');
     final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
     return List<Map<String, dynamic>>.from(jsonData['values'] as List);
   }
 
   Future<List<Map<String, dynamic>>> _loadSortMenuJson() async {
-    final jsonString = await rootBundle.loadString('assets/enums/SortMenu.json');
+    final jsonString =
+        await rootBundle.loadString('assets/enums/SortMenu.json');
     final jsonData = jsonDecode(jsonString) as Map<String, dynamic>;
     return List<Map<String, dynamic>>.from(jsonData['values'] as List);
   }
 
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     setState(() {
       cd.buildcoll(context);
     });
@@ -90,18 +93,20 @@ class CollectionPageState extends State<CollectionPage> {
                     future: _filterMenuData,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                        return const SizedBox(
+                            width: 150,
+                            child: Center(child: CircularProgressIndicator()));
                       }
                       if (snapshot.hasError) {
                         return const Text('Error loading filters');
                       }
                       final filterItems = snapshot.data ?? [];
 
-
                       return DropdownMenu<Map<String, dynamic>>(
                         hintText: 'all products',
                         dropdownMenuEntries: filterItems
-                            .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                            .map<DropdownMenuEntry<Map<String, dynamic>>>(
+                                (item) {
                           return DropdownMenuEntry<Map<String, dynamic>>(
                             value: item,
                             label: item['text'] as String,
@@ -114,8 +119,6 @@ class CollectionPageState extends State<CollectionPage> {
                           });
                         },
                       );
-
-
                     },
                   ),
 
@@ -124,18 +127,20 @@ class CollectionPageState extends State<CollectionPage> {
                     future: _sortMenuData,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const SizedBox(width: 150, child: Center(child: CircularProgressIndicator()));
+                        return const SizedBox(
+                            width: 150,
+                            child: Center(child: CircularProgressIndicator()));
                       }
                       if (snapshot.hasError) {
                         return const Text('Error loading sorts');
                       }
                       final sortItems = snapshot.data ?? [];
 
-
                       return DropdownMenu<Map<String, dynamic>>(
                         hintText: 'Best Selling',
                         dropdownMenuEntries: sortItems
-                            .map<DropdownMenuEntry<Map<String, dynamic>>>((item) {
+                            .map<DropdownMenuEntry<Map<String, dynamic>>>(
+                                (item) {
                           return DropdownMenuEntry<Map<String, dynamic>>(
                             value: item,
                             label: item['text'] as String,
@@ -154,9 +159,24 @@ class CollectionPageState extends State<CollectionPage> {
               ),
             ),
 
-            SizedBox(
-              width: double.infinity,
-              child: cd.productlist,
+            
+            FutureBuilder<List<Map<String, dynamic>>>(
+              future: cd.datalist,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const SizedBox(
+                      width: 150,
+                      child: Center(child: CircularProgressIndicator()));
+                }
+                if (snapshot.hasError) {
+                  return const Text('Error loading data');
+                }
+                cd.buildcoll(context);
+                return SizedBox(
+                  width: double.infinity,
+                  child: cd.productlist,
+                );
+              },
             ),
             // Footer
             SizedBox(
@@ -172,8 +192,6 @@ class CollectionPageState extends State<CollectionPage> {
                 ],
               ),
             ),
-            
-            ElevatedButton(onPressed: () => reloadpage(context), child: Text('Reload Page')),
 
             const Footer(),
           ],

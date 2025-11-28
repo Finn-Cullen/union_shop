@@ -11,6 +11,7 @@ class CollectionData {
   String sortmethod = 'best selling';
   int page = 1;
   late Widget productlist = const Column();
+  late Future<List<Map<String, dynamic>>> datalist;
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -122,6 +123,7 @@ class CollectionData {
     List<ProductDisplay> listofproducts = [];
 
     final map = await buildlist();
+    datalist = buildlist();
     final name = map.map((v) => v["name"]).toList();
     final cost = map.map((v) => v["cost"]).toList();
     final path = map.map((v) => v["path"]).toList();
@@ -151,6 +153,8 @@ class CollectionData {
     } // filters
     listofproducts = sortproducts(listofproducts, featlist, bestlist); // sorts
     productlist = orderrowanscolumns(listofproducts);
+
+    
   }
 
   Future<List<Map<String, dynamic>>> buildlist() async {

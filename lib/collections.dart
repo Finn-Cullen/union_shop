@@ -24,6 +24,12 @@ class CollectionsPageState extends State<CollectionsPage> {
     });
   }
 
+    @override
+  void initState() {
+    super.initState();
+    csd.datalist = csd.buildlist();
+  }
+
   @override
   Widget build(BuildContext context) {
     csd.buildcoll(context);
@@ -39,11 +45,26 @@ class CollectionsPageState extends State<CollectionsPage> {
               height: 140,
               child: Text('COLLECTIONS', style: TextStyle(fontSize: 60)),
             ),
-            SizedBox(
-                // products
-                child: csd.collections),
 
-            ElevatedButton(onPressed: () => reloadpage(context), child: Text('Reload Page')),
+            FutureBuilder<List<Map<String, dynamic>>>(
+              future: csd.datalist,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const SizedBox(
+                      width: 150,
+                      child: Center(child: CircularProgressIndicator()));
+                }
+                if (snapshot.hasError) {
+                  return const Text('Error loading data');
+                }
+                csd.buildcoll(context);
+                return SizedBox(
+                  width: double.infinity,
+                  child: csd.collections,
+                );
+              },
+            ),
+
             const Footer(),
           ],
         ),
