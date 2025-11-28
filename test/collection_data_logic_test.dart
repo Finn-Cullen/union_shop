@@ -54,12 +54,14 @@ void main() {
 
     // test low to high
     cdLocal.sortmethod = 'low to high';
-    final resLow = cdLocal.sortproducts(List.from(list), [false, false, false], [1, 2, 3]);
+    final resLow =
+        cdLocal.sortproducts(List.from(list), [false, false, false], [1, 2, 3]);
     expect(resLow.first.name, 'b');
 
     // test best selling ordering uses bestlist when sortmethod is best selling
     cdLocal.sortmethod = 'best selling';
-    final resBest = cdLocal.sortproducts(List.from(list), [false, false, false], [2, 3, 1]);
+    final resBest =
+        cdLocal.sortproducts(List.from(list), [false, false, false], [2, 3, 1]);
     // 'b' has best 3 so should be first if ordering applied
     expect(resBest.first.name, 'b');
   });
