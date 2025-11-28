@@ -6,7 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/repositories/collections_data.dart';
 
 void main() {
-  testWidgets('buildcoll sets collections to Column when asset available', (tester) async {
+  testWidgets('buildcoll sets collections to Column when asset available',
+      (tester) async {
     final binding = TestWidgetsFlutterBinding.ensureInitialized();
 
     final jsonContent = jsonEncode({
@@ -16,7 +17,8 @@ void main() {
       ]
     });
 
-    binding.defaultBinaryMessenger.setMockMessageHandler('flutter/assets', (message) async {
+    binding.defaultBinaryMessenger.setMockMessageHandler('flutter/assets',
+        (message) async {
       final key = utf8.decode(message!.buffer.asUint8List());
       if (key == 'assets/enums/Collections.json') {
         final bytes = utf8.encode(jsonContent);
@@ -26,7 +28,8 @@ void main() {
     });
 
     // Pump a MaterialApp to get a valid BuildContext
-    await tester.pumpWidget(const MaterialApp(home: Scaffold(body: SizedBox())));
+    await tester
+        .pumpWidget(const MaterialApp(home: Scaffold(body: SizedBox())));
     final BuildContext context = tester.element(find.byType(SizedBox));
 
     final cs = CollectionsData();
