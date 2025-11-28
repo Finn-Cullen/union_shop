@@ -11,21 +11,7 @@ class CollectionsData {
   late Future<List<Map<String, dynamic>>> datalist;
 
   Widget orderrowanscolumns(List<Widget> list){
-    List<Widget> prod = [];
-    for (int i = 0; i < list.length;){ // this function turns a list of items into a set of rows in a column
-      Widget hold = Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          list[i],
-          list[i+1],
-          list[i+2],
-        ],
-      );
-      i += 3;
-      prod.add(hold);
-    }
-
-    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: prod,);
+    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: list,);
   }
 
   void buildcoll(BuildContext context) async {
