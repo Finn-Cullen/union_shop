@@ -10,8 +10,11 @@ class CollectionsData {
   Widget collections = Text('No collections found');
   late Future<List<Map<String, dynamic>>> datalist;
 
-  Widget orderrowanscolumns(List<Widget> list){
-    return Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: list,);
+  Widget orderrowanscolumns(List<Widget> list) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: list,
+    );
   }
 
   void buildcoll(BuildContext context) async {
@@ -21,13 +24,13 @@ class CollectionsData {
     final collnames = map.map((v) => v["collname"]).toList();
     final paths = map.map((v) => v["displaypath"]).toList();
 
-    for(int i = 0; i < collnames.length; i++){
+    for (int i = 0; i < collnames.length; i++) {
       listofcollections.add(DisplayCollection(collnames[i], paths[i]));
     }
 
     collections = orderrowanscolumns(listofcollections);
   }
-   
+
   Future<List<Map<String, dynamic>>> buildlist() async {
     final jsonstring = await loadJson();
     final data = jsonDecode(jsonstring)['values'];
@@ -39,31 +42,30 @@ class CollectionsData {
   }
 }
 
-
-
-class DisplayCollection extends StatelessWidget{
+class DisplayCollection extends StatelessWidget {
   final String name;
   final String path;
 
-  const DisplayCollection(this.name, this.path,{super.key});
+  const DisplayCollection(this.name, this.path, {super.key});
 
-  void nav(BuildContext context, String coll){
+  void nav(BuildContext context, String coll) {
     csd.collselected = coll;
     Navigator.pushNamed(context, '/collection');
   }
 
   @override
-  Widget build(BuildContext context){
-    return(
-      Container(
-        width : 300,
-        height : 300,
-        decoration: BoxDecoration(
-          image: DecorationImage(fit:BoxFit.fill ,image: AssetImage(path)),
-        ),
-        child: Center(child: TextButton(onPressed: () => nav(context,name), child: Text(name,style: const TextStyle(color: Colors.white,fontSize: 20)))),
-        
-      )
-    );
+  Widget build(BuildContext context) {
+    return (Container(
+      width: 300,
+      height: 300,
+      decoration: BoxDecoration(
+        image: DecorationImage(fit: BoxFit.fill, image: AssetImage(path)),
+      ),
+      child: Center(
+          child: TextButton(
+              onPressed: () => nav(context, name),
+              child: Text(name,
+                  style: const TextStyle(color: Colors.white, fontSize: 20)))),
+    ));
   }
 }
