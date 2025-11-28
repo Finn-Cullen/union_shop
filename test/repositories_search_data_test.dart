@@ -4,7 +4,8 @@ import 'package:union_shop/models/prod_display.dart';
 
 void main() {
   group('SearchData', () {
-    test('search falls back to Products enum when asset loading fails', () async {
+    test('search falls back to Products enum when asset loading fails',
+        () async {
       final s = SearchData();
 
       // Use a substring that appears in the enum names (e.g. 'aw' matches 'awaw' and 'gagaw')
