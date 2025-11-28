@@ -10,44 +10,58 @@ class AboutUs extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Navbar(),
-            SizedBox(
-              width: double.infinity,
-              height: 550,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  const Text(
-                    'About us',
-                    style: TextStyle(fontSize: 30),
-                  ),
-                  const Text('Welcome to the Union Shop!'),
-                  Row(
-                    children: [
-                      const Text(
-                          'We’re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive'),
-                      TextButton(
-                          onPressed: placeholderCallbackForButtons,
-                          child: const Text('personalisation service!'))
-                    ],
-                  ),
-                  const Text(
-                      'All online purchases are available for delivery or instore collection!'),
-                  const Text(
-                      'We hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don’t hesitate to contact us at hello@upsu.net.'),
-                  const Text('Happy shopping!'),
-                  const Text('The Union Shop & Reception Team​​​​​​​​​'),
-                ],
+    return LayoutBuilder(builder: (context, constraints) {
+      final isMobile = constraints.maxWidth < 600;
+      return Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Navbar(),
+              SizedBox(
+                width: double.infinity,
+                height: isMobile ? 360 : 550,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'About us',
+                      style: TextStyle(fontSize: isMobile ? 22 : 30),
+                    ),
+                    const Text('Welcome to the Union Shop!'),
+                    isMobile
+                        ? Column(
+                            children: [
+                              const Text(
+                                  'We’re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive'),
+                              TextButton(
+                                  onPressed: placeholderCallbackForButtons,
+                                  child: const Text('personalisation service!'))
+                            ],
+                          )
+                        : Row(
+                            children: [
+                              const Expanded(
+                                  child: Text(
+                                      'We’re dedicated to giving you the very best University branded products, with a range of clothing and merchandise available to shop all year round! We even offer an exclusive')),
+                              TextButton(
+                                  onPressed: placeholderCallbackForButtons,
+                                  child: const Text('personalisation service!'))
+                            ],
+                          ),
+                    const Text(
+                        'All online purchases are available for delivery or instore collection!'),
+                    const Text(
+                        'We hope you enjoy our products as much as we enjoy offering them to you. If you have any questions or comments, please don’t hesitate to contact us at hello@upsu.net.'),
+                    const Text('Happy shopping!'),
+                    const Text('The Union Shop & Reception Team​​​​​​​​​'),
+                  ],
+                ),
               ),
-            ),
-            const Footer(),
-          ],
+              const Footer(),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+    });
   }
 }
