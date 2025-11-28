@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
- 
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,7 +8,9 @@ import 'package:union_shop/views/cart.dart';
 import 'package:union_shop/repositories/cart_data.dart';
 
 void main() {
-  testWidgets('Cart page displays cart header and product rows when items present', (tester) async {
+  testWidgets(
+      'Cart page displays cart header and product rows when items present',
+      (tester) async {
     // ensure cart empty then add an item
     cd.cartlist = [];
     cd.displist = [];
@@ -52,7 +53,8 @@ class TestAssetBundle extends CachingAssetBundle {
   }
 
   @override
-  Future<T> loadStructuredBinaryData<T>(String key, FutureOr<T> Function(ByteData) loader) async {
+  Future<T> loadStructuredBinaryData<T>(
+      String key, FutureOr<T> Function(ByteData) loader) async {
     final codec = const StandardMessageCodec();
     final dynamic encoded = codec.encodeMessage(<String, List<String>>{});
     if (encoded is ByteData) return loader(encoded);
