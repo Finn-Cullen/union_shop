@@ -152,12 +152,8 @@ One small change was made to improve testability: the `setState()` call during w
 - Add tests under `test/` and follow existing patterns for `DefaultAssetBundle` and window sizing.
 - Keep changes minimal and focused; run the test suite with coverage before opening PRs.
 
-## Contact / Next steps
+## Contact
 
-If you'd like, I can:
-- Add more unit tests for remaining repository files (e.g., `collection_data` deeper scenarios).
-- Add a widget test for `lib/views/sale.dart`.
-- Run the full test suite and push coverage improvements.
-
-Ask me which part you'd like me to work on next.
+ - finn daniel cullen
+ - contact at finncullen83@gmail.com
 
