@@ -15,11 +15,9 @@ class SearchPage extends StatefulWidget {
 class SearchPageState extends State<SearchPage> {
   TextEditingController controller = TextEditingController();
   SearchData sd = SearchData();
-
-  void searchitm(String inp) {
-    setState(() {
-      sd.search(inp);
-    });
+  void searchitm(String inp) async {
+    await sd.search(inp);
+    setState(() {});
   }
 
   @override
