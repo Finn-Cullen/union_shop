@@ -1,5 +1,4 @@
-(The file `c:\UNIVERSITY_WORK\LV_5\programming_applications_programming_languages\CW_union_shop\union_shop\README.md` exists, but is empty)
-# union_shop (UNIUIN Shop)
+# union_shop
 
 This repository contains a small Flutter app used for teaching/testing purposes (a simple shop UI and repositories). The test-suite includes both unit and widget tests and a helper to compute coverage.
 
